@@ -1,0 +1,327 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>smoketest.sikuli\HTMLTestRunner.sikuli</h2> <a href="smoketest.sikuli\HTMLTestRunner.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># -*- coding: utf-8 -*-
+</span>
+<span class="kw">import</span> StringIO
+<span class="kw">import</span> sys
+<span class="kw">import</span> unittest
+
+<span class="kw">import</span> HTMLTestRunner
+
+<span class="cmt"># ----------------------------------------------------------------------
+</span>
+<span class="kw">def</span> safe_unicode(obj, *args):
+    <span class="str">""" return the unicode representation of obj """</span>
+    <span class="kw">try</span>:
+        <span class="kw">return</span> unicode(obj, *args)
+    <span class="kw">except</span> UnicodeDecodeError:
+        <span class="cmt"># obj is byte string
+</span>        ascii_text = str(obj).encode(<span class="str">'string_escape'</span>)
+        <span class="kw">return</span> unicode(ascii_text)
+
+<span class="kw">def</span> safe_str(obj):
+    <span class="str">""" return the byte string representation of obj """</span>
+    <span class="kw">try</span>:
+        <span class="kw">return</span> str(obj)
+    <span class="kw">except</span> UnicodeEncodeError:
+        <span class="cmt"># obj is unicode
+</span>        <span class="kw">return</span> unicode(obj).encode(<span class="str">'unicode_escape'</span>)
+
+<span class="cmt"># ----------------------------------------------------------------------
+</span><span class="cmt"># Sample tests to drive the HTMLTestRunner
+</span>
+<span class="kw">class</span> SampleTest0(unittest.TestCase):
+    <span class="str">""" A class that passes.
+
+    This simple class has only one test case that passes.
+    """</span>
+    <span class="kw">def</span> __init__(self, methodName):
+        unittest.TestCase.__init__(self, methodName)
+
+    <span class="kw">def</span> test_pass_no_output(self):
+        <span class="str">"""        test description
+        """</span>
+        <span class="kw">pass</span>
+
+<span class="kw">class</span> SampleTest1(unittest.TestCase):
+    <span class="str">""" A class that fails.
+
+    This simple class has only one test case that fails.
+    """</span>
+    <span class="kw">def</span> test_fail(self):
+        <span class="str">"""
+        test description (描述)
+        """</span>
+        self.fail()
+
+<span class="kw">class</span> SampleOutputTestBase(unittest.TestCase):
+    <span class="str">""" Base TestCase. Generates 4 test cases x different content type. """</span>
+    <span class="kw">def</span> test_1(self):
+        <span class="kw">print</span> self.MESSAGE
+    <span class="kw">def</span> test_2(self):
+        <span class="kw">print</span> &gt;&gt;sys.stderr, self.MESSAGE
+    <span class="kw">def</span> test_3(self):
+        self.fail(self.MESSAGE)
+    <span class="kw">def</span> test_4(self):
+        <span class="kw">raise</span> RuntimeError(self.MESSAGE)
+
+<span class="kw">class</span> SampleTestBasic(SampleOutputTestBase):
+    MESSAGE = <span class="str">'basic test'</span>
+
+<span class="kw">class</span> SampleTestHTML(SampleOutputTestBase):
+    MESSAGE = <span class="str">'the message is 5 symbols: &lt;&gt;&amp;"\'\nplus the HTML entity string: [&amp;copy;] on a second line'</span>
+
+<span class="kw">class</span> SampleTestLatin1(SampleOutputTestBase):
+    MESSAGE = <span class="str">u'the message is áéíóú'</span>.encode(<span class="str">'latin-1'</span>)
+
+<span class="kw">class</span> SampleTestUnicode(SampleOutputTestBase):
+    <span class="str">u""" Unicode (統一碼) test """</span>
+    MESSAGE = <span class="str">u'the message is \u8563'</span>
+    <span class="cmt"># 2006-04-25 Note: Exception would show up as
+</span>    <span class="cmt"># AssertionError: &lt;unprintable instance object&gt;
+</span>    <span class="cmt">#
+</span>    <span class="cmt"># This seems to be limitation of traceback.format_exception()
+</span>    <span class="cmt"># Same result in standard unittest.
+</span>    <span class="kw">def</span> test_pass(self):
+        <span class="str">u""" A test with Unicode (統一碼) docstring """</span>
+        <span class="kw">pass</span>
+
+
+<span class="cmt"># ------------------------------------------------------------------------
+</span><span class="cmt"># This is the main test on HTMLTestRunner
+</span>
+<span class="kw">class</span> Test_HTMLTestRunner(unittest.TestCase):
+
+    <span class="kw">def</span> test0(self):
+        self.suite = unittest.TestSuite()
+        buf = StringIO.StringIO()
+        runner = HTMLTestRunner.HTMLTestRunner(buf)
+        runner.run(self.suite)
+        <span class="cmt"># didn't blow up? ok.
+</span>        self.assert_(<span class="str">'&lt;/html&gt;'</span> <span class="kw">in</span> buf.getvalue())
+
+    <span class="kw">def</span> test_main(self):
+        <span class="cmt"># Run HTMLTestRunner. Verify the HTML report.
+</span>
+        <span class="cmt"># suite of TestCases
+</span>        self.suite = unittest.TestSuite()
+        self.suite.addTests([
+            unittest.defaultTestLoader.loadTestsFromTestCase(SampleTest0),
+            unittest.defaultTestLoader.loadTestsFromTestCase(SampleTest1),
+            unittest.defaultTestLoader.loadTestsFromTestCase(SampleTestBasic),
+            unittest.defaultTestLoader.loadTestsFromTestCase(SampleTestHTML),
+            unittest.defaultTestLoader.loadTestsFromTestCase(SampleTestLatin1),
+            unittest.defaultTestLoader.loadTestsFromTestCase(SampleTestUnicode),
+            ])
+
+        <span class="cmt"># Invoke TestRunner
+</span>        buf = StringIO.StringIO()
+        <span class="cmt">#runner = unittest.TextTestRunner(buf)       #DEBUG: this is the unittest baseline
+</span>        runner = HTMLTestRunner.HTMLTestRunner(
+                    stream=buf,
+                    title=<span class="str">'&lt;Demo Test&gt;'</span>,
+                    description=<span class="str">'This demonstrates the report output by HTMLTestRunner.'</span>
+                    )
+        runner.run(self.suite)
+
+        <span class="cmt"># Define the expected output sequence. This is imperfect but should
+</span>        <span class="cmt"># give a good sense of the well being of the test.
+</span>        EXPECTED = <span class="str">u"""
+Demo Test
+
+&gt;SampleTest0:
+
+&gt;SampleTest1:
+
+&gt;SampleTestBasic
+&gt;test_1&lt;
+&gt;pass&lt;
+basic test
+
+&gt;test_2&lt;
+&gt;pass&lt;
+basic test
+
+&gt;test_3&lt;
+&gt;fail&lt;
+AssertionError: basic test
+
+&gt;test_4&lt;
+&gt;error&lt;
+RuntimeError: basic test
+
+
+&gt;SampleTestHTML
+&gt;test_1&lt;
+&gt;pass&lt;
+'the message is 5 symbols: \\x3C\\x3E\\x26\\"\\'\\n
+plus the HTML entity string: [\\x26copy;] on a second line
+
+&gt;test_2&lt;
+&gt;pass&lt;
+'the message is 5 symbols: \\x3C\\x3E\\x26\\"\\'\\n
+plus the HTML entity string: [\\x26copy;] on a second line
+
+&gt;test_3&lt;
+&gt;fail&lt;
+AssertionError: the message is 5 symbols: \\x3C\\x3E\\x26\\"\\'\\n
+plus the HTML entity string: [\\x26copy;] on a second line
+
+&gt;test_4&lt;
+&gt;error&lt;
+RuntimeError: the message is 5 symbols: \\x3C\\x3E\\x26\\"\\'\\n
+plus the HTML entity string: [\\x26copy;] on a second line
+
+
+&gt;SampleTestLatin1
+&gt;test_1&lt;
+&gt;pass&lt;
+the message is áéíóú
+
+&gt;test_2&lt;
+&gt;pass&lt;
+the message is áéíóú
+
+&gt;test_3&lt;
+&gt;fail&lt;
+AssertionError: the message is áéíóú
+
+&gt;test_4&lt;
+&gt;error&lt;
+RuntimeError: the message is áéíóú
+
+
+&gt;SampleTestUnicode
+&gt;test_1&lt;
+&gt;pass&lt;
+the message is \u8563
+
+&gt;test_2&lt;
+&gt;pass&lt;
+the message is \u8563
+
+&gt;test_3&lt;
+&gt;fail&lt;
+AssertionError: \\x3Cunprintable instance object\\x3E
+
+&gt;test_4&lt;
+&gt;error&lt;
+RuntimeError: \\x3Cunprintable instance object\\x3E
+
+Total
+&gt;19&lt;
+&gt;10&lt;
+&gt;5&lt;
+&gt;4&lt;
+&lt;/html&gt;
+"""</span>
+        <span class="cmt"># check out the output
+</span>        byte_output = buf.getvalue()
+        <span class="cmt"># output the main test output for debugging &amp; demo
+</span>        <span class="kw">print</span> byte_output
+        <span class="cmt"># HTMLTestRunner pumps UTF-8 output
+</span>        output = byte_output.decode(<span class="str">'utf-8'</span>)
+        self._checkoutput(output,EXPECTED)
+
+
+    <span class="kw">def</span> _checkoutput(self,output,EXPECTED):
+        i = <span class="dig">0</span>
+        <span class="kw">for</span> lineno, p <span class="kw">in</span> enumerate(EXPECTED.splitlines()):
+            <span class="kw">if</span> <span class="kw">not</span> p:
+                <span class="kw">continue</span>
+            j = output.<span class="skw">find</span>(p,i)
+            <span class="kw">if</span> j &lt; <span class="dig">0</span>:
+                self.fail(safe_str(<span class="str">'Pattern not found lineno %s: "%s"'</span> % (lineno+<span class="dig">1</span>,p)))
+            i = j + len(p)
+
+
+
+
+<span class="cmt">##############################################################################
+</span><span class="cmt"># Executing this module from the command line
+</span><span class="cmt">##############################################################################
+</span>
+<span class="kw">import</span> unittest
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    <span class="kw">if</span> len(sys.argv) &gt; <span class="dig">1</span>:
+        argv = sys.argv
+    <span class="kw">else</span>:
+        argv=[<span class="str">'test_HTMLTestRunner.py'</span>, <span class="str">'Test_HTMLTestRunner'</span>]
+    unittest.main(argv=argv)
+    <span class="cmt"># Testing HTMLTestRunner with HTMLTestRunner would work. But instead
+</span>    <span class="cmt"># we will use standard library's TextTestRunner to reduce the nesting
+</span>    <span class="cmt"># that may confuse people.
+</span>    <span class="cmt">#HTMLTestRunner.main(argv=argv)</span>
+</pre>
+</body>
+</html>

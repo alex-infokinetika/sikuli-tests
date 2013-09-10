@@ -1,0 +1,226 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>authorizationInNavstat.sikuli\authorizationInNavstat.sikuli</h2> <a href="authorizationInNavstat.sikuli\authorizationInNavstat.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="cmt"># -*- coding: utf-8 -*-
+</span><span class="kw">import</span> os
+<span class="kw">import</span> sys
+<span class="kw">import</span> shutil
+<span class="cmt"># get the directory containing your running .sikuli
+</span>myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">u"sikuli-tests"</span>
+<span class="kw">if</span> <span class="kw">not</span> myPath <span class="kw">in</span> sys.path:
+    sys.path.append(myPath)
+<span class="kw">import</span> baseFunction
+<span class="cmt"># -------------- Вспомогательные функции -------------------------------
+</span><span class="cmt"># просто кликаем иконку Навстат на пенели быстрого запуска
+</span><span class="kw">def</span> runNavstat():
+    Region(<span class="dig">2</span>,<span class="dig">1012</span>,<span class="dig">1735</span>,<span class="dig">67</span>).<span class="skw">click</span>(<img src="1376562365600.png" />)
+    Region(<span class="dig">478</span>,<span class="dig">149</span>,<span class="dig">897</span>,<span class="dig">631</span>).<span class="skw">wait</span>(Pattern(<img src="1376562536766.png" />).similar(<span class="dig">0.60</span>),<span class="dig">15</span>)
+<span class="cmt"># эту функцию надо будет переписать, чтоб она вызывала Навстат как приложение, а не зависила от иконки
+</span><span class="kw">def</span> closeAuthorizationForm():
+    Region(<span class="dig">478</span>,<span class="dig">149</span>,<span class="dig">897</span>,<span class="dig">631</span>).<span class="skw">click</span>(<img src="Onaena-1.png" />)
+
+<span class="cmt"># ------------- набот тестов формы авторизации -----------------------------------------------------------------------------------------    
+</span>
+<span class="cmt"># проверка коректности переходов табами с ключём демо
+</span><span class="kw">def</span> tabGo():
+    <span class="kw">try</span>:
+         baseFunction.clearData()
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! не удалились конфиги"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        exit()
+    runNavstat()
+    text = <span class="str">u"1 ----"</span>
+    <span class="skw">type</span>(text.encode(<span class="str">"utf-8"</span>))
+    <span class="kw">try</span>:
+        Region(<span class="dig">717</span>,<span class="dig">299</span>,<span class="dig">500</span>,<span class="dig">376</span>).<span class="skw">find</span>(Pattern(<img src="QnO1Tb3OBBT1.png" />).similar(<span class="dig">0.90</span>))
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Не ввелось имя пользователя"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        exit()
+    <span class="skw">type</span>(Key.TAB)  <span class="cmt"># перешли в поле пароль</span>
+    <span class="skw">type</span>(text.encode(<span class="str">"utf-8"</span>))
+    <span class="kw">try</span>:
+        Region(<span class="dig">717</span>,<span class="dig">299</span>,<span class="dig">500</span>,<span class="dig">376</span>).<span class="skw">find</span>(Pattern(<img src="Qap0m.png" />).similar(<span class="dig">0.90</span>))
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Не ввёлся пароль"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        exit()
+    <span class="skw">type</span>(Key.TAB) <span class="cmt"># перешли в чекбокс</span>
+    <span class="kw">try</span>:
+        Region(<span class="dig">770</span>,<span class="dig">328</span>,<span class="dig">377</span>,<span class="dig">313</span>).<span class="skw">find</span>(Pattern(<img src="III.png" />).similar(<span class="dig">0.90</span>))
+        <span class="skw">type</span>(Key.SPACE)
+        Region(<span class="dig">770</span>,<span class="dig">328</span>,<span class="dig">377</span>,<span class="dig">313</span>).<span class="skw">find</span>(Pattern(<img src="1376565096984.png" />).similar(<span class="dig">0.90</span>))
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Не установилась/снялась галка 'Запомнить пароль...'"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        exit()
+    <span class="skw">type</span>(Key.TAB) <span class="cmt"># перешли на ОК</span>
+    <span class="kw">try</span>:
+        Region(<span class="dig">770</span>,<span class="dig">328</span>,<span class="dig">377</span>,<span class="dig">313</span>).<span class="skw">find</span>(<img src="1376568260292.png" />)
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Не не перешли на кнопку ОК"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        exit()
+    <span class="skw">type</span>(Key.TAB) <span class="cmt"># перешли в Отмена</span>
+    <span class="kw">try</span>:
+        Region(<span class="dig">770</span>,<span class="dig">328</span>,<span class="dig">377</span>,<span class="dig">313</span>).<span class="skw">find</span>(<img src="1376568318636.png" />)
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Не не перешли на кнопку Отмена"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        exit()
+    <span class="skw">type</span>(Key.TAB)
+    n=<span class="dig">10</span>
+    <span class="kw">while</span> n &gt; <span class="dig">0</span>:
+        <span class="kw">if</span> n == <span class="dig">0</span>:
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            <span class="skw">type</span>(Key.BACKSPACE)
+            n -= <span class="dig">1</span>
+    <span class="kw">try</span>:
+        Region(<span class="dig">717</span>,<span class="dig">299</span>,<span class="dig">500</span>,<span class="dig">376</span>).<span class="skw">find</span>(Pattern(<img src="K.png" />).similar(<span class="dig">0.90</span>))
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Не вернулись в поле 'Пользователь'"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        exit()
+    <span class="skw">type</span>(Key.TAB) <span class="cmt"># перешли в поле пароль</span>
+    <span class="skw">type</span>(Key.TAB) <span class="cmt"># перешли в чекбокс</span>
+    <span class="skw">type</span>(Key.TAB) <span class="cmt"># перешли на ОК</span>
+    <span class="skw">type</span>(Key.TAB) <span class="cmt"># перешли в Отмена</span>
+    <span class="skw">type</span>(Key.ENTER) <span class="cmt"># закрыли прогу</span>
+
+<span class="cmt"># ----------------------------------------------------------------------------------------
+</span><span class="cmt"># Проверка работы выпадающего списка абонентов с ключём Холдинга
+</span><span class="cmt"># для проверки используется тестовый сервер
+</span><span class="cmt"># Автохолдинг Холдинг 404C2A00-B173-4844-BA59-9A6F296479E7
+</span><span class="cmt"># Петров ИП   Клиент  54131713-78BC-4E1A-8EA2-A59E79A5B4A2
+</span><span class="cmt"># Иванов ИП   Клиент  AE33FC55-4D71-45B7-A919-FD242F0EFA07
+</span><span class="cmt"># Исаев ООО   Клиент  2AA51F34-8D4E-438E-9A39-64E6FE3E8C5A
+</span>
+<span class="kw">import</span> keyer
+
+<span class="kw">def</span> abonentList():
+    <span class="cmt"># меняем ключ на Автохолдинг на тестовом сервере
+</span>    k = <span class="str">u"404C2A00-B173-4844-BA59-9A6F296479E7"</span>
+    u = <span class="str">u"http://services.navstat.infokinetika.net"</span>
+    keyer.editKeyAndService(k,u)
+    runNavstat()
+    <span class="skw">click</span>(Pattern(<img src="A50HerrrIIII.png" />).targetOffset(<span class="dig">149</span>,<span class="dig">0</span>))
+    <span class="kw">try</span>:
+        Region(<span class="dig">717</span>,<span class="dig">299</span>,<span class="dig">500</span>,<span class="dig">376</span>).<span class="skw">find</span>(Pattern(<img src="abonentList.png" />).targetOffset(<span class="dig">144</span>,-<span class="dig">6</span>))
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Неn списка абонентов"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        <span class="kw">return</span> <span class="dig">0</span>
+    <span class="skw">click</span>(Pattern(<img src="A50Herrr.png" />).targetOffset(<span class="dig">271</span>,<span class="dig">1</span>))
+    closeAuthorizationForm()
+    <span class="kw">return</span> <span class="dig">1</span>
+
+<span class="cmt"># Движение по списку абонентов мышкой
+</span><span class="kw">def</span> moovWithAbonentList():
+    mess = <span class="str">u"Выполнять только после успешного прохода abonentList"</span>
+    <span class="kw">print</span>(mess.encode(<span class="str">"utf-8"</span>))
+    runNavstat()
+    <span class="skw">click</span>(Pattern(<img src="A50HerrrIIII.png" />).targetOffset(<span class="dig">52</span>,<span class="dig">1</span>))
+    mouseMove(Pattern(<img src="list0.png" />).targetOffset(<span class="dig">21</span>,-<span class="dig">16</span>))
+    <span class="kw">try</span>:
+        Region(<span class="dig">717</span>,<span class="dig">299</span>,<span class="dig">500</span>,<span class="dig">376</span>).<span class="skw">find</span>(<img src="list1.png" />)
+        mouseMove(<span class="skw">find</span>(Pattern(<img src="list1.png" />).targetOffset(<span class="dig">0</span>,<span class="dig">36</span>)))
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Не идём по списку абонентов"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        <span class="kw">return</span> <span class="dig">0</span>
+    <span class="kw">try</span>:
+        Region(<span class="dig">717</span>,<span class="dig">299</span>,<span class="dig">500</span>,<span class="dig">376</span>).<span class="skw">find</span>(<img src="list4.png" />)
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Не идём по списку абонентов"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        <span class="kw">return</span> <span class="dig">0</span>
+    mouseDown(Button.LEFT)
+    mouseUp()
+    <span class="kw">try</span>:
+        Region(<span class="dig">717</span>,<span class="dig">299</span>,<span class="dig">500</span>,<span class="dig">376</span>).<span class="skw">find</span>(Pattern(<img src="OODVlcaes.png" />).similar(<span class="dig">0.90</span>).targetOffset(-<span class="dig">76</span>,-<span class="dig">28</span>))
+    <span class="kw">except</span>:
+        er = <span class="str">u"Ошибка! Выбрали абонента"</span>
+        <span class="kw">print</span>(er.encode(<span class="str">"utf-8"</span>))
+        <span class="kw">return</span> <span class="dig">0</span>
+    <span class="skw">popup</span>(<span class="str">"End"</span>)
+<span class="cmt"># дальше надо подвигаться по списку клавишами "вверх" "вниз"
+</span>
+<span class="cmt"># Поиск по выпадающему списку абонентов
+</span><span class="kw">def</span> findAbonentInList():
+    mess = <span class="str">u"Выполнять только после успешного прохода abonentList"</span>
+    <span class="kw">print</span>(mess.encode(<span class="str">"utf-8"</span>))
+</pre>
+</body>
+</html>

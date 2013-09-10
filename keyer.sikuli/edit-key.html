@@ -1,0 +1,97 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>keyer.sikuli\edit-key.sikuli</h2> <a href="keyer.sikuli\edit-key.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">def</span> editKey():
+    newKey = <span class="str">"ABF000F5-BF68-C631-E040-18C3EA454DAA"</span>
+    <span class="skw">click</span>(<img src="1376472023054.png" />)
+    <span class="skw">wait</span>(Pattern(<img src="YCTGHOBHCHGI.png" />).similar(<span class="dig">0.50</span>),<span class="dig">30</span>)
+    <span class="skw">type</span>(Pattern(<img src="nO1Tb3OBBT1T-1.png" />).targetOffset(-<span class="dig">63</span>,-<span class="dig">1</span>), newKey)
+    <span class="skw">type</span>(Pattern(<img src="ap0m-1.png" />).targetOffset(-<span class="dig">60</span>,-<span class="dig">3</span>), <span class="str">"wwqwqwq"</span>)
+    <span class="skw">click</span>(Pattern(<img src="OK-1.png" />).similar(<span class="dig">0.80</span>))
+    <span class="skw">wait</span>(<img src="1376472195857.png" />,<span class="dig">5</span>)
+    <span class="skw">click</span>(<img src="VCIpBBVTbKII.png" />)
+    <span class="skw">doubleClick</span>(Pattern(Pattern(<img src="Llemo0cW.png" />).targetOffset(-<span class="dig">47</span>,-<span class="dig">2</span>)).targetOffset(-<span class="dig">47</span>,-<span class="dig">1</span>))
+    <span class="skw">type</span>(Key.DELETE)
+    paste(Pattern(<img src="PIWCTpBLLHOH.png" />).targetOffset(-<span class="dig">219</span>,<span class="dig">5</span>), newKey)
+
+<span class="cmt">#    click(Pattern("Pacu1vrpermu.png").targetOffset(-27,1))
+</span><span class="cmt">#    click(Pattern("IIOKB3BTbPBC.png").targetOffset(-92,-1))
+</span><span class="cmt">#    doubleClick(Pattern("3Dhttpservic.png").targetOffset(22,6))
+</span><span class="cmt">#    paste("http://services.navstat.infokinetika.net")
+</span>    <span class="skw">click</span>(<img src="OK-2.png" />)
+    <span class="skw">wait</span>(Pattern(<img src="YCTGHOBHCHGI.png" />).similar(<span class="dig">0.50</span>),<span class="dig">30</span>)
+    <span class="skw">click</span>(<img src="Onaena.png" />)
+    <span class="kw">print</span> <span class="str">"curent key -------"</span>
+</pre>
+</body>
+</html>
