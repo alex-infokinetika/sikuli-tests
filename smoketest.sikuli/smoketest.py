@@ -15,12 +15,11 @@ class BDTests(unittest.TestCase):
     
     def test_1(self):
         print(u"Тесты формы авторизации")
-        authorizationInNavstat.tabGo()
-        if authorizationInNavstat.abonentList():
-            print( u"Продолжаем")
+#        authorizationInNavstat.tabGo()
+#        if authorizationInNavstat.abonentList():
+#            print( u"Продолжаем")
     def test_2(self):
         print("test_2")
-        
     def test_3(self):
         print("test_3")
     def test_4(self):        
@@ -28,8 +27,15 @@ class BDTests(unittest.TestCase):
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
-outfile = open(os.environ.get("HOME") + u"Desktop", "w")
-runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Test Report', description='This is demo' )
-runner.run(suite)
+outPath =  os.environ.get("GIT_HOME").split("\"")[1] + "report.html" # Вариант с путём без кирилицы и именами без пробелов
+try:
+    outfile = open(outPath, "w")
+    print "open file ", outPath
+    runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Test Report', description='This is demo' )
+    runner.run(suite)
+    outfile.close()
+except:
+    print "Don't open file ", outPath.encode("UTF-8")
+
 
 

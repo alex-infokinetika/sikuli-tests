@@ -87,12 +87,11 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 
     <span class="kw">def</span> test_1(self):
         <span class="kw">print</span>(<span class="str">u"Тесты формы авторизации"</span>)
-        authorizationInNavstat.tabGo()
-        <span class="kw">if</span> authorizationInNavstat.abonentList():
-            <span class="kw">print</span>( <span class="str">u"Продолжаем"</span>)
-    <span class="kw">def</span> test_2(self):
+<span class="cmt">#        authorizationInNavstat.tabGo()
+</span><span class="cmt">#        if authorizationInNavstat.abonentList():
+</span><span class="cmt">#            print( u"Продолжаем")
+</span>    <span class="kw">def</span> test_2(self):
         <span class="kw">print</span>(<span class="str">"test_2"</span>)
-
     <span class="kw">def</span> test_3(self):
         <span class="kw">print</span>(<span class="str">"test_3"</span>)
     <span class="kw">def</span> test_4(self):
@@ -100,9 +99,15 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
-outfile = open(os.environ.get(<span class="str">"HOME"</span>) + <span class="str">u"Desktop"</span>, <span class="str">"w"</span>)
-runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title=<span class="str">'Test Report'</span>, description=<span class="str">'This is demo'</span> )
-runner.run(suite)
+outPath =  os.environ.get(<span class="str">"GIT_HOME"</span>).split(<span class="str">"\""</span>)[<span class="dig">1</span>] + <span class="str">"report.html"</span> <span class="cmt"># Вариант с путём без кирилицы и именами без пробелов</span>
+<span class="kw">try</span>:
+    outfile = open(outPath, <span class="str">"w"</span>)
+    <span class="kw">print</span> <span class="str">"open file "</span>, outPath
+    runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title=<span class="str">'Test Report'</span>, description=<span class="str">'This is demo'</span> )
+    runner.run(suite)
+    outfile.close()
+<span class="kw">except</span>:
+    <span class="kw">print</span> <span class="str">"Don't open file "</span>, outPath.encode(<span class="str">"UTF-8"</span>)
 </pre>
 </body>
 </html>
