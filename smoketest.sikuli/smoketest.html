@@ -99,7 +99,7 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
-outPath =  os.environ.get(<span class="str">"GIT_HOME"</span>).split(<span class="str">"\""</span>)[<span class="dig">1</span>] + <span class="str">"report.html"</span> <span class="cmt"># Вариант с путём без кирилицы и именами без пробелов</span>
+outPath =  os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">"report.html"</span> <span class="cmt"># Вариант с путём без кирилицы и именами без пробелов</span>
 <span class="kw">try</span>:
     outfile = open(outPath, <span class="str">"w"</span>)
     <span class="kw">print</span> <span class="str">"open file "</span>, outPath
