@@ -26,7 +26,7 @@ def tabGo():
     except:
         er = u"Ошибка! не удалились конфиги" 
         print(er.encode("utf-8"))
-        exit()
+        #exit()
     runNavstat()
     text = u"1 ----"
     type(text.encode("utf-8"))
