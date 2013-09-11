@@ -80,18 +80,18 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
     sys.path.append(myPath)
 <span class="cmt"># Импорт тестов ------------------------------
 </span><span class="kw">import</span> authorizationInNavstat
-
+<span class="kw">import</span> baseFunction
 
 <span class="cmt"># --------------------------------------------
 </span><span class="kw">class</span> BDTests(unittest.TestCase):
 
     <span class="kw">def</span> test_1(self):
+        baseFunction.clearData()
+    <span class="kw">def</span> test_2(self):
         <span class="kw">print</span>(<span class="str">u"Тесты формы авторизации"</span>)
-<span class="cmt">#        authorizationInNavstat.tabGo()
-</span><span class="cmt">#        if authorizationInNavstat.abonentList():
-</span><span class="cmt">#            print( u"Продолжаем")
-</span>    <span class="kw">def</span> test_2(self):
-        <span class="kw">print</span>(<span class="str">"test_2"</span>)
+        authorizationInNavstat.tabGo()
+        <span class="kw">if</span> authorizationInNavstat.abonentList():
+            <span class="kw">print</span>( <span class="str">u"Продолжаем"</span>)
     <span class="kw">def</span> test_3(self):
         <span class="kw">print</span>(<span class="str">"test_3"</span>)
     <span class="kw">def</span> test_4(self):

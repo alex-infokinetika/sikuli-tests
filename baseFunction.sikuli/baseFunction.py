@@ -20,10 +20,12 @@ def deleteFileOrFolder(directory):
 
 
 def clearData():
-    directory= u"C:\\Users\\CD86~1\\AppData\\Roaming\\Infokinetika\\NavstatExpress"
-    print directory.encode("UTF-8")
-    directory=deleteFileOrFolder(directory.encode("UTF-8"))
-
+    batPath = os.environ.get("GIT_HOME") + "sikuli-tests\\baseFunction.sikuli\clear.bat"
+    try:
+        os.system(batPath)
+        print "All clear"
+    except:
+        print "Clear = false"
 
 def startNavstat(userName = u"admin", password = u"admin"):
     click("1376484163733.png")

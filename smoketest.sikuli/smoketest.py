@@ -8,18 +8,18 @@ if not myPath in sys.path:
     sys.path.append(myPath)
 # Импорт тестов ------------------------------
 import authorizationInNavstat
-
+import baseFunction
 
 # --------------------------------------------
 class BDTests(unittest.TestCase):
     
     def test_1(self):
-        print(u"Тесты формы авторизации")
-#        authorizationInNavstat.tabGo()
-#        if authorizationInNavstat.abonentList():
-#            print( u"Продолжаем")
+        baseFunction.clearData()
     def test_2(self):
-        print("test_2")
+        print(u"Тесты формы авторизации")
+        authorizationInNavstat.tabGo()
+        if authorizationInNavstat.abonentList():
+            print( u"Продолжаем")
     def test_3(self):
         print("test_3")
     def test_4(self):        

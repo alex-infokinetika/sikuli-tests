@@ -92,10 +92,12 @@
 
 
 <span class="kw">def</span> clearData():
-    directory= <span class="str">u"C:\\Users\\CD86~1\\AppData\\Roaming\\Infokinetika\\NavstatExpress"</span>
-    <span class="kw">print</span> directory.encode(<span class="str">"UTF-8"</span>)
-    directory=deleteFileOrFolder(directory.encode(<span class="str">"UTF-8"</span>))
-
+    batPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">"sikuli-tests\\baseFunction.sikuli\clear.bat"</span>
+    <span class="kw">try</span>:
+        os.system(batPath)
+        <span class="kw">print</span> <span class="str">"All clear"</span>
+    <span class="kw">except</span>:
+        <span class="kw">print</span> <span class="str">"Clear = false"</span>
 
 <span class="kw">def</span> startNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
     <span class="skw">click</span>(<img src="1376484163733.png" />)
