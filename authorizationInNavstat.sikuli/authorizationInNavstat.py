@@ -11,11 +11,11 @@ import baseFunction
 # -------------- Вспомогательные функции -------------------------------
 # просто кликаем иконку Навстат на пенели быстрого запуска
 def runNavstat():
-    Region(2,1012,1735,67).click("1376562365600.png")
-    Region(478,149,897,631).wait(Pattern("1376562536766.png").similar(0.60),15)
+    click("1376562365600.png")
+    wait(Pattern("1376562536766.png").similar(0.60),15)
 # эту функцию надо будет переписать, чтоб она вызывала Навстат как приложение, а не зависила от иконки
 def closeAuthorizationForm():
-    Region(478,149,897,631).click("Onaena-1.png")
+    click("Onaena-1.png")
 
 # ------------- набот тестов формы авторизации -----------------------------------------------------------------------------------------    
 
@@ -31,7 +31,7 @@ def tabGo():
     text = u"1 ----"
     type(text.encode("utf-8"))
     try:
-        Region(717,299,500,376).find(Pattern("QnO1Tb3OBBT1.png").similar(0.90))
+        find(Pattern("QnO1Tb3OBBT1.png").similar(0.90))
     except:
         er = u"Ошибка! Не ввелось имя пользователя" 
         print(er.encode("utf-8"))
@@ -39,30 +39,30 @@ def tabGo():
     type(Key.TAB)  # перешли в поле пароль
     type(text.encode("utf-8"))
     try:
-        Region(717,299,500,376).find(Pattern("Qap0m.png").similar(0.90))
+        find(Pattern("Qap0m.png").similar(0.90))
     except:
         er = u"Ошибка! Не ввёлся пароль" 
         print(er.encode("utf-8"))
         exit()
     type(Key.TAB) # перешли в чекбокс
     try:
-        Region(770,328,377,313).find(Pattern("III.png").similar(0.90))
+        find(Pattern("III.png").similar(0.90))
         type(Key.SPACE)
-        Region(770,328,377,313).find(Pattern("1376565096984.png").similar(0.90))
+        find(Pattern("1376565096984.png").similar(0.90))
     except:
         er = u"Ошибка! Не установилась/снялась галка 'Запомнить пароль...'" 
         print(er.encode("utf-8"))
         exit()
     type(Key.TAB) # перешли на ОК
     try:
-        Region(770,328,377,313).find("1376568260292.png")
+        find("1376568260292.png")
     except:
         er = u"Ошибка! Не не перешли на кнопку ОК" 
         print(er.encode("utf-8"))
         exit()
     type(Key.TAB) # перешли в Отмена
     try:
-        Region(770,328,377,313).find("1376568318636.png")
+        find("1376568318636.png")
     except:
         er = u"Ошибка! Не не перешли на кнопку Отмена" 
         print(er.encode("utf-8"))
@@ -76,7 +76,7 @@ def tabGo():
             type(Key.BACKSPACE)
             n -= 1
     try:
-        Region(717,299,500,376).find(Pattern("K.png").similar(0.90))
+        find(Pattern("K.png").similar(0.90))
     except:
         er = u"Ошибка! Не вернулись в поле 'Пользователь'" 
         print(er.encode("utf-8"))
@@ -105,7 +105,7 @@ def abonentList():
     runNavstat()
     click(Pattern("A50HerrrIIII.png").targetOffset(149,0))
     try:
-        Region(717,299,500,376).find(Pattern("abonentList.png").targetOffset(144,-6))
+        find(Pattern("abonentList.png").targetOffset(144,-6))
     except:
         er = u"Ошибка! Неn списка абонентов" 
         print(er.encode("utf-8"))
@@ -122,14 +122,14 @@ def moovWithAbonentList():
     click(Pattern("A50HerrrIIII.png").targetOffset(52,1))    
     mouseMove(Pattern("list0.png").targetOffset(21,-16))
     try:
-        Region(717,299,500,376).find("list1.png")
+        find("list1.png")
         mouseMove(find(Pattern("list1.png").targetOffset(0,36)))
     except:
         er = u"Ошибка! Не идём по списку абонентов" 
         print(er.encode("utf-8"))
         return 0
     try:
-        Region(717,299,500,376).find("list4.png")
+        find("list4.png")
     except:
         er = u"Ошибка! Не идём по списку абонентов" 
         print(er.encode("utf-8"))
@@ -137,7 +137,7 @@ def moovWithAbonentList():
     mouseDown(Button.LEFT)
     mouseUp()
     try:
-        Region(717,299,500,376).find(Pattern("OODVlcaes.png").similar(0.90).targetOffset(-76,-28))
+        find(Pattern("OODVlcaes.png").similar(0.90).targetOffset(-76,-28))
     except:
         er = u"Ошибка! Выбрали абонента" 
         print(er.encode("utf-8"))
@@ -149,6 +149,5 @@ def moovWithAbonentList():
 def findAbonentInList():
     mess = u"Выполнять только после успешного прохода abonentList" 
     print(mess.encode("utf-8"))
-
 
 
