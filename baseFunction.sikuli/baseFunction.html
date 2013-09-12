@@ -113,6 +113,7 @@
         <span class="skw">wait</span>(Pattern(<img src="NAVSTAT-1.png" />).similar(<span class="dig">0.80</span>), <span class="dig">300</span>)
     <span class="kw">except</span>:
         <span class="kw">print</span> (<span class="str">u"Навстат не запустился"</span>)
+        exit()
 
 
 <span class="kw">def</span> firstStartNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
@@ -122,6 +123,7 @@
         <span class="kw">print</span> (<span class="str">u"Первичный запуск Навстат"</span>)
     <span class="kw">except</span>:
         <span class="kw">print</span> (<span class="str">u"Это не первичный запуск Навстат"</span>)
+        exit()
 
 <span class="cmt"># аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
 </span><span class="cmt"># если не дождались возвращаем "-1"

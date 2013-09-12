@@ -41,6 +41,7 @@ def startNavstat(userName = u"admin", password = u"admin"):
         wait(Pattern("NAVSTAT-1.png").similar(0.80), 300)
     except:
         print (u"Навстат не запустился")
+        exit()
 
 
 def firstStartNavstat(userName = u"admin", password = u"admin"):
@@ -50,6 +51,7 @@ def firstStartNavstat(userName = u"admin", password = u"admin"):
         print (u"Первичный запуск Навстат")
     except:
         print (u"Это не первичный запуск Навстат")
+        exit()
 
 # аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
 # если не дождались возвращаем "-1"

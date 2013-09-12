@@ -24,6 +24,17 @@ def simple_test1():
     except:
         print(u"Меню сломали")
         exit()
+#-----------------------
+    click("NAVSTAT_menu_map.png")
+    try:
+        find("map_tabs.png")
+        print (u"Таб с картой через меню открывается")
+    except:
+        print (u"Таб с картой через меню НЕ открывается!")
+        exit()
+#-----------------------
+
+
     type(Key.F4, KeyModifier.ALT)
 
 #simple_test1()
