@@ -81,33 +81,35 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 <span class="cmt"># Импорт тестов ------------------------------
 </span><span class="kw">import</span> authorizationInNavstat
 <span class="kw">import</span> baseFunction
-
+<span class="kw">import</span> simple_tests
 <span class="cmt"># --------------------------------------------
 </span><span class="kw">class</span> BDTests(unittest.TestCase):
 
     <span class="kw">def</span> test_1(self):
-        baseFunction.clearData()
+        <span class="kw">print</span> <span class="str">"test 1"</span>
+        simple_tests.simple_test1()
     <span class="kw">def</span> test_2(self):
+        <span class="kw">print</span> <span class="str">"test 2"</span>
         <span class="kw">print</span>(<span class="str">u"Тесты формы авторизации"</span>)
-        authorizationInNavstat.tabGo()
-        <span class="kw">if</span> authorizationInNavstat.abonentList():
-            <span class="kw">print</span>( <span class="str">u"Продолжаем"</span>)
-    <span class="kw">def</span> test_3(self):
+<span class="cmt">#        authorizationInNavstat.tabGo()
+</span><span class="cmt">#        if authorizationInNavstat.abonentList():
+</span><span class="cmt">#            print( u"Продолжаем")
+</span>    <span class="kw">def</span> test_3(self):
         <span class="kw">print</span>(<span class="str">"test_3"</span>)
     <span class="kw">def</span> test_4(self):
         <span class="kw">print</span>(<span class="str">"test_4"</span>)
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
-outPath =  os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">"report.html"</span> <span class="cmt"># Вариант с путём без кирилицы и именами без пробелов</span>
-<span class="kw">try</span>:
-    outfile = open(outPath, <span class="str">"w"</span>)
-    <span class="kw">print</span> <span class="str">"open file "</span>, outPath
-    runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title=<span class="str">'Test Report'</span>, description=<span class="str">'This is demo'</span> )
-    runner.run(suite)
-    outfile.close()
-<span class="kw">except</span>:
-    <span class="kw">print</span> <span class="str">"Don't open file "</span>, outPath.encode(<span class="str">"UTF-8"</span>)
+outPath =  os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">"report.html"</span> <span class="cmt"># Вариант с путём без кирилицы и именами без пробелов  </span>
+<span class="cmt">#try:
+</span>outfile = open(outPath, <span class="str">"w"</span>)
+<span class="kw">print</span> <span class="str">"open file "</span>, outPath
+runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title=<span class="str">'Test Report'</span>, description=<span class="str">'This is demo'</span> )
+runner.run(suite)
+outfile.close()
+<span class="cmt">#except:
+</span><span class="cmt">#    print "Don't open file ", outPath.encode("UTF-8")</span>
 </pre>
 </body>
 </html>

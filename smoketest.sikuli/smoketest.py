@@ -9,17 +9,19 @@ if not myPath in sys.path:
 # Импорт тестов ------------------------------
 import authorizationInNavstat
 import baseFunction
-
+import simple_tests
 # --------------------------------------------
 class BDTests(unittest.TestCase):
     
     def test_1(self):
-        baseFunction.clearData()
+        print "test 1"
+        simple_tests.simple_test1()
     def test_2(self):
+        print "test 2"
         print(u"Тесты формы авторизации")
-        authorizationInNavstat.tabGo()
-        if authorizationInNavstat.abonentList():
-            print( u"Продолжаем")
+#        authorizationInNavstat.tabGo()
+#        if authorizationInNavstat.abonentList():
+#            print( u"Продолжаем")
     def test_3(self):
         print("test_3")
     def test_4(self):        
@@ -27,15 +29,15 @@ class BDTests(unittest.TestCase):
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
-outPath =  os.environ.get("GIT_HOME") + "report.html" # Вариант с путём без кирилицы и именами без пробелов
-try:
-    outfile = open(outPath, "w")
-    print "open file ", outPath
-    runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Test Report', description='This is demo' )
-    runner.run(suite)
-    outfile.close()
-except:
-    print "Don't open file ", outPath.encode("UTF-8")
+outPath =  os.environ.get("GIT_HOME") + "report.html" # Вариант с путём без кирилицы и именами без пробелов  
+#try:
+outfile = open(outPath, "w")
+print "open file ", outPath
+runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Test Report', description='This is demo' )
+runner.run(suite)
+outfile.close()
+#except:
+#    print "Don't open file ", outPath.encode("UTF-8")
 
 
 

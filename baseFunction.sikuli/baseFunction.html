@@ -95,9 +95,12 @@
     batPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">"sikuli-tests\\baseFunction.sikuli\clear.bat"</span>
     <span class="kw">try</span>:
         os.system(batPath)
-        <span class="kw">print</span> <span class="str">"All clear"</span>
+        <span class="kw">print</span> (<span class="str">u"Папка NavstatExpress удалена"</span>)
+        <span class="kw">return</span> <span class="dig">1</span>
     <span class="kw">except</span>:
-        <span class="kw">print</span> <span class="str">"Clear = false"</span>
+        <span class="kw">print</span> (<span class="str">u"Папка NavstatExpress не удалена!"</span>)
+        <span class="kw">return</span> <span class="dig">0</span>
+
 
 <span class="kw">def</span> startNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
     <span class="skw">click</span>(<img src="1376484163733.png" />)
@@ -106,12 +109,19 @@
     <span class="skw">type</span>(Key.TAB)
     <span class="skw">type</span>(password.encode(<span class="str">"UTF-8"</span>))
     <span class="skw">click</span>(<img src="OK.png" />)
-    Region(<span class="dig">0</span>,<span class="dig">1</span>,<span class="dig">542</span>,<span class="dig">330</span>).<span class="skw">wait</span>(Pattern(<img src="NAVSTAT.png" />).similar(<span class="dig">0.60</span>), <span class="dig">300</span>)
+    <span class="kw">try</span>:
+        <span class="skw">wait</span>(Pattern(<img src="NAVSTAT-1.png" />).similar(<span class="dig">0.80</span>), <span class="dig">300</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span> (<span class="str">u"Навстат не запустился"</span>)
 
 
 <span class="kw">def</span> firstStartNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
     startNavstat(userName, password)
-    <span class="skw">click</span>(Pattern(<img src="Vlcropvmvrsm.png" />).targetOffset(<span class="dig">64</span>,-<span class="dig">1</span>))
+    <span class="kw">try</span>:
+        <span class="skw">click</span>(Pattern(<img src="Vlcropvmvrsm.png" />).targetOffset(<span class="dig">64</span>,-<span class="dig">1</span>))
+        <span class="kw">print</span> (<span class="str">u"Первичный запуск Навстат"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span> (<span class="str">u"Это не первичный запуск Навстат"</span>)
 
 <span class="cmt"># аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
 </span><span class="cmt"># если не дождались возвращаем "-1"
@@ -124,7 +134,6 @@
             <span class="kw">print</span> <span class="str">"Find "</span>, i
             <span class="kw">try</span>:
                 <span class="skw">find</span>(imgList[i])
-                <span class="kw">print</span> <span class="str">"----------------------"</span>,i
                 <span class="kw">return</span> i
             <span class="kw">except</span>:
                 <span class="kw">print</span>(<span class="str">"Don't find "</span>)

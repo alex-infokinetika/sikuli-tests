@@ -23,9 +23,12 @@ def clearData():
     batPath = os.environ.get("GIT_HOME") + "sikuli-tests\\baseFunction.sikuli\clear.bat"
     try:
         os.system(batPath)
-        print "All clear"
+        print (u"Папка NavstatExpress удалена")
+        return 1
     except:
-        print "Clear = false"
+        print (u"Папка NavstatExpress не удалена!")
+        return 0
+        
 
 def startNavstat(userName = u"admin", password = u"admin"):
     click("1376484163733.png")
@@ -34,12 +37,19 @@ def startNavstat(userName = u"admin", password = u"admin"):
     type(Key.TAB)
     type(password.encode("UTF-8"))
     click("OK.png")
-    Region(0,1,542,330).wait(Pattern("NAVSTAT.png").similar(0.60), 300)
+    try:
+        wait(Pattern("NAVSTAT-1.png").similar(0.80), 300)
+    except:
+        print (u"Навстат не запустился")
 
 
 def firstStartNavstat(userName = u"admin", password = u"admin"):
     startNavstat(userName, password)
-    click(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1))
+    try:
+        click(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1))
+        print (u"Первичный запуск Навстат")
+    except:
+        print (u"Это не первичный запуск Навстат")
 
 # аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
 # если не дождались возвращаем "-1"
@@ -52,7 +62,6 @@ def waitList(imgList, timer):
             print "Find ", i
             try:
                 find(imgList[i])
-                print "----------------------",i
                 return i
             except:
                 print("Don't find ")
