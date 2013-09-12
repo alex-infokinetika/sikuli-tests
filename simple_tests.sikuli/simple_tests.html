@@ -91,7 +91,7 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
     <span class="skw">click</span>(<img src="NAVSTAT.png" />)
     <span class="skw">wait</span>(<span class="dig">1</span>)
     <span class="kw">try</span>:
-        <span class="skw">find</span>(Pattern(<img src="NAVSTAT_menu.png" />).similar(<span class="dig">0.80</span>))
+        <span class="skw">find</span>(<img src="NAVSTAT_menu.png" />)
         <span class="kw">print</span>(<span class="str">u"Меню на месте"</span>)
     <span class="kw">except</span>:
         <span class="kw">print</span>(<span class="str">u"Меню сломали"</span>)
@@ -105,7 +105,13 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
         <span class="kw">print</span> (<span class="str">u"Таб с картой через меню НЕ открывается!"</span>)
         exit()
 <span class="cmt">#-----------------------
-</span>
+</span>    <span class="skw">click</span>(Pattern(<img src="map_tabs.png" />).similar(<span class="dig">0.80</span>).targetOffset(<span class="dig">78</span>,<span class="dig">1</span>))
+    <span class="kw">try</span>:
+        <span class="skw">find</span>(<img src="map_tab_2.png" />)
+        <span class="kw">print</span> (<span class="str">u"Таб с картой через плюсик открывается"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span> (<span class="str">u"Таб с картой через плюсик НЕ открывается!"</span>)
+
 
     <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
 

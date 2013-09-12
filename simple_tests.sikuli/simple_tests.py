@@ -19,7 +19,7 @@ def simple_test1():
     click("NAVSTAT.png")
     wait(1)
     try:
-        find(Pattern("NAVSTAT_menu.png").similar(0.80))
+        find("NAVSTAT_menu.png")
         print(u"Меню на месте")
     except:
         print(u"Меню сломали")
@@ -33,6 +33,12 @@ def simple_test1():
         print (u"Таб с картой через меню НЕ открывается!")
         exit()
 #-----------------------
+    click(Pattern("map_tabs.png").similar(0.80).targetOffset(78,1))
+    try:
+        find("map_tab_2.png")
+        print (u"Таб с картой через плюсик открывается")
+    except:
+        print (u"Таб с картой через плюсик НЕ открывается!")
 
 
     type(Key.F4, KeyModifier.ALT)
