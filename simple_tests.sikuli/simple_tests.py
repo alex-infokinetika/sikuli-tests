@@ -16,7 +16,7 @@ def simple_test1():
     baseFunction.clearData()
     #keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
     baseFunction.firstStartNavstat()
-    click("NAVSTAT.png")
+    click(Pattern("NAVSTAT.png").similar(0.90))
     wait(1)
     try:
         find("NAVSTAT_menu.png")

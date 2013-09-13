@@ -88,7 +88,7 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
     baseFunction.clearData()
     <span class="cmt">#keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
 </span>    baseFunction.firstStartNavstat()
-    <span class="skw">click</span>(<img src="NAVSTAT.png" />)
+    <span class="skw">click</span>(Pattern(<img src="NAVSTAT.png" />).similar(<span class="dig">0.90</span>))
     <span class="skw">wait</span>(<span class="dig">1</span>)
     <span class="kw">try</span>:
         <span class="skw">find</span>(<img src="NAVSTAT_menu.png" />)
