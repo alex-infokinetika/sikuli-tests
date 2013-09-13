@@ -105,10 +105,33 @@
 <span class="kw">def</span> startNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
     <span class="kw">try</span>:
         <span class="skw">click</span>(<img src="1376484163733.png" />)
-        <span class="kw">print</span> (<span class="str">u"Навстат стартанул"</span>)
+        <span class="kw">print</span> (<span class="str">u"Кликнули ярлык Навтат"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span> (<span class="str">u"Не нашёл ярлык Навтат!"</span>)
+        exit()
+    <span class="kw">try</span>:
         <span class="skw">wait</span>(<img src="1376485054733.png" />,<span class="dig">10</span>)
         <span class="kw">print</span> (<span class="str">u"Обновлений нет"</span>)
     <span class="kw">except</span>:
+        <span class="kw">try</span>:
+            <span class="skw">wait</span>(<img src="1379065887261.png" />)
+            <span class="skw">click</span>(<img src="update_butt.png" />)
+            <span class="skw">click</span>(Pattern(<img src="update_available.png" />).targetOffset(<span class="dig">48</span>,<span class="dig">74</span>))
+            <span class="skw">wait</span>(<img src="error_pres_ok.png" />,<span class="dig">60</span>)
+            <span class="skw">click</span>(Pattern(<img src="error_pres_ok.png" />).targetOffset(<span class="dig">95</span>,<span class="dig">49</span>))
+            <span class="kw">print</span> (<span class="str">u"Обновили Навстат"</span>)
+            <span class="kw">try</span>:
+                <span class="skw">click</span>(<img src="1376484163733.png" />)
+                <span class="kw">print</span> (<span class="str">u"Кликнули ярлык Навтат"</span>)
+            <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Не нашёл ярлык Навтат!"</span>)
+                exit()
+            <span class="kw">try</span>:
+                <span class="skw">wait</span>(<img src="1376485054733.png" />,<span class="dig">10</span>)
+                <span class="kw">print</span> (<span class="str">u"Обновлений нет"</span>)
+        <span class="kw">except</span>:
+            <span class="kw">print</span> (<span class="str">u"Обновиться не удалось"</span>)
+
         <span class="kw">print</span> (<span class="str">u"Навстат не стартанул или есть обновления"</span>)
         exit()
     <span class="kw">try</span>:

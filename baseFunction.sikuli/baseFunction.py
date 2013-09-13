@@ -31,29 +31,57 @@ def clearData():
         
 
 def startNavstat(userName = u"admin", password = u"admin"):
-    try:
-        click("1376484163733.png")
-        print (u"Навстат стартанул")
-        wait("1376485054733.png",10)
-        print (u"Обновлений нет")
-    except:
-        print (u"Навстат не стартанул или есть обновления")
-        exit()
-    try:
-        type(Pattern("VnO1Tb3OBBT1.png").targetOffset(42,2), userName.encode("UTF-8"))
-        type(Key.TAB)
-        type(password.encode("UTF-8"))
-        click("OK.png")
-        print (u"Ввели логин и пароль, нажали OK")
-    except:
-        print (u"Вволдили логин и пароль, нажали OK - сто-то пошло не так!")
-        exit()
-    try:
-        wait(Pattern("NAVSTAT-1.png").similar(0.80), 300)
-        print (u"Навстат запустился")
-    except:
-        print (u"Навстат не запустился")
-        exit()
+	try:
+		click("1376484163733.png")
+		print (u"Кликнули ярлык Навтат")
+	except:
+		print (u"Не нашёл ярлык Навтат!")
+		exit()
+	try:
+		wait("1376485054733.png",10)
+		print (u"Обновлений нет")
+	except:
+		print (u"Похоже есть обновления")
+		try:
+			wait("1379065887261.png")
+			print(u"Есть обновления")
+			click("update_butt.png")
+			click(Pattern("update_available.png").targetOffset(48,74))
+			wait("error_pres_ok.png",60)
+			click(Pattern("error_pres_ok.png").targetOffset(95,49))
+			print (u"Обновили Навстат")
+			try:
+				click("1376484163733.png")
+				print (u"Кликнули ярлык Навтат")
+			except:
+				print (u"Не нашёл ярлык Навтат!")
+				exit()
+			try:
+				wait("1376485054733.png",10)
+				print (u"Обновлений больше нет")
+			except:
+				print (u"Навстат не запустился после обновления")
+				exit()
+		except:
+			print (u"Обновиться не удалось")
+			exit()
+		exit()
+	try:
+		type(Pattern("VnO1Tb3OBBT1.png").targetOffset(42,2), userName.encode("UTF-8"))
+		type(Key.TAB)
+		type(password.encode("UTF-8"))
+		click("OK.png")
+		print (u"Ввели логин и пароль, нажали OK")
+	except:
+		print (u"Вволдили логин и пароль, нажали OK - сто-то пошло не так!")
+		exit()
+		try:
+			wait(Pattern("NAVSTAT-1.png").similar(0.80), 300)
+			print (u"Навстат запустился")
+		except:
+			print (u"Навстат не запустился")
+			exit()
+		exit()
 
 
 def firstStartNavstat(userName = u"admin", password = u"admin"):
