@@ -61,6 +61,7 @@ def firstStartNavstat(userName = u"admin", password = u"admin"):
         startNavstat(userName, password)
     except:
         exit()
+    wait(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1),30)
     try:
         click(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1))
         print (u"Первичный запуск Навстат")
