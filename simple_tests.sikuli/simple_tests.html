@@ -78,17 +78,18 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 <span class="kw">if</span> <span class="kw">not</span> myPath <span class="kw">in</span> sys.path:
     sys.path.append(myPath)
 <span class="cmt"># Импорт ------------------------------
-</span><span class="kw">import</span> authorizationInNavstat
-<span class="kw">import</span> baseFunction
+</span><span class="kw">import</span> baseFunction
 <span class="kw">import</span> keyer
 <span class="cmt"># -------------------------------------
 </span>
-<span class="cmt"># Проверяет сам факт того что Навстат запустился
+<span class="cmt"># Проверяет сам факт того что Навстат запустился и работает
 </span><span class="kw">def</span> simple_test1():
     baseFunction.clearData()
     keyer.editKeyAndService(<span class="str">"404C2A00-B173-4844-BA59-9A6F296479E7"</span>, <span class="str">"http://services.navstat.infokinetika.net"</span>)
-    baseFunction.firstStartNavstat()
-    <span class="skw">click</span>(Pattern(<img src="NAVSTAT.png" />).similar(<span class="dig">0.90</span>))
+    <span class="cmt"># Ключ тестового клиента "Автотестхолдинг"
+</span>    baseFunction.firstStartNavstat()
+<span class="cmt">#-----------------------
+</span>    <span class="skw">click</span>(Pattern(<img src="NAVSTAT.png" />).similar(<span class="dig">0.90</span>))
     <span class="skw">wait</span>(<span class="dig">1</span>)
     <span class="kw">try</span>:
         <span class="skw">find</span>(<img src="NAVSTAT_menu.png" />)
@@ -113,8 +114,8 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
         <span class="kw">print</span> (<span class="str">u"Таб с картой через плюсик НЕ открывается!"</span>)
 
 
-<span class="cmt">#    type(Key.F4, KeyModifier.ALT)
-</span>
+    <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+
 <span class="cmt">#simple_test1()</span>
 </pre>
 </body>

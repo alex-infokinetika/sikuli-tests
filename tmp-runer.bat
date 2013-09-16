@@ -1,0 +1,1 @@
+"%SIKULI_HOME%\\Sikuli-IDE.bat" -r %GIT_HOME%\sikuli-tests\tmp-runer.sikuli
