@@ -132,22 +132,54 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
     closeCurTab()
 <span class="cmt">#--------------заготовки:
 </span>    newMapTab()
-
     <span class="skw">doubleClick</span>(Pattern(<img src="ncrpuh.png" />).similar(<span class="dig">0.80</span>).targetOffset(<span class="dig">2</span>,<span class="dig">1</span>))
-    <span class="skw">wait</span>(Pattern(<img src="1379080119801.png" />).similar(<span class="dig">0.80</span>))
+    <span class="kw">try</span>:
+        <span class="skw">wait</span>(Pattern(<img src="1379080119801.png" />).similar(<span class="dig">0.80</span>))
+        <span class="kw">print</span>(<span class="str">u"Переместились к объекту по даблклику"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span>(<span class="str">u"Не переместились к объекту по даблклику"</span>)
+        exit(<span class="dig">3</span>)
     <span class="skw">click</span>(Pattern(<img src="Eucmwi.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">72</span>,<span class="dig">0</span>))
-    waitVanish(<img src="1379080119801.png" />)
-    <span class="skw">wait</span>(<img src="1379080342892.png" />)
-    <span class="skw">wait</span>(<img src="EcsmvVar10QO.png" />)
+    <span class="kw">try</span>:
+        waitVanish(<img src="1379080119801.png" />, <span class="dig">5</span>)
+        <span class="skw">wait</span>(<img src="1379080342892.png" />)
+        <span class="kw">print</span>(<span class="str">u"Скрыли объект"</span>)
+        <span class="skw">wait</span>(<img src="EcsmvVar10QO.png" />)
+        <span class="kw">print</span>(<span class="str">u"И галочка в дереве исчезла"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span>(<span class="str">u"Не скрылся объект или галочка в дереве не исчезла"</span>)
+        exit(<span class="dig">4</span>)
     <span class="skw">click</span>(Pattern(<img src="Eucmwi.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">72</span>,<span class="dig">0</span>))
-    <span class="skw">wait</span>(Pattern(<img src="1379080119801.png" />).similar(<span class="dig">0.80</span>))
+    <span class="kw">try</span>:
+        <span class="skw">wait</span>(Pattern(<img src="1379080119801.png" />).similar(<span class="dig">0.80</span>),<span class="dig">5</span>)
+        <span class="kw">print</span>(<span class="str">u"Вернули видимость объекта"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span>(<span class="str">u"Видимость объекта не восстановилась"</span>)
+        exit(<span class="dig">5</span>)
     <span class="skw">click</span>(Pattern(<img src="OncxmMoumopm.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">55</span>,<span class="dig">31</span>))
-    <span class="skw">wait</span>(Pattern(<img src="IIO61eVluani.png" />).similar(<span class="dig">0.90</span>))
-    waitVanish(<img src="1379080119801.png" />)
+    <span class="kw">try</span>:
+        <span class="skw">wait</span>(Pattern(<img src="IIO61eVluani.png" />).similar(<span class="dig">0.90</span>))
+        <span class="kw">print</span>(<span class="str">u"Сняли галочки со всего дерева объектов"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span>(<span class="str">u"Галочки, со всего дерева объектов, не снялись"</span>)
+        exit(<span class="dig">6</span>)
+    <span class="kw">try</span>:
+        waitVanish(<img src="1379080119801.png" />,<span class="dig">30</span>)<span class="cmt"># Уменьшить время ожидания после починки бага http://idea.navstat.ru/tickets/7971</span>
+        <span class="skw">wait</span>(<img src="1379080342892.png" />)
+        <span class="kw">print</span>(<span class="str">u"Объект сурылся"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span>(<span class="str">u"Не скрылся объект"</span>)
+        exit(<span class="dig">7</span>)
     <span class="skw">click</span>(Pattern(<img src="OncxmMoumopm.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">55</span>,<span class="dig">31</span>))
-    <span class="skw">wait</span>(Pattern(<img src="1379080789295.png" />).similar(<span class="dig">0.90</span>))
-    <span class="skw">wait</span>(Pattern(<img src="1379080119801.png" />).similar(<span class="dig">0.80</span>)) <span class="cmt"># Найден баг, не сразу исчезает и появляется машинка при установке снятии галок со всех объектов, уточнить причины задержки</span>
-
+    <span class="kw">try</span>:
+        <span class="skw">wait</span>(Pattern(<img src="1379080789295.png" />).similar(<span class="dig">0.90</span>))
+        <span class="kw">print</span>(<span class="str">u"Вернули галочки видимости всем объектам"</span>)
+        waitVanish(<img src="1379080342892.png" />,<span class="dig">30</span>)
+        <span class="skw">wait</span>(Pattern(<img src="1379080119801.png" />).similar(<span class="dig">0.80</span>)) <span class="cmt"># Найден баг, не сразу исчезает и появляется машинка при установке снятии галок со всех объектов, уточнить причины задержки</span>
+        <span class="kw">print</span>(<span class="str">u"Вернулась видимость объекта"</span>)
+    <span class="kw">except</span>:
+        <span class="kw">print</span>(<span class="str">u"Видимость объекта не восстановилась"</span>)
+        exit(<span class="dig">8</span>)
 <span class="cmt">#-----------------------
 </span>    <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
 </pre>
