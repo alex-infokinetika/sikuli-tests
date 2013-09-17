@@ -82,13 +82,14 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 </span><span class="kw">import</span> authorizationInNavstat
 <span class="kw">import</span> baseFunction
 <span class="kw">import</span> simple_tests
+<span class="kw">import</span> s_interface
 <span class="cmt"># --------------------------------------------
 </span><span class="kw">class</span> BDTests(unittest.TestCase):
 
     <span class="kw">def</span> test_1(self):
         <span class="kw">print</span> <span class="str">"test 1"</span>
-        simple_tests.simple_test1()
-    <span class="kw">def</span> test_2(self):
+        <span class="cmt">#s_interface.test1()
+</span>    <span class="kw">def</span> test_2(self):
         <span class="kw">print</span> <span class="str">"test 2"</span>
         <span class="kw">print</span>(<span class="str">u"Тесты формы авторизации"</span>)
 <span class="cmt">#        authorizationInNavstat.tabGo()
@@ -98,6 +99,7 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
         <span class="kw">print</span>(<span class="str">"test_3"</span>)
     <span class="kw">def</span> test_4(self):
         <span class="kw">print</span>(<span class="str">"test_4"</span>)
+        simple_tests.simple_test1()
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)

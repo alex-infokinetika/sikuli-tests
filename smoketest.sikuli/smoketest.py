@@ -10,12 +10,13 @@ if not myPath in sys.path:
 import authorizationInNavstat
 import baseFunction
 import simple_tests
+import s_interface
 # --------------------------------------------
 class BDTests(unittest.TestCase):
     
     def test_1(self):
         print "test 1"
-        simple_tests.simple_test1()
+        #s_interface.test1()
     def test_2(self):
         print "test 2"
         print(u"Тесты формы авторизации")
@@ -26,6 +27,7 @@ class BDTests(unittest.TestCase):
         print("test_3")
     def test_4(self):        
         print("test_4")
+        simple_tests.simple_test1()
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)

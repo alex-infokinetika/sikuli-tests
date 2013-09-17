@@ -40,8 +40,5 @@ def simple_test1():
         print (u"Таб с картой через плюсик открывается")
     except:
         print (u"Таб с картой через плюсик НЕ открывается!")
-
-
     type(Key.F4, KeyModifier.ALT)
-
 #simple_test1()

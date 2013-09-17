@@ -123,3 +123,17 @@ def setInterval(day1,day2):
     doubleClick(Pattern("3GlpHOJ1BDBM.png").targetOffset(-37,23))
     paste(day2.strftime("%d.%m.%Y "))
 # ---------------------------------------------------------------------------------------------------------
+
+# просто закрывает активный таб
+def closeCurTab():
+    try:
+        wait("1379333077365-1.png")
+        click("1379333077365-1.png")
+        return 1
+    except:
+        return 0
+
+# Открывает новый таб с картой
+def newMapTab():
+    wait("1379333330757.png")
+    click("1379333330757.png") 

@@ -103,52 +103,57 @@
 
 
 <span class="kw">def</span> startNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
-    <span class="kw">try</span>:
-        <span class="skw">click</span>(<img src="1376484163733.png" />)
-        <span class="kw">print</span> (<span class="str">u"Кликнули ярлык Навтат"</span>)
-    <span class="kw">except</span>:
-        <span class="kw">print</span> (<span class="str">u"Не нашёл ярлык Навтат!"</span>)
-        exit()
-    <span class="kw">try</span>:
-        <span class="skw">wait</span>(<img src="1376485054733.png" />,<span class="dig">10</span>)
-        <span class="kw">print</span> (<span class="str">u"Обновлений нет"</span>)
-    <span class="kw">except</span>:
         <span class="kw">try</span>:
-            <span class="skw">wait</span>(<img src="1379065887261.png" />)
-            <span class="skw">click</span>(<img src="update_butt.png" />)
-            <span class="skw">click</span>(Pattern(<img src="update_available.png" />).targetOffset(<span class="dig">48</span>,<span class="dig">74</span>))
-            <span class="skw">wait</span>(<img src="error_pres_ok.png" />,<span class="dig">60</span>)
-            <span class="skw">click</span>(Pattern(<img src="error_pres_ok.png" />).targetOffset(<span class="dig">95</span>,<span class="dig">49</span>))
-            <span class="kw">print</span> (<span class="str">u"Обновили Навстат"</span>)
-            <span class="kw">try</span>:
                 <span class="skw">click</span>(<img src="1376484163733.png" />)
                 <span class="kw">print</span> (<span class="str">u"Кликнули ярлык Навтат"</span>)
-            <span class="kw">except</span>:
+        <span class="kw">except</span>:
                 <span class="kw">print</span> (<span class="str">u"Не нашёл ярлык Навтат!"</span>)
                 exit()
-            <span class="kw">try</span>:
+        <span class="kw">try</span>:
                 <span class="skw">wait</span>(<img src="1376485054733.png" />,<span class="dig">10</span>)
                 <span class="kw">print</span> (<span class="str">u"Обновлений нет"</span>)
         <span class="kw">except</span>:
-            <span class="kw">print</span> (<span class="str">u"Обновиться не удалось"</span>)
-
-        <span class="kw">print</span> (<span class="str">u"Навстат не стартанул или есть обновления"</span>)
-        exit()
-    <span class="kw">try</span>:
-        <span class="skw">type</span>(Pattern(<img src="VnO1Tb3OBBT1.png" />).targetOffset(<span class="dig">42</span>,<span class="dig">2</span>), userName.encode(<span class="str">"UTF-8"</span>))
-        <span class="skw">type</span>(Key.TAB)
-        <span class="skw">type</span>(password.encode(<span class="str">"UTF-8"</span>))
-        <span class="skw">click</span>(<img src="OK.png" />)
-        <span class="kw">print</span> (<span class="str">u"Ввели логин и пароль, нажали OK"</span>)
-    <span class="kw">except</span>:
-        <span class="kw">print</span> (<span class="str">u"Вволдили логин и пароль, нажали OK - сто-то пошло не так!"</span>)
-        exit()
-    <span class="kw">try</span>:
-        <span class="skw">wait</span>(Pattern(<img src="NAVSTAT-1.png" />).similar(<span class="dig">0.80</span>), <span class="dig">300</span>)
-        <span class="kw">print</span> (<span class="str">u"Навстат запустился"</span>)
-    <span class="kw">except</span>:
-        <span class="kw">print</span> (<span class="str">u"Навстат не запустился"</span>)
-        exit()
+                <span class="kw">print</span> (<span class="str">u"Похоже есть обновления"</span>)
+                <span class="kw">try</span>:
+                        <span class="skw">wait</span>(<img src="1379065887261.png" />)
+                        <span class="kw">print</span>(<span class="str">u"Есть обновления"</span>)
+                        <span class="skw">click</span>(<img src="update_butt.png" />)
+                        <span class="skw">click</span>(Pattern(<img src="update_available.png" />).targetOffset(<span class="dig">48</span>,<span class="dig">74</span>))
+                        <span class="skw">wait</span>(<img src="error_pres_ok.png" />,<span class="dig">60</span>)
+                        <span class="skw">click</span>(Pattern(<img src="error_pres_ok.png" />).targetOffset(<span class="dig">95</span>,<span class="dig">49</span>))
+                        <span class="kw">print</span> (<span class="str">u"Обновили Навстат"</span>)
+                        <span class="kw">try</span>:
+                                <span class="skw">click</span>(<img src="1376484163733.png" />)
+                                <span class="kw">print</span> (<span class="str">u"Кликнули ярлык Навтат"</span>)
+                        <span class="kw">except</span>:
+                                <span class="kw">print</span> (<span class="str">u"Не нашёл ярлык Навтат!"</span>)
+                                exit()
+                        <span class="kw">try</span>:
+                                <span class="skw">wait</span>(<img src="1376485054733.png" />,<span class="dig">10</span>)
+                                <span class="kw">print</span> (<span class="str">u"Обновлений больше нет"</span>)
+                        <span class="kw">except</span>:
+                                <span class="kw">print</span> (<span class="str">u"Навстат не запустился после обновления"</span>)
+                                exit()
+                <span class="kw">except</span>:
+                        <span class="kw">print</span> (<span class="str">u"Обновиться не удалось"</span>)
+                        exit()
+                exit()
+        <span class="kw">try</span>:
+                <span class="skw">type</span>(Pattern(<img src="VnO1Tb3OBBT1.png" />).targetOffset(<span class="dig">42</span>,<span class="dig">2</span>), userName.encode(<span class="str">"UTF-8"</span>))
+                <span class="skw">type</span>(Key.TAB)
+                <span class="skw">type</span>(password.encode(<span class="str">"UTF-8"</span>))
+                <span class="skw">click</span>(<img src="OK.png" />)
+                <span class="kw">print</span> (<span class="str">u"Ввели логин и пароль, нажали OK"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Вволдили логин и пароль, нажали OK - сто-то пошло не так!"</span>)
+                exit()
+                <span class="kw">try</span>:
+                        <span class="skw">wait</span>(Pattern(<img src="NAVSTAT-1.png" />).similar(<span class="dig">0.80</span>), <span class="dig">300</span>)
+                        <span class="kw">print</span> (<span class="str">u"Навстат запустился"</span>)
+                <span class="kw">except</span>:
+                        <span class="kw">print</span> (<span class="str">u"Навстат не запустился"</span>)
+                        exit()
+                exit()
 
 
 <span class="kw">def</span> firstStartNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
@@ -189,7 +194,21 @@
     paste(day1.strftime(<span class="str">"%d.%m.%Y "</span>))
     <span class="skw">doubleClick</span>(Pattern(<img src="3GlpHOJ1BDBM.png" />).targetOffset(-<span class="dig">37</span>,<span class="dig">23</span>))
     paste(day2.strftime(<span class="str">"%d.%m.%Y "</span>))
-<span class="cmt"># ---------------------------------------------------------------------------------------------------------</span>
+<span class="cmt"># ---------------------------------------------------------------------------------------------------------
+</span>
+<span class="cmt"># просто закрывает активный таб
+</span><span class="kw">def</span> closeCurTab():
+    <span class="kw">try</span>:
+        <span class="skw">wait</span>(<img src="1379333077365-1.png" />)
+        <span class="skw">click</span>(<img src="1379333077365-1.png" />)
+        <span class="kw">return</span> <span class="dig">1</span>
+    <span class="kw">except</span>:
+        <span class="kw">return</span> <span class="dig">0</span>
+
+<span class="cmt"># Открывает новый таб с картой
+</span><span class="kw">def</span> newMapTab():
+    <span class="skw">wait</span>(<img src="1379333330757.png" />)
+    <span class="skw">click</span>(<img src="1379333330757.png" />)
 </pre>
 </body>
 </html>

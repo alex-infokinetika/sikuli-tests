@@ -8,12 +8,17 @@ if not myPath in sys.path:
     sys.path.append(myPath)
 # Импорт тестов ------------------------------
 import tmp
+import s_interface
 # --------------------------------------------
 class BDTests(unittest.TestCase):
     
     def test_1(self):
         print "test 1"
-        tmp.tmp()
+        #tmp.tmp()
+    def test_1(self):
+        print "test 2"
+        s_interface.test1()
+
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
 outPath =  os.environ.get("GIT_HOME") + "tmp-report.html" # Вариант с путём без кирилицы и именами без пробелов  
