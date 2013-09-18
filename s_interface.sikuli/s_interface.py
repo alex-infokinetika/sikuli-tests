@@ -4,7 +4,7 @@ import os
 
 myPath = os.environ.get("GIT_HOME") + u"sikuli-tests"
 if not myPath in sys.path:
-    sys.path.append(myPath)
+	sys.path.append(myPath)
 # Импорт ------------------------------
 import baseFunction as BF
 import keyer
@@ -15,80 +15,88 @@ import keyer
 #	1.1.	Вкладки: история, карта, отчёт (попутно переключаемся междуними, туда и обратно)
 #	1.2.	кнопка со списком табов
 def test1():
-    BF.clearData()
-    keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
-    # Ключ тестового клиента "Автотестхолдинг"
-    BF.startNavstat()
+	BF.clearData()
+	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
+	# Ключ тестового клиента "Автотестхолдинг"
+	BF.startNavstat()
 #-----------------------
-    try:
-        wait(Pattern("tab_hist.png").similar(0.80),15)
-        print (u"Таб История изменений на месте")
-    except:
-        print (u"Нет таба История изменений или соседнего!")
-        exit(1)
-    click("1379425632955.png")
-    try:
-        wait("Kapra.png",5)
-        print (u"Таб Карта на месте")
-    except:
-        print (u"Нет таба Карта или соседнего!")
-        exit(2)
-    click("1379425704457.png")
-    try:
-        wait("OwT.png",5)
-        print (u"Таб Отчёт на месте")
-    except:
-        print (u"Нет таба с Отчёт или соседнего!")
-        exit(3)
-    click("1379426134745.png")
-    try:
-        wait(Pattern("tab_list.png").similar(0.90),5)
-        print (u"Список табов на месте")
-    except:
-        print (u"Нет списка табов!")
-        exit(4)
-    click(Pattern("tab_list.png").similar(0.90).targetOffset(-38,13))
-    try:
-        wait("KamaX.png")
-        print (u"Перешли на таб Карта через список табов")
-    except:
-        print (u"Не перешли на таб Карта через список табов!")
-        exit(5)
-    click("1379426134745.png")
-    click(Pattern("tab_list.png").similar(0.90).targetOffset(-36,-8))
-    try:
-        wait("OwTX.png",5)
-        print (u"Перешли на таб Отчёт через список табов")
-    except:
-        print (u"Не перешли на таб Отчёт через список табов!")
-        exit(6)
-    click("1379426134745.png")
-    click(Pattern("tab_list.png").similar(0.00).targetOffset(-34,34))
-    try:
-        wait("Vlcropmnameo.png")
-        print (u"Перешли на таб История изменений через список табов")
-    except:
-        print (u"Не перешли на таб История изменений через список табов!")
-        exit(7)
-    BF.closeCurTab()
-    BF.closeCurTab()
-    BF.closeCurTab()
-    try:
-        waitVanish("1379425632955.png")
-        waitVanish("1379425704457.png")
-        waitVanish("tab_hist_1.png")
-        waitVanish("KamaX.png")
-        waitVanish("OwTX.png")
-        waitVanish("Vlcropmnameo.png")
-        waitVanish("Kapra.png")
-        waitVanish("OwT.png")
-        waitVanish("tab_hist_2.png")
-        print (u"Все табы закрыли")
-    except:
-        print (u"Не все табы закрыли!")
-        exit(8)
-#    print (u"")
-    type(Key.F4, KeyModifier.ALT)
+	try:
+		wait(Pattern("tab_hist.png").similar(0.80),15)
+		print (u"Таб История изменений на месте")
+	except:
+		print (u"Нет таба История изменений или соседнего!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(1)
+	click("1379425632955.png")
+	try:
+		wait("Kapra.png",5)
+		print (u"Таб Карта на месте")
+	except:
+		print (u"Нет таба Карта или соседнего!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(2)
+	click("1379425704457.png")
+	try:
+		wait("OwT.png",5)
+		print (u"Таб Отчёт на месте")
+	except:
+		print (u"Нет таба с Отчёт или соседнего!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(3)
+	click("1379426134745.png")
+	try:
+		wait(Pattern("tab_list.png").similar(0.90),5)
+		print (u"Список табов на месте")
+	except:
+		print (u"Нет списка табов!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(4)
+	click(Pattern("tab_list.png").similar(0.90).targetOffset(-38,13))
+	try:
+		wait("KamaX.png")
+		print (u"Перешли на таб Карта через список табов")
+	except:
+		print (u"Не перешли на таб Карта через список табов!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(5)
+	click("1379426134745.png")
+	click(Pattern("tab_list.png").similar(0.90).targetOffset(-36,-8))
+	try:
+		wait("OwTX.png",5)
+		print (u"Перешли на таб Отчёт через список табов")
+	except:
+		print (u"Не перешли на таб Отчёт через список табов!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(6)
+	click("1379426134745.png")
+	click(Pattern("tab_list.png").similar(0.00).targetOffset(-34,34))
+	try:
+		wait("Vlcropmnameo.png")
+		print (u"Перешли на таб История изменений через список табов")
+	except:
+		print (u"Не перешли на таб История изменений через список табов!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(7)
+	BF.closeCurTab()
+	BF.closeCurTab()
+	BF.closeCurTab()
+	try:
+		waitVanish("1379425632955.png")
+		waitVanish("1379425704457.png")
+		waitVanish("tab_hist_1.png")
+		waitVanish("KamaX.png")
+		waitVanish("OwTX.png")
+		waitVanish("Vlcropmnameo.png")
+		waitVanish("Kapra.png")
+		waitVanish("OwT.png")
+		waitVanish("tab_hist_2.png")
+		print (u"Все табы закрыли")
+	except:
+		print (u"Не все табы закрыли!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(8)
+#	print (u"")
+	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	2.	Тест
 #	2.1.	Панель объектов: объекты, зоны, места (сворачивание разворачивание, наличие на нём объектов)
