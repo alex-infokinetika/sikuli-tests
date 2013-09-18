@@ -70,12 +70,25 @@ def test1():
     except:
         print (u"Не перешли на таб История изменений через список табов!")
         exit(7)
-
     BF.closeCurTab()
     BF.closeCurTab()
     BF.closeCurTab()
-    print (u"")
-#    type(Key.F4, KeyModifier.ALT)
+    try:
+        waitVanish("1379425632955.png")
+        waitVanish("1379425704457.png")
+        waitVanish("tab_hist_1.png")
+        waitVanish("KamaX.png")
+        waitVanish("OwTX.png")
+        waitVanish("Vlcropmnameo.png")
+        waitVanish("Kapra.png")
+        waitVanish("OwT.png")
+        waitVanish("tab_hist_2.png")
+        print (u"Все табы закрыли")
+    except:
+        print (u"Не все табы закрыли!")
+        exit(8)
+#    print (u"")
+    type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	2.	Тест
 #	2.1.	Панель объектов: объекты, зоны, места (сворачивание разворачивание, наличие на нём объектов)
