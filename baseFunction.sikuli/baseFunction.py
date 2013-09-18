@@ -136,4 +136,4 @@ def closeCurTab():
 # Открывает новый таб с картой
 def newMapTab():
     wait("1379333330757.png")
-    click("1379333330757.png") 
+    click("1379333330757.png")
