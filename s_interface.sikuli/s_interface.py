@@ -18,7 +18,7 @@ import keyer
 #	1.1.	Вкладки: история, карта, отчёт (попутно переключаемся междуними, туда и обратно)
 #	1.2.	кнопка со списком табов
 def test1():
-    start = time.time()
+	start = time.time()
 	BF.clearData()
 	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
 	# Ключ тестового клиента "Автотестхолдинг"
@@ -92,7 +92,7 @@ def test1():
 		type(Key.F4, KeyModifier.ALT)
 		exit(8)
 #	print (u"")
-    print (u"Время выполнения теста: ", datetime.timedelta(seconds=time.time()-start))
+	print (u"Время выполнения теста: ", datetime.timedelta(seconds=time.time()-start))
 	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	2.	Тест
@@ -101,7 +101,7 @@ def test1():
 #	3.	Тест
 #	3.1.	Панели инструментов (сворачивание, разворачивание, переключение между панелями, наличие элементов интерфейса) на табах карта и отчёт
 def test3():
-    start = time.time()
+	start = time.time()
 	BF.clearData()
 	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
 	# Ключ тестового клиента "Автотестхолдинг"
@@ -195,7 +195,7 @@ def test3():
 		exit(11)
 
 #	print (u"")
-    print (u"Время выполнения теста: ", datetime.timedelta(seconds=time.time()-start))
+	print (u"Время выполнения теста: ", datetime.timedelta(seconds=time.time()-start))
 	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	4.	Тест
