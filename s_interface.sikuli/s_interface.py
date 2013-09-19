@@ -92,7 +92,7 @@ def test1():
 		type(Key.F4, KeyModifier.ALT)
 		exit(8)
 #	print (u"")
-	print (u"Время выполнения теста: ", datetime.timedelta(seconds=time.time()-start))
+	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
 	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	2.	Тест
@@ -195,7 +195,7 @@ def test3():
 		exit(11)
 
 #	print (u"")
-	print (u"Время выполнения теста: ", datetime.timedelta(seconds=time.time()-start))
+	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
 	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	4.	Тест

@@ -1,6 +1,8 @@
 from sikuli import *
 # -*- coding: utf-8 -*-
 import os
+import time
+import datetime
 
 myPath = os.environ.get("GIT_HOME") + u"sikuli-tests"
 if not myPath in sys.path:
@@ -111,4 +113,7 @@ def tmp():
 #-----------------------
     type(Key.F4, KeyModifier.ALT)
 
-
+def timer():
+    start = time.time()
+    sleep(5)
+    print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)

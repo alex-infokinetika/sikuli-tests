@@ -73,6 +73,8 @@
 <span class="kw">from</span> sikuli <span class="kw">import</span> *
 <span class="cmt"># -*- coding: utf-8 -*-
 </span><span class="kw">import</span> os
+<span class="kw">import</span> time
+<span class="kw">import</span> datetime
 
 myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">u"sikuli-tests"</span>
 <span class="kw">if</span> <span class="kw">not</span> myPath <span class="kw">in</span> sys.path:
@@ -182,6 +184,11 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
         exit(<span class="dig">8</span>)
 <span class="cmt">#-----------------------
 </span>    <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+
+<span class="kw">def</span> timer():
+    start = time.time()
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    <span class="kw">print</span> (<span class="str">u"Время выполнения теста: "</span>), datetime.timedelta(seconds=time.time()-start)
 </pre>
 </body>
 </html>
