@@ -67,12 +67,15 @@
    </head>
 <body>
 <div class="info">
-<h2>s_interface.sikuli\s-interface.sikuli</h2> <a href="s_interface.sikuli\s-interface.zip">(Download this script)</a>
+<h2>s_interface.sikuli\s_interface.sikuli</h2> <a href="s_interface.sikuli\s_interface.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
 <span class="kw">from</span> sikuli <span class="kw">import</span> *
 <span class="cmt"># -*- coding: utf-8 -*-
 </span><span class="kw">import</span> os
+<span class="kw">import</span> time
+<span class="kw">import</span> datetime
+
 
 myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">u"sikuli-tests"</span>
 <span class="kw">if</span> <span class="kw">not</span> myPath <span class="kw">in</span> sys.path:
@@ -87,6 +90,7 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 </span><span class="cmt">#       1.1.    Вкладки: история, карта, отчёт (попутно переключаемся междуними, туда и обратно)
 </span><span class="cmt">#       1.2.    кнопка со списком табов
 </span><span class="kw">def</span> test1():
+    start = time.time()
         BF.clearData()
         keyer.editKeyAndService(<span class="str">"404C2A00-B173-4844-BA59-9A6F296479E7"</span>, <span class="str">"http://services.navstat.infokinetika.net"</span>)
         <span class="cmt"># Ключ тестового клиента "Автотестхолдинг"
@@ -153,22 +157,15 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
         BF.closeCurTab()
         BF.closeCurTab()
         <span class="kw">try</span>:
-                waitVanish(<img src="1379425632955.png" />)
-                waitVanish(<img src="1379425704457.png" />)
-                waitVanish(<img src="tab_hist_1.png" />)
-                waitVanish(<img src="KamaX.png" />)
-                waitVanish(<img src="OwTX.png" />)
-                waitVanish(<img src="Vlcropmnameo.png" />)
-                waitVanish(<img src="Kapra.png" />)
-                waitVanish(<img src="OwT.png" />)
-                waitVanish(<img src="tab_hist_2.png" />)
+                BF.waitVanishAll([<img src="1379425632955.png" />,<img src="1379425704457.png" />,<img src="tab_hist_1.png" />,<img src="KamaX.png" />,<img src="OwTX.png" />,<img src="Vlcropmnameo.png" />,<img src="Kapra.png" />,<img src="OwT.png" />,<img src="tab_hist_2.png" />])
                 <span class="kw">print</span> (<span class="str">u"Все табы закрыли"</span>)
         <span class="kw">except</span>:
                 <span class="kw">print</span> (<span class="str">u"Не все табы закрыли!"</span>)
                 <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
                 exit(<span class="dig">8</span>)
 <span class="cmt">#       print (u"")
-</span>        <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+</span>    <span class="kw">print</span> (<span class="str">u"Время выполнения теста: "</span>, datetime.timedelta(seconds=time.time()-start))
+        <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
 <span class="cmt">#--------------------------------------------------------------------------------------------------------------------
 </span><span class="cmt">#       2.      Тест
 </span><span class="cmt">#       2.1.    Панель объектов: объекты, зоны, места (сворачивание разворачивание, наличие на нём объектов)
@@ -176,6 +173,7 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 </span><span class="cmt">#       3.      Тест
 </span><span class="cmt">#       3.1.    Панели инструментов (сворачивание, разворачивание, переключение между панелями, наличие элементов интерфейса) на табах карта и отчёт
 </span><span class="kw">def</span> test3():
+    start = time.time()
         BF.clearData()
         keyer.editKeyAndService(<span class="str">"404C2A00-B173-4844-BA59-9A6F296479E7"</span>, <span class="str">"http://services.navstat.infokinetika.net"</span>)
         <span class="cmt"># Ключ тестового клиента "Автотестхолдинг"
@@ -184,37 +182,94 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 </span>        <span class="kw">try</span>:
                 <span class="skw">wait</span>(<img src="NAVSTATQ.png" />,<span class="dig">15</span>)
                 <span class="skw">click</span>(Pattern(<img src="NAVSTATQ.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">31</span>,<span class="dig">12</span>))
-                <span class="skw">wait</span>(<img src="panel_hist.png" />)
-                <span class="kw">print</span> (<span class="str">u"Панель История на месте"</span>)
-        <span class="kw">except</span>:
-                <span class="kw">print</span> (<span class="str">u"Панель История не развернулась"</span>)
-                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
-                exit(<span class="dig">1</span>)
-        <span class="kw">try</span>:
                 <span class="skw">wait</span>(<img src="MapuuprywHou.png" />,<span class="dig">15</span>)
                 <span class="kw">print</span> (<span class="str">u"Кнопки переключения между панелями на месте"</span>)
         <span class="kw">except</span>:
                 <span class="kw">print</span> (<span class="str">u"Нет кнопок переключения между панелями!"</span>)
                 <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">1</span>)
+        <span class="kw">try</span>:
+                <span class="skw">wait</span>(<img src="panel_hist.png" />)
+                <span class="kw">print</span> (<span class="str">u"Панель История на месте"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Панель История не развернулась"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
                 exit(<span class="dig">2</span>)
         <span class="kw">try</span>:
-<span class="cmt">#               wait(Pattern("180920131157.png").similar(0.60)) #так не пойдёт, надо опознавать каждый отдельно
-</span>                <span class="skw">wait</span>(<img src="strelki1.png" />)
-                <span class="skw">wait</span>(<img src="strelki2.png" />)
-                <span class="skw">wait</span>(<img src="za_den.png" />)
-                <span class="skw">wait</span>(<img src="za_period.png" />)
-                <span class="skw">wait</span>(<img src="zakladki.png" />)
-                <span class="skw">wait</span>(<img src="pokazat_skryt.png" />)
+                BF.waitAll([<img src="strelki1.png" />,<img src="strelki2.png" />,<img src="za_den.png" />,<img src="za_period.png" />,<img src="zakladki.png" />,<img src="pokazat_skryt.png" />,Pattern(<img src="190920131017.png" />).similar(<span class="dig">0.90</span>)],<span class="dig">5</span>)
                 <span class="kw">print</span> (<span class="str">u"Элементы, на панели История, в порядке"</span>)
         <span class="kw">except</span>:
-                <span class="kw">print</span> (<span class="str">u"Элементы, на панели История, в не порядке!"</span>)
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели История, не в порядке!"</span>)
                 <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
                 exit(<span class="dig">3</span>)
-
+        <span class="kw">try</span>:
+                <span class="skw">click</span>(Pattern(<img src="MapuuprywHou.png" />).similar(<span class="dig">0.00</span>).targetOffset(-<span class="dig">19</span>,<span class="dig">1</span>),<span class="dig">15</span>)
+                <span class="skw">wait</span>(<img src="MapuWT.png" />)
+                <span class="skw">wait</span>(<img src="VlcropmHoucx.png" />)
+                <span class="kw">print</span> (<span class="str">u"Панель Маршрут на месте"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Панель Маршрут не открылась"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">4</span>)
+        <span class="kw">try</span>:
+                BF.waitAll([<img src="1379567058042.png" />,<img src="1379567072814.png" />,<img src="1379567083379.png" />,<img src="1379567092595.png" />,<img src="0wT.png" />,<img src="IOwncmm.png" />,Pattern(<img src="IOwncmm0wT.png" />).similar(<span class="dig">0.90</span>)])
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели Маршрут, в порядке"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели Маршрут, не в порядке!"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">5</span>)
+        <span class="kw">try</span>:
+                <span class="skw">click</span>(Pattern(<img src="VlcropmHoucx.png" />).targetOffset(<span class="dig">28</span>,<span class="dig">1</span>),<span class="dig">15</span>)
+                BF.waitAll([<img src="Honcx.png" />,<img src="1379570862855.png" />])
+                <span class="kw">print</span> (<span class="str">u"Панель Поиск на месте"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Панель Поиск не открылась"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">6</span>)
+        <span class="kw">try</span>:
+                BF.waitAll([<img src="CrpanaPacman.png" />,<img src="P.png" />,<img src="Ymua.png" />,<img src="Hou.png" />,<img src="EOrpanmwmtmm.png" />,<img src="1Cnv.png" />,<img src="1379571017771.png" />,<img src="Hoxaaam.png" />,<img src="Cxpum.png" />,Pattern(<img src="HoncxCrpanaP.png" />).similar(<span class="dig">0.90</span>)])
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели Поиск, в порядке"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели Поиск, не в порядке!"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">7</span>)
+        <span class="kw">try</span>:
+                <span class="skw">click</span>(Pattern(<img src="1379570862855.png" />).targetOffset(<span class="dig">76</span>,<span class="dig">0</span>),<span class="dig">15</span>)
+                BF.waitAll([<img src="IlaaTap.png" />,Pattern(<img src="VlcrapmMapuu.png" />).similar(<span class="dig">0.80</span>)])
+                <span class="kw">print</span> (<span class="str">u"Панель Локатор на месте"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Панель Локатор не открылась"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">8</span>)
+        <span class="kw">try</span>:
+                BF.waitAll([<img src="TmTONKMmncpe.png" />,<img src="Pawycnocxa20.png" />,<img src="Flopuwlrauno.png" />,<img src="Cpm.png" />,Pattern(<img src="TmTONKMmncpe-1.png" />).similar(<span class="dig">0.90</span>)])
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели Локатор, в порядке"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели Локатор, не в порядке!"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">9</span>)
+        BF.closeCurTab()
+        <span class="kw">print</span> (<span class="str">u"Закрыли таб Карта"</span>)
+        <span class="kw">try</span>:
+                BF.waitAll([<img src="OwTX.png" />,<img src="Owm.png" />])
+                <span class="kw">print</span> (<span class="str">u"Переключились на таб Отчёт"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Не переключились на таб Отчёт!"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="lfEHF.png" />).similar(<span class="dig">0.80</span>).targetOffset(<span class="dig">27</span>,<span class="dig">0</span>)) <span class="cmt"># Временная заглушка, убрать её после починки http://idea.navstat.ru/tickets/6917</span>
+        <span class="kw">try</span>:
+                BF.waitAll([<img src="strelki1.png" />,<img src="strelki2.png" />,<img src="za_den.png" />,<img src="za_period.png" />,<img src="1aasuanamec.png" />,<img src="EYraecmrnTcc.png" />,<img src="Hoxaaam-1.png" />,<img src="O6uueowmMTOT.png" />,Pattern(<img src="Owm190920131.png" />).similar(<span class="dig">0.90</span>)])
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели Отчёт, в порядке"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Элементы, на панели Отчёт, не в порядке!"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">11</span>)
 
 <span class="cmt">#       print (u"")
-</span><span class="cmt">#       type(Key.F4, KeyModifier.ALT)
-</span><span class="cmt">#--------------------------------------------------------------------------------------------------------------------
+</span>    <span class="kw">print</span> (<span class="str">u"Время выполнения теста: "</span>, datetime.timedelta(seconds=time.time()-start))
+        <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+<span class="cmt">#--------------------------------------------------------------------------------------------------------------------
 </span><span class="cmt">#       4.      Тест
 </span><span class="cmt">#       4.1.    Журнал (сворачивание разворачивание)
 </span><span class="cmt">#       4.2.    миникарта

@@ -88,8 +88,8 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 
     <span class="kw">def</span> test_1(self):
         <span class="kw">print</span> <span class="str">"test 1"</span>
-        <span class="cmt">#s_interface.test1()
-</span>    <span class="kw">def</span> test_2(self):
+        s_interface.test1()
+    <span class="kw">def</span> test_2(self):
         <span class="kw">print</span> <span class="str">"test 2"</span>
         <span class="kw">print</span>(<span class="str">u"Тесты формы авторизации"</span>)
 <span class="cmt">#        authorizationInNavstat.tabGo()
@@ -97,6 +97,7 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 </span><span class="cmt">#            print( u"Продолжаем")
 </span>    <span class="kw">def</span> test_3(self):
         <span class="kw">print</span>(<span class="str">"test_3"</span>)
+        s_interface.test3()
     <span class="kw">def</span> test_4(self):
         <span class="kw">print</span>(<span class="str">"test_4"</span>)
         simple_tests.simple_test1()

@@ -3,6 +3,8 @@ from sikuli import *
 import os
 import sys
 import shutil
+import time
+import datetime
 
 def deleteFileOrFolder(directory):
     if os.path.exists(directory):
@@ -98,8 +100,8 @@ def firstStartNavstat(userName = u"admin", password = u"admin"):
         exit()
 
 # аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
-# если не дождались возвращаем "-1"
-def waitList(imgList, timer):
+# если не дождались - вызываем исключение
+def waitList(imgList, timer=3):
     start = time.time() + timer
     while start > time.time():
         print " --- ", start, " - ", time.time(), " = ", start-time.time()
@@ -112,10 +114,36 @@ def waitList(imgList, timer):
             except:
                 print("Don't find ")
             i+=1
-    return -1
+    assert(false)
+# аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает 1 если нашёл все картинки из списка
+# если не дождались - вызываем исключение
+def waitAll(imgList, timer=3):
+    start = time.time() + timer
+    while start > time.time():
+        res = 1
+        for img in imgList:
+            try:
+                find(img)
+            except:
+                res = -1
+        if res == 1:
+            return 1
+    assert(false)
+
+# аналог waitVanish принимает на вход список картинок и время ожидания в секундах, возвращает 1 если все картинки из списка исчезли
+# если за время timer хоть одна картинка не исчезла - вызываем исключение
+def waitVanishAll(imgList, timer=3):
+    start = time.time() + timer
+    while start > time.time():
+        res = -1
+        for img in imgList:
+            if not waitVanish(img):
+                res = 1
+                break
+        if res == -1:
+            return 1
+    assert(false)
 # Установка периода для отчётов и истории -----------------------------------------------------------------
-import time
-import datetime
 def setInterval(day1,day2):
     # Навстат должен быть запущен и открыта панель с датапикером
     doubleClick(Pattern("3GlpHOJ1BDBM.png").targetOffset(-39,-4))

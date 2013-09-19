@@ -75,6 +75,8 @@
 </span><span class="kw">import</span> os
 <span class="kw">import</span> sys
 <span class="kw">import</span> shutil
+<span class="kw">import</span> time
+<span class="kw">import</span> datetime
 
 <span class="kw">def</span> deleteFileOrFolder(directory):
     <span class="kw">if</span> os.path.exists(directory):
@@ -170,8 +172,8 @@
         exit()
 
 <span class="cmt"># аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
-</span><span class="cmt"># если не дождались возвращаем "-1"
-</span><span class="kw">def</span> waitList(imgList, timer):
+</span><span class="cmt"># если не дождались - вызываем исключение
+</span><span class="kw">def</span> waitList(imgList, timer=<span class="dig">3</span>):
     start = time.time() + timer
     <span class="kw">while</span> start &gt; time.time():
         <span class="kw">print</span> <span class="str">" --- "</span>, start, <span class="str">" - "</span>, time.time(), <span class="str">" = "</span>, start-time.time()
@@ -184,11 +186,37 @@
             <span class="kw">except</span>:
                 <span class="kw">print</span>(<span class="str">"Don't find "</span>)
             i+=<span class="dig">1</span>
-    <span class="kw">return</span> -<span class="dig">1</span>
+    <span class="kw">assert</span>(false)
+<span class="cmt"># аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает 1 если нашёл все картинки из списка
+</span><span class="cmt"># если не дождались - вызываем исключение
+</span><span class="kw">def</span> waitAll(imgList, timer=<span class="dig">3</span>):
+    start = time.time() + timer
+    <span class="kw">while</span> start &gt; time.time():
+        res = <span class="dig">1</span>
+        <span class="kw">for</span> img <span class="kw">in</span> imgList:
+            <span class="kw">try</span>:
+                <span class="skw">find</span>(img)
+            <span class="kw">except</span>:
+                res = -<span class="dig">1</span>
+        <span class="kw">if</span> res == <span class="dig">1</span>:
+            <span class="kw">return</span> <span class="dig">1</span>
+    <span class="kw">assert</span>(false)
+
+<span class="cmt"># аналог waitVanish принимает на вход список картинок и время ожидания в секундах, возвращает 1 если все картинки из списка исчезли
+</span><span class="cmt"># если за время timer хоть одна картинка не исчезла - вызываем исключение
+</span><span class="kw">def</span> waitVanishAll(imgList, timer=<span class="dig">3</span>):
+    start = time.time() + timer
+    <span class="kw">while</span> start &gt; time.time():
+        res = -<span class="dig">1</span>
+        <span class="kw">for</span> img <span class="kw">in</span> imgList:
+            <span class="kw">if</span> <span class="kw">not</span> waitVanish(img):
+                res = <span class="dig">1</span>
+                <span class="kw">break</span>
+        <span class="kw">if</span> res == -<span class="dig">1</span>:
+            <span class="kw">return</span> <span class="dig">1</span>
+    <span class="kw">assert</span>(false)
 <span class="cmt"># Установка периода для отчётов и истории -----------------------------------------------------------------
-</span><span class="kw">import</span> time
-<span class="kw">import</span> datetime
-<span class="kw">def</span> setInterval(day1,day2):
+</span><span class="kw">def</span> setInterval(day1,day2):
     <span class="cmt"># Навстат должен быть запущен и открыта панель с датапикером
 </span>    <span class="skw">doubleClick</span>(Pattern(<img src="3GlpHOJ1BDBM.png" />).targetOffset(-<span class="dig">39</span>,-<span class="dig">4</span>))
     paste(day1.strftime(<span class="str">"%d.%m.%Y "</span>))

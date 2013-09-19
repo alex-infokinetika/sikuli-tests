@@ -1,6 +1,9 @@
 from sikuli import *
 # -*- coding: utf-8 -*-
 import os
+import time
+import datetime
+
 
 myPath = os.environ.get("GIT_HOME") + u"sikuli-tests"
 if not myPath in sys.path:
@@ -15,6 +18,7 @@ import keyer
 #	1.1.	Вкладки: история, карта, отчёт (попутно переключаемся междуними, туда и обратно)
 #	1.2.	кнопка со списком табов
 def test1():
+    start = time.time()
 	BF.clearData()
 	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
 	# Ключ тестового клиента "Автотестхолдинг"
@@ -81,21 +85,14 @@ def test1():
 	BF.closeCurTab()
 	BF.closeCurTab()
 	try:
-		waitVanish("1379425632955.png")
-		waitVanish("1379425704457.png")
-		waitVanish("tab_hist_1.png")
-		waitVanish("KamaX.png")
-		waitVanish("OwTX.png")
-		waitVanish("Vlcropmnameo.png")
-		waitVanish("Kapra.png")
-		waitVanish("OwT.png")
-		waitVanish("tab_hist_2.png")
+		BF.waitVanishAll(["1379425632955.png","1379425704457.png","tab_hist_1.png","KamaX.png","OwTX.png","Vlcropmnameo.png","Kapra.png","OwT.png","tab_hist_2.png"])
 		print (u"Все табы закрыли")
 	except:
 		print (u"Не все табы закрыли!")
 		type(Key.F4, KeyModifier.ALT)
 		exit(8)
 #	print (u"")
+    print (u"Время выполнения теста: ", datetime.timedelta(seconds=time.time()-start))
 	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	2.	Тест
@@ -104,6 +101,7 @@ def test1():
 #	3.	Тест
 #	3.1.	Панели инструментов (сворачивание, разворачивание, переключение между панелями, наличие элементов интерфейса) на табах карта и отчёт
 def test3():
+    start = time.time()
 	BF.clearData()
 	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
 	# Ключ тестового клиента "Автотестхолдинг"
@@ -112,36 +110,93 @@ def test3():
 	try:
 		wait("NAVSTATQ.png",15)
 		click(Pattern("NAVSTATQ.png").similar(0.80).targetOffset(-31,12))
-		wait("panel_hist.png")
-		print (u"Панель История на месте")
-	except:
-		print (u"Панель История не развернулась")
-		type(Key.F4, KeyModifier.ALT)
-		exit(1)
-	try:
 		wait("MapuuprywHou.png",15)
 		print (u"Кнопки переключения между панелями на месте")
 	except:
 		print (u"Нет кнопок переключения между панелями!")
 		type(Key.F4, KeyModifier.ALT)
+		exit(1)
+	try:
+		wait("panel_hist.png")
+		print (u"Панель История на месте")
+	except:
+		print (u"Панель История не развернулась")
+		type(Key.F4, KeyModifier.ALT)
 		exit(2)
 	try:
-#		wait(Pattern("180920131157.png").similar(0.60)) #так не пойдёт, надо опознавать каждый отдельно
-		wait("strelki1.png")
-		wait("strelki2.png")
-		wait("za_den.png")
-		wait("za_period.png")
-		wait("zakladki.png")
-		wait("pokazat_skryt.png")
+		BF.waitAll(["strelki1.png","strelki2.png","za_den.png","za_period.png","zakladki.png","pokazat_skryt.png",Pattern("190920131017.png").similar(0.90)],5)
 		print (u"Элементы, на панели История, в порядке")
 	except:
-		print (u"Элементы, на панели История, в не порядке!")
+		print (u"Элементы, на панели История, не в порядке!")
 		type(Key.F4, KeyModifier.ALT)
 		exit(3)
-
+	try:
+		click(Pattern("MapuuprywHou.png").similar(0.00).targetOffset(-19,1),15)
+		wait("MapuWT.png")
+		wait("VlcropmHoucx.png")
+		print (u"Панель Маршрут на месте")
+	except:
+		print (u"Панель Маршрут не открылась")
+		type(Key.F4, KeyModifier.ALT)
+		exit(4)
+	try:
+		BF.waitAll(["1379567058042.png","1379567072814.png","1379567083379.png","1379567092595.png","0wT.png","IOwncmm.png",Pattern("IOwncmm0wT.png").similar(0.90)])
+		print (u"Элементы, на панели Маршрут, в порядке")
+	except:
+		print (u"Элементы, на панели Маршрут, не в порядке!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(5)
+	try:
+		click(Pattern("VlcropmHoucx.png").targetOffset(28,1),15)
+		BF.waitAll(["Honcx.png","1379570862855.png"])
+		print (u"Панель Поиск на месте")
+	except:
+		print (u"Панель Поиск не открылась")
+		type(Key.F4, KeyModifier.ALT)
+		exit(6)
+	try:
+		BF.waitAll(["CrpanaPacman.png","P.png","Ymua.png","Hou.png","EOrpanmwmtmm.png","1Cnv.png","1379571017771.png","Hoxaaam.png","Cxpum.png",Pattern("HoncxCrpanaP.png").similar(0.90)])
+		print (u"Элементы, на панели Поиск, в порядке")
+	except:
+		print (u"Элементы, на панели Поиск, не в порядке!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(7)
+	try:
+		click(Pattern("1379570862855.png").targetOffset(76,0),15)
+		BF.waitAll(["IlaaTap.png",Pattern("VlcrapmMapuu.png").similar(0.80)])
+		print (u"Панель Локатор на месте")
+	except:
+		print (u"Панель Локатор не открылась")
+		type(Key.F4, KeyModifier.ALT)
+		exit(8)
+	try:
+		BF.waitAll(["TmTONKMmncpe.png","Pawycnocxa20.png","Flopuwlrauno.png","Cpm.png",Pattern("TmTONKMmncpe-1.png").similar(0.90)])
+		print (u"Элементы, на панели Локатор, в порядке")
+	except:
+		print (u"Элементы, на панели Локатор, не в порядке!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(9)
+	BF.closeCurTab()
+	print (u"Закрыли таб Карта") 
+	try:
+		BF.waitAll(["OwTX.png","Owm.png"])
+		print (u"Переключились на таб Отчёт")
+	except:
+		print (u"Не переключились на таб Отчёт!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(10)
+	click(Pattern("lfEHF.png").similar(0.80).targetOffset(27,0)) # Временная заглушка, убрать её после починки http://idea.navstat.ru/tickets/6917
+	try:
+		BF.waitAll(["strelki1.png","strelki2.png","za_den.png","za_period.png","1aasuanamec.png","EYraecmrnTcc.png","Hoxaaam-1.png","O6uueowmMTOT.png",Pattern("Owm190920131.png").similar(0.90)])
+		print (u"Элементы, на панели Отчёт, в порядке")
+	except:
+		print (u"Элементы, на панели Отчёт, не в порядке!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(11)
 
 #	print (u"")
-#	type(Key.F4, KeyModifier.ALT)
+    print (u"Время выполнения теста: ", datetime.timedelta(seconds=time.time()-start))
+	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	4.	Тест
 #	4.1.	Журнал (сворачивание разворачивание)
