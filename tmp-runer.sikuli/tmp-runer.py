@@ -21,10 +21,13 @@ class BDTests(unittest.TestCase):
     def test_3(self):
         print "test 3"
         #s_interface.test3()
+    def test_4(self):
+        print "test 4"
+        s_interface.test4()
 
     def test_0(self):
         print "test 0"
-        tmp.timer()
+        #tmp.timer()
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
 outPath =  os.environ.get("GIT_HOME") + "tmp-report.html" # Вариант с путём без кирилицы и именами без пробелов  

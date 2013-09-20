@@ -93,11 +93,14 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 </span>    <span class="kw">def</span> test_3(self):
         <span class="kw">print</span> <span class="str">"test 3"</span>
         <span class="cmt">#s_interface.test3()
-</span>
+</span>    <span class="kw">def</span> test_4(self):
+        <span class="kw">print</span> <span class="str">"test 4"</span>
+        s_interface.test4()
+
     <span class="kw">def</span> test_0(self):
         <span class="kw">print</span> <span class="str">"test 0"</span>
-        tmp.timer()
-
+        <span class="cmt">#tmp.timer()
+</span>
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
 outPath =  os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str">"tmp-report.html"</span> <span class="cmt"># Вариант с путём без кирилицы и именами без пробелов  </span>
 <span class="kw">try</span>:

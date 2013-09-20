@@ -204,6 +204,23 @@ def test3():
 #	4.3.	панелька масштаба
 #	4.4.	координаты
 #	4.5.	строка статуса (надо придумать как проверить актуальность времени
+def test4():
+	start = time.time()
+	BF.clearData()
+	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
+	# Ключ тестового клиента "Автотестхолдинг"
+	BF.firstStartNavstat()
+#-----------------------
+	try:
+		BF.waitAll(["HaraMunewm.png","Aonem.png","O61cTMoumopm.png","Onncarme.png"])
+		print (u"Элементы, журнала событий, в порядке")
+	except:
+		print (u"Элементы, журнала событий, не в порядке!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(1)
+#	print (u"")
+	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
+	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	5.	Тест
 #	5.1.	переключение режимов

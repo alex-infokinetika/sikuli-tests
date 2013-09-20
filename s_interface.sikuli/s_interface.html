@@ -276,7 +276,24 @@ myPath = os.environ.get(<span class="str">"GIT_HOME"</span>) + <span class="str"
 </span><span class="cmt">#       4.3.    панелька масштаба
 </span><span class="cmt">#       4.4.    координаты
 </span><span class="cmt">#       4.5.    строка статуса (надо придумать как проверить актуальность времени
-</span><span class="cmt">#--------------------------------------------------------------------------------------------------------------------
+</span><span class="kw">def</span> test4():
+        start = time.time()
+        BF.clearData()
+        keyer.editKeyAndService(<span class="str">"404C2A00-B173-4844-BA59-9A6F296479E7"</span>, <span class="str">"http://services.navstat.infokinetika.net"</span>)
+        <span class="cmt"># Ключ тестового клиента "Автотестхолдинг"
+</span>        BF.firstStartNavstat()
+<span class="cmt">#-----------------------
+</span>        <span class="kw">try</span>:
+                BF.waitAll([<img src="HaraMunewm.png" />,<img src="Aonem.png" />,<img src="O61cTMoumopm.png" />,<img src="Onncarme.png" />])
+                <span class="kw">print</span> (<span class="str">u"Элементы, журнала событий, в порядке"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Элементы, журнала событий, не в порядке!"</span>)
+                <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+                exit(<span class="dig">1</span>)
+<span class="cmt">#       print (u"")
+</span>        <span class="kw">print</span> (<span class="str">u"Время выполнения теста: "</span>), datetime.timedelta(seconds=time.time()-start)
+        <span class="skw">type</span>(Key.F4, KeyModifier.ALT)
+<span class="cmt">#--------------------------------------------------------------------------------------------------------------------
 </span><span class="cmt">#       5.      Тест
 </span><span class="cmt">#       5.1.    переключение режимов
 </span><span class="cmt">#--------------------------------------------------------------------------------------------------------------------
