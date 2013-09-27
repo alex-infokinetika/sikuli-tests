@@ -1,4 +1,4 @@
-from sikuli.Sikuli import *
+#from sikuli.Sikuli import *
 
-click("1379680986120.png")
+click("1380262987507.png")
 popup("Hello sikuli!")
