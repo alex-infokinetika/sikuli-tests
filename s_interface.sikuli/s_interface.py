@@ -73,7 +73,7 @@ def test1():
 		type(Key.F4, KeyModifier.ALT)
 		exit(6)
 	click("1379426134745.png")
-	click(Pattern("tab_list.png").similar(0.00).targetOffset(-34,34))
+	click(Pattern("tab_list.png").targetOffset(-34,34))
 	try:
 		wait("Vlcropmnameo.png")
 		print (u"Перешли на таб История изменений через список табов")
@@ -131,7 +131,7 @@ def test3():
 		type(Key.F4, KeyModifier.ALT)
 		exit(3)
 	try:
-		click(Pattern("MapuuprywHou.png").similar(0.00).targetOffset(-19,1),15)
+		click(Pattern("MapuuprywHou.png").targetOffset(-19,1),15)
 		wait("MapuWT.png")
 		wait("VlcropmHoucx.png")
 		print (u"Панель Маршрут на месте")
@@ -199,7 +199,7 @@ def test3():
 	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	4.	Тест
-#	4.1.	Журнал (сворачивание разворачивание)
+#	4.1.	Журнал - сворачивание разворачивание, заголовки, фильтрики (наличие данных в журнале и работа фильтров не проверяется)
 #	4.2.	миникарта
 #	4.3.	панелька масштаба
 #	4.4.	координаты
@@ -218,9 +218,66 @@ def test4():
 		print (u"Элементы, журнала событий, не в порядке!")
 		type(Key.F4, KeyModifier.ALT)
 		exit(1)
+	try:
+		if len( list( findAll("filtr_icon.png") ) ) == 4:
+			print (u"Иконки фильтров, журнала событий, в порядке")
+		else:
+			print (u"Иконки фильтров, журнала событий, не в порядке!")
+			type(Key.F4, KeyModifier.ALT)
+			exit(2)	
+	except:
+		print (u"Иконки фильтров, журнала событий, не в порядке!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(3)
+	try:
+		click("jornal_close_icon.png")
+		BF.waitAll(["jornal_open_icon_blue.png",Pattern("jornal_close_1.png").similar(0.80),Pattern("jornal_close_2.png").similar(0.90),Pattern("jornal_close_3.png").similar(0.90)])
+		print (u"Журнал свернулся")
+	except:
+		print (u"Журнал не свернулся!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(4)
+	try:
+		click("jornal_open_icon_blue.png")
+		BF.waitAll(["HaraMunewm.png","Aonem.png","O61cTMoumopm.png","Onncarme.png"])
+		if len( list( findAll("filtr_icon.png") ) ) != 4:
+			print (u"Журнал не развернулся!")
+			type(Key.F4, KeyModifier.ALT)
+			exit(5)
+		print (u"Журнал развернулся")
+	except:
+		print (u"Журнал не развернулся!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(6)
+# 4.2 Миникарта
+	try:
+		doubleClick("speeddy.png")
+		click("mini_map_open_1.png") # comment
+		BF.waitAll(["car_in_sea.png",Pattern("mini_map.png").similar(0.90),Pattern("blue_rect.png").similar(0.80),"mini_map_close_2.png"])
+		print (u"Миникарта развернулась")
+	except:
+		print (u"Миникарта не развернулась!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(7)
+	try:
+		click("mini_map_close_2.png")
+		BF.waitVanishAll([Pattern("mini_map-1.png").similar(0.90),Pattern("blue_rect-1.png").similar(0.80),Pattern("mini_map_close_2-1.png").similar(0.80)])
+		BF.waitAll(["mini_map_open_2.png","no_mini_map.png"])
+		print (u"Миникарта cвернулась")
+	except:
+		print (u"Миникарта не cвернулась!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(8)
+#	4.3.	панелька масштаба
+
+#	4.4.	координаты
+
+#	4.5.	строка статуса (надо придумать как проверить актуальность времени
+
+
 #	print (u"")
 	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
-	type(Key.F4, KeyModifier.ALT)
+#	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	5.	Тест
 #	5.1.	переключение режимов
