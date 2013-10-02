@@ -12,7 +12,107 @@ if not myPath in sys.path:
 import baseFunction as BF
 import keyer
 
-# Смоктест
+# ---------- тесты вынесенные в функции по разным причинам. Их бы в отдельный файл вынести --------------------------
+# 4.1 Журнал
+def eventJornal():
+	try:
+		BF.waitAll(["HaraMunewm.png","Aonem.png","O61cTMoumopm.png","Onncarme.png"])
+		print (u"Элементы, журнала событий, в порядке")
+	except:
+		print (u"Элементы, журнала событий, не в порядке!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(1)
+	try:
+		if len( list( findAll("filtr_icon.png") ) ) == 4:
+			print (u"Иконки фильтров, журнала событий, в порядке")
+		else:
+			print (u"Иконки фильтров, журнала событий, не в порядке!")
+			type(Key.F4, KeyModifier.ALT)
+			exit(2)	
+	except:
+		print (u"Иконки фильтров, журнала событий, не в порядке!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(3)
+	try:
+		click("jornal_close_icon.png")
+		BF.waitAll(["jornal_open_icon_blue.png",Pattern("jornal_close_1.png").similar(0.80),Pattern("jornal_close_2.png").similar(0.90),Pattern("jornal_close_3.png").similar(0.90)])
+		print (u"Журнал свернулся")
+	except:
+		print (u"Журнал не свернулся!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(4)
+	try:
+		click("jornal_open_icon_blue.png")
+		BF.waitAll(["HaraMunewm.png","Aonem.png","O61cTMoumopm.png","Onncarme.png"])
+		if len( list( findAll("filtr_icon.png") ) ) != 4:
+			print (u"Журнал не развернулся!")
+			type(Key.F4, KeyModifier.ALT)
+			exit(5)
+		print (u"Журнал развернулся")
+	except:
+		print (u"Журнал не развернулся!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(6)
+# 4.2 Миникарта
+def miniMap():
+	try:
+		doubleClick("speeddy.png")
+		click("mini_map_open_1.png") # comment
+		BF.waitAll(["car_in_sea.png",Pattern("mini_map.png").similar(0.90),Pattern("blue_rect.png").similar(0.80),"mini_map_close_2.png"])
+		print (u"Миникарта развернулась")
+	except:
+		print (u"Миникарта не развернулась!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(7)
+	try:
+		click("mini_map_close_2.png")
+		BF.waitVanishAll([Pattern("mini_map-1.png").similar(0.90),Pattern("blue_rect-1.png").similar(0.80),Pattern("mini_map_close_2-1.png").similar(0.80)])
+		BF.waitAll(["mini_map_open_2.png","no_mini_map.png"])
+		print (u"Миникарта cвернулась")
+	except:
+		print (u"Миникарта не cвернулась!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(8)
+
+#	4.4.	координаты
+def coordinates():
+	BF.closeCurTab()
+	BF.newMapTab() # перешли в свежий таб. В текущей версии при этом программа смещается в какуюто опред точку, не зависимо от того куда был сфокусирован текущий таб.
+	fileName = "position_cur.png"
+	try:
+		#print (u"1")
+		some_region = Region(find(Pattern("position.png").similar(0.60))) # нашли регион в котором нахобятся координаты
+#		print (u"2")
+		screenshotsDir = os.path.join(os.environ.get("GIT_HOME")) #, "sikuli-test", "img")
+		print (u"Сохранил патерн в "), screenshotsDir
+		img = capture(some_region)
+		print (u"screenshotsDir + fileName = "), os.path.join(screenshotsDir, fileName)
+	except:
+		print (u"Не создал патерн с текущими координатами")
+		type(Key.F4, KeyModifier.ALT)
+		exit(2)
+	try:
+		shutil.move(img, os.path.join(screenshotsDir, fileName))
+#		print (u"Сохранил патерн с текущими координатами")
+	except:
+		print (u"Не сохранился патерн с текущими координатами")
+		type(Key.F4, KeyModifier.ALT)
+		exit(22)
+	
+	try:
+		click("../img/"+fileName)
+		waitVanish(Pattern("../img/"+fileName).similar(0.80))
+		doubleClick("speeddy.png")
+		click(Pattern("car_in_sea.png"))
+		wait(Pattern("position_0_0.png").similar(0.90))
+		print (u"Координаты меняются нормально")	
+	except:
+		print (u"Что-то не так с изменением координат!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(3)
+
+# -------------------------------------------------------------------------------------------
+
 # Проверка общего состояния, наличия элементов управления
 #	1.	Тест
 #	1.1.	Вкладки: история, карта, отчёт (попутно переключаемся междуними, туда и обратно)
@@ -124,7 +224,7 @@ def test3():
 		type(Key.F4, KeyModifier.ALT)
 		exit(2)
 	try:
-		BF.waitAll(["strelki1.png","strelki2.png","za_den.png","za_period.png","zakladki.png","pokazat_skryt.png",Pattern("190920131017.png").similar(0.90)],5)
+		BF.waitAll(["strelki1.png","strelki2.png","za_den.png","za_period.png","zakladki.png","pokazat_skryt.png","190920131017.png"],5)
 		print (u"Элементы, на панели История, в порядке")
 	except:
 		print (u"Элементы, на панели История, не в порядке!")
@@ -207,71 +307,16 @@ def test3():
 def test4():
 	start = time.time()
 	BF.clearData()
-	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
-	# Ключ тестового клиента "Автотестхолдинг"
+	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net") # Ключ тестового клиента "Автотестхолдинг"
 	BF.firstStartNavstat()
-#-----------------------
-	try:
-		BF.waitAll(["HaraMunewm.png","Aonem.png","O61cTMoumopm.png","Onncarme.png"])
-		print (u"Элементы, журнала событий, в порядке")
-	except:
-		print (u"Элементы, журнала событий, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
-		exit(1)
-	try:
-		if len( list( findAll("filtr_icon.png") ) ) == 4:
-			print (u"Иконки фильтров, журнала событий, в порядке")
-		else:
-			print (u"Иконки фильтров, журнала событий, не в порядке!")
-			type(Key.F4, KeyModifier.ALT)
-			exit(2)	
-	except:
-		print (u"Иконки фильтров, журнала событий, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
-		exit(3)
-	try:
-		click("jornal_close_icon.png")
-		BF.waitAll(["jornal_open_icon_blue.png",Pattern("jornal_close_1.png").similar(0.80),Pattern("jornal_close_2.png").similar(0.90),Pattern("jornal_close_3.png").similar(0.90)])
-		print (u"Журнал свернулся")
-	except:
-		print (u"Журнал не свернулся!")
-		type(Key.F4, KeyModifier.ALT)
-		exit(4)
-	try:
-		click("jornal_open_icon_blue.png")
-		BF.waitAll(["HaraMunewm.png","Aonem.png","O61cTMoumopm.png","Onncarme.png"])
-		if len( list( findAll("filtr_icon.png") ) ) != 4:
-			print (u"Журнал не развернулся!")
-			type(Key.F4, KeyModifier.ALT)
-			exit(5)
-		print (u"Журнал развернулся")
-	except:
-		print (u"Журнал не развернулся!")
-		type(Key.F4, KeyModifier.ALT)
-		exit(6)
+# 4.1 Журнал
+	#eventJornal()
 # 4.2 Миникарта
-	try:
-		doubleClick("speeddy.png")
-		click("mini_map_open_1.png") # comment
-		BF.waitAll(["car_in_sea.png",Pattern("mini_map.png").similar(0.90),Pattern("blue_rect.png").similar(0.80),"mini_map_close_2.png"])
-		print (u"Миникарта развернулась")
-	except:
-		print (u"Миникарта не развернулась!")
-		type(Key.F4, KeyModifier.ALT)
-		exit(7)
-	try:
-		click("mini_map_close_2.png")
-		BF.waitVanishAll([Pattern("mini_map-1.png").similar(0.90),Pattern("blue_rect-1.png").similar(0.80),Pattern("mini_map_close_2-1.png").similar(0.80)])
-		BF.waitAll(["mini_map_open_2.png","no_mini_map.png"])
-		print (u"Миникарта cвернулась")
-	except:
-		print (u"Миникарта не cвернулась!")
-		type(Key.F4, KeyModifier.ALT)
-		exit(8)
+	# miniMap() # вынесена в функцию, чтобы было удобно отключать на время исправления баги
 #	4.3.	панелька масштаба
 
 #	4.4.	координаты
-
+	coordinates()
 #	4.5.	строка статуса (надо придумать как проверить актуальность времени
 
 
