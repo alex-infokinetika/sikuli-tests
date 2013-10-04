@@ -7,30 +7,30 @@ import time
 import datetime
 
 def deleteFileOrFolder(directory):
-    if os.path.exists(directory):
-        try:
-            if os.path.isdir(directory):
-                # delete folder
-                shutil.rmtree(directory)
-            else:
-                # delete file
-                os.remove(directory)
-        except:
-            print "Ecxeption ",str(sys.exc_info())
-    else:
-        print "not found ",directory
+	if os.path.exists(directory):
+		try:
+			if os.path.isdir(directory):
+				# delete folder
+				shutil.rmtree(directory)
+			else:
+				# delete file
+				os.remove(directory)
+		except:
+			print "Ecxeption ",str(sys.exc_info())
+	else:
+		print "not found ",directory
 
 
 def clearData():
-    batPath = os.environ.get("GIT_HOME") + "sikuli-tests\\baseFunction.sikuli\clear.bat"
-    try:
-        os.system(batPath)
-        print (u"Папка NavstatExpress удалена")
-        return 1
-    except:
-        print (u"Папка NavstatExpress не удалена!")
-        return 0
-        
+	batPath = os.environ.get("GIT_HOME") + "sikuli-tests\\baseFunction.sikuli\clear.bat"
+	try:
+		os.system(batPath)
+		print (u"Папка NavstatExpress удалена")
+		return 1
+	except:
+		print (u"Папка NavstatExpress не удалена!")
+		return 0
+		
 
 def startNavstat(userName = u"admin", password = u"admin"):
 	try:
@@ -87,81 +87,81 @@ def startNavstat(userName = u"admin", password = u"admin"):
 
 
 def firstStartNavstat(userName = u"admin", password = u"admin"):
-    try:
-        startNavstat(userName, password)
-    except:
-        exit()
-    wait(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1),30)
-    try:
-        click(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1))
-        print (u"Первичный запуск Навстат")
-    except:
-        print (u"Это не первичный запуск Навстат")
-        exit()
+	try:
+		startNavstat(userName, password)
+	except:
+		exit()
+	wait(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1),30)
+	try:
+		click(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1))
+		print (u"Первичный запуск Навстат")
+	except:
+		print (u"Это не первичный запуск Навстат")
+		exit()
 
 # аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
 # если не дождались - вызываем исключение
 def waitList(imgList, timer=3):
-    start = time.time() + timer
-    while start > time.time():
-        print " --- ", start, " - ", time.time(), " = ", start-time.time()
-        i=0
-        while i < len(imgList):
-            print "Find ", i
-            try:
-                find(imgList[i])
-                return i
-            except:
-                print("Don't find ")
-            i+=1
-    assert(false)
+	start = time.time() + timer
+	while start > time.time():
+		print " --- ", start, " - ", time.time(), " = ", start-time.time()
+		i=0
+		while i < len(imgList):
+			print "Find ", i
+			try:
+				find(imgList[i])
+				return i
+			except:
+				print("Don't find ")
+			i+=1
+	assert(false)
 # аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает 1 если нашёл все картинки из списка
 # если не дождались - вызываем исключение
 def waitAll(imgList, timer=3):
-    start = time.time() + timer
-    while start > time.time():
-        res = 1
-        for img in imgList:
-            try:
-                find(img)
-            except:
-                res = -1
-        if res == 1:
-            return 1
-    assert(false)
+	start = time.time() + timer
+	while start > time.time():
+		res = 1
+		for img in imgList:
+			try:
+				find(img)
+			except:
+				res = -1
+		if res == 1:
+			return 1
+	assert(false)
 
 # аналог waitVanish принимает на вход список картинок и время ожидания в секундах, возвращает 1 если все картинки из списка исчезли
 # если за время timer хоть одна картинка не исчезла - вызываем исключение
 def waitVanishAll(imgList, timer=3):
-    start = time.time() + timer
-    while start > time.time():
-        res = -1
-        for img in imgList:
-            if not waitVanish(img):
-                res = 1
-                break
-        if res == -1:
-            return 1
-    assert(false)
+	start = time.time() + timer
+	while start > time.time():
+		res = -1
+		for img in imgList:
+			if not waitVanish(img):
+				res = 1
+				break
+		if res == -1:
+			return 1
+	assert(false)
 # Установка периода для отчётов и истории -----------------------------------------------------------------
 def setInterval(day1,day2):
-    # Навстат должен быть запущен и открыта панель с датапикером
-    doubleClick(Pattern("3GlpHOJ1BDBM.png").targetOffset(-39,-4))
-    paste(day1.strftime("%d.%m.%Y "))
-    doubleClick(Pattern("3GlpHOJ1BDBM.png").targetOffset(-37,23))
-    paste(day2.strftime("%d.%m.%Y "))
+	# Навстат должен быть запущен и открыта панель с датапикером
+	doubleClick(Pattern("3GlpHOJ1BDBM.png").targetOffset(-39,-4))
+	paste(day1.strftime("%d.%m.%Y "))
+	doubleClick(Pattern("3GlpHOJ1BDBM.png").targetOffset(-37,23))
+	paste(day2.strftime("%d.%m.%Y "))
 # ---------------------------------------------------------------------------------------------------------
 
 # просто закрывает активный таб
 def closeCurTab():
-    try:
-        wait("1379333077365-1.png")
-        click("1379333077365-1.png")
-        return 1
-    except:
-        return 0
+	try:
+		wait("1379333077365-1.png")
+		click("1379333077365-1.png")
+		return 1
+	except:
+		return 0
 
 # Открывает новый таб с картой
 def newMapTab():
-    wait("1379333330757.png")
-    click("1379333330757.png")
+	wait("1379333330757.png")
+	click("1379333330757.png")

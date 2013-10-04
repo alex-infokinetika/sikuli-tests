@@ -3,6 +3,7 @@ from sikuli import *
 import os
 import time
 import datetime
+import shutil
 
 
 myPath = os.environ.get("GIT_HOME") + u"sikuli-tests"
@@ -57,6 +58,16 @@ def eventJornal():
 def miniMap():
 	try:
 		doubleClick("speeddy.png")
+		# убрать заглушку после исправления http://idea.navstat.ru/tickets/8506
+		click("point_on_map.png")
+		try:
+			mouseDown(Button.LEFT)
+			mouseMove("care.png")
+			mouseUp(Button.LEFT)
+		except:
+			print (u"Вылетела заглушка от 8506")
+			exit(1)
+		# -------------------------------------------------------
 		click("mini_map_open_1.png") # comment
 		BF.waitAll(["car_in_sea.png",Pattern("mini_map.png").similar(0.90),Pattern("blue_rect.png").similar(0.80),"mini_map_close_2.png"])
 		print (u"Миникарта развернулась")
@@ -73,43 +84,59 @@ def miniMap():
 		print (u"Миникарта не cвернулась!")
 		type(Key.F4, KeyModifier.ALT)
 		exit(8)
-
-#	4.4.	координаты
+#	4.3	координаты
 def coordinates():
 	BF.closeCurTab()
 	BF.newMapTab() # перешли в свежий таб. В текущей версии при этом программа смещается в какуюто опред точку, не зависимо от того куда был сфокусирован текущий таб.
-	fileName = "position_cur.png"
 	try:
-		#print (u"1")
-		some_region = Region(find(Pattern("position.png").similar(0.60))) # нашли регион в котором нахобятся координаты
-#		print (u"2")
-		screenshotsDir = os.path.join(os.environ.get("GIT_HOME")) #, "sikuli-test", "img")
-		print (u"Сохранил патерн в "), screenshotsDir
-		img = capture(some_region)
-		print (u"screenshotsDir + fileName = "), os.path.join(screenshotsDir, fileName)
-	except:
-		print (u"Не создал патерн с текущими координатами")
-		type(Key.F4, KeyModifier.ALT)
-		exit(2)
-	try:
-		shutil.move(img, os.path.join(screenshotsDir, fileName))
-#		print (u"Сохранил патерн с текущими координатами")
+		img = capture(Region(find(Pattern("position-3.png").similar(0.60))))# нашли регион в котором нахобятся координаты
+		shutil.move(img, os.path.join(os.environ.get("GIT_HOME"), u"sikuli-tests", u"img", u"f3.png"))
+		print (u"Сохранил патерн с текущими координатами")
 	except:
 		print (u"Не сохранился патерн с текущими координатами")
-		type(Key.F4, KeyModifier.ALT)
-		exit(22)
-	
+		exit(9)
 	try:
-		click("../img/"+fileName)
-		waitVanish(Pattern("../img/"+fileName).similar(0.80))
+		img = os.path.join(os.environ.get("GIT_HOME"), u"sikuli-tests", u"img", u"f3.png")
+		click(img)
+		waitVanish(Pattern(img).similar(0.80))
 		doubleClick("speeddy.png")
-		click(Pattern("car_in_sea.png"))
-		wait(Pattern("position_0_0.png").similar(0.90))
+		click("car_in_sea-2.png")
+		wait(Pattern("position_0_0-1.png").similar(0.90))
 		print (u"Координаты меняются нормально")	
 	except:
 		print (u"Что-то не так с изменением координат!")
 		type(Key.F4, KeyModifier.ALT)
-		exit(3)
+		exit(10)
+# 4.4	панелька масштаба
+# не забудь проверку баги http://idea.navstat.ru/tickets/8507
+def zoom():
+	BF.closeCurTab()
+	BF.newMapTab() # перешли в свежий таб. В текущей версии при этом программа смещается в какуюто опред точку, не зависимо от того куда был сфокусирован текущий таб.
+	try:
+		BF.waitAll(["zoom_line_14000-1.png","mashtab-1.png"],10)
+		print (u"1")
+	except:
+		print (u"2!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(11)
+	try:
+		for i in xrange(1,12):
+			click(Pattern("zoom_minus.png").similar(0.90))
+		BF.waitAll(["min_zoom.png","zoom_111000000.png","afrika.png","australia.png"],20)
+		print (u"Максимально удалились")
+	except:
+		print (u"Не отработало максимальное удаление!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(12)
+	try:
+		for i in xrange(1,5):
+			click(Pattern("zppm_plus.png").similar(0.90))
+		BF.waitAll(["zoom_7000000.png","zoom_line_7000000.png","mini_car.png","sao_tome.png","libreville.png"],20)
+		print (u"Масштаб 7 000 000")
+	except:
+		print (u"Не перешли на масштаб 7 000 000!")
+		type(Key.F4, KeyModifier.ALT)
+		exit(13)
 
 # -------------------------------------------------------------------------------------------
 
@@ -310,19 +337,18 @@ def test4():
 	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net") # Ключ тестового клиента "Автотестхолдинг"
 	BF.firstStartNavstat()
 # 4.1 Журнал
-	#eventJornal()
+	eventJornal()
 # 4.2 Миникарта
-	# miniMap() # вынесена в функцию, чтобы было удобно отключать на время исправления баги
-#	4.3.	панелька масштаба
-
-#	4.4.	координаты
+	miniMap()
+# 4.3.	координаты
 	coordinates()
-#	4.5.	строка статуса (надо придумать как проверить актуальность времени
-
+# 4.4.	панелька масштаба
+	zoom()
+# 4.5.	строка статуса (надо придумать как проверить актуальность времени
 
 #	print (u"")
 	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
-#	type(Key.F4, KeyModifier.ALT)
+	type(Key.F4, KeyModifier.ALT)
 #--------------------------------------------------------------------------------------------------------------------
 #	5.	Тест
 #	5.1.	переключение режимов

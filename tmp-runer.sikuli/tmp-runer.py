@@ -9,6 +9,7 @@ if not myPath in sys.path:
 # Импорт тестов ------------------------------
 import tmp
 import s_interface
+import simpl
 # --------------------------------------------
 class BDTests(unittest.TestCase):
 
@@ -24,6 +25,11 @@ class BDTests(unittest.TestCase):
 	def test_4(self):
 		print "test 4"
 		s_interface.test4()
+		#s_interface.coordinates()
+	def test_5(self):
+		print "test 5"
+		simpl.zoom()
+		#simpl.coordinates()
 		#s_interface.coordinates()
 		
 	def test_0(self):

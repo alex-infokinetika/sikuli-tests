@@ -5,7 +5,7 @@ import HTMLTestRunner
 
 myPath = os.environ.get("GIT_HOME") + u"sikuli-tests"
 if not myPath in sys.path:
-    sys.path.append(myPath)
+	sys.path.append(myPath)
 # Импорт тестов ------------------------------
 import authorizationInNavstat
 import baseFunction
@@ -13,22 +13,25 @@ import simple_tests
 import s_interface
 # --------------------------------------------
 class BDTests(unittest.TestCase):
-    
-    def test_1(self):
-        print "test 1"
-        s_interface.test1()
-    def test_2(self):
-        print "test 2"
-        print(u"Тесты формы авторизации")
-#        authorizationInNavstat.tabGo()
-#        if authorizationInNavstat.abonentList():
-#            print( u"Продолжаем")
-    def test_3(self):
-        print("test_3")
-        s_interface.test3()
-    def test_4(self):        
-        print("test_4")
-        simple_tests.simple_test1()
+	
+	def test_1_1(self):
+		print "test 1 1"
+		#s_interface.test1()
+	def test_1_2(self):
+		print "test 1 2"
+		#s_interface.test2()
+	def test_1_3(self):
+		print "test 1 3"
+		#s_interface.test3()
+	def test_1_4(self):
+		print "test 1 4"
+		s_interface.test4()
+#	def test_2(self):
+#		print "test 2"
+#		print(u"Тесты формы авторизации")
+#		authorizationInNavstat.tabGo()
+#		if authorizationInNavstat.abonentList():
+#			print( u"Продолжаем")
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
@@ -40,7 +43,7 @@ runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Test Report', desc
 runner.run(suite)
 outfile.close()
 #except:
-#    print "Don't open file ", outPath.encode("UTF-8")
+#	print "Don't open file ", outPath.encode("UTF-8")
 
 
 

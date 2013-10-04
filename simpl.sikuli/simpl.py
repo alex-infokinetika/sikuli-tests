@@ -10,25 +10,113 @@ if not myPath in sys.path:
 # Импорт ------------------------------
 import baseFunction as BF
 
+
+
+#	4.4	панелька масштаба
+def zoom():
+	BF.closeCurTab()
+	BF.newMapTab() # перешли в свежий таб. В текущей версии при этом программа смещается в какуюто опред точку, не зависимо от того куда был сфокусирован текущий таб.
+	try:
+		BF.waitAll(["zoom_line_14000.png","mashtab.png"],10)
+		print (u"1")
+	except:
+		print (u"2!")
+#		type(Key.F4, KeyModifier.ALT)
+		exit(3)
+	try:
+		for i in xrange(1,12):
+			click(Pattern("zoom_minus.png").similar(0.90))
+		BF.waitAll(["min_zoom.png","zoom_111000000.png","afrika.png","australia.png"],20)
+		print (u"Максимально удалились")
+	except:
+		print (u"Не отработало максимальное удаление!")
+#		type(Key.F4, KeyModifier.ALT)
+		exit(4)
+	try:
+		for i in xrange(1,5):
+			click(Pattern("zppm_plus.png").similar(0.90))
+		BF.waitAll(["zoom_7000000.png","zoom_line_7000000.png","mini_car.png","sao_tome.png","libreville.png"],20)
+		print (u"Масштаб 7 000 000")
+	except:
+		print (u"Не перешли на масштаб 7 000 000!")
+#		type(Key.F4, KeyModifier.ALT)
+		exit(5)
+
+
+
+
+
+def moveMap():
+	click("point_on_map.png")
+	try:
+		mouseDown(Button.LEFT)
+		mouseMove("care.png")
+		mouseUp(Button.LEFT)
+	except:
+		exit(1)
+
+#moveMap()
+
+
+
+def readF():
+	fn = os.path.join(os.environ.get("GIT_HOME"), u"f1.txt")
+	print (u"File name: "), fn
+	try:
+		f = open(fn)
+		points = f.read()
+		f.close()
+		return points
+	except:
+		exit(1)
+
+def writeF():
+	f1 = open(os.path.join(os.environ.get("GIT_HOME"), u"f2.txt"), 'w')
+	a = f1.write(readF())
+	print a
+
+def screenF():
+	img = capture(App.focusedWindow())
+	shutil.move(img, os.path.join(os.environ.get("GIT_HOME"), u"f3.png"))
+
+#screenF()
+#writeF()
+#readF()
+
+
+
+
+
+
+
+
+
+
+
 def coordinates():
 	BF.closeCurTab()
 	BF.newMapTab() # перешли в свежий таб. В текущей версии при этом программа смещается в какуюто опред точку, не зависимо от того куда был сфокусирован текущий таб.
-	fileName = "position_cur.png"
 	try:
-		print ("1")
-		some_region = Region(find(Pattern("position-2.png").similar(0.60))) # нашли регион в котором нахобятся координаты
-		print ("2")
-		screenshotsDir = os.path.join(os.environ.get("GIT_HOME"),"sikuli-tests","img")
-		print screenshotsDir
-		img = capture(some_region)
-		print ("4")
-		shutil.move(img, os.path.join(screenshotsDir, fileName))
-		print ("Сохранил патерн с текущими координатами")
+		img = capture(Region(find(Pattern("position-2.png").similar(0.60))))# нашли регион в котором нахобятся координаты
+		shutil.move(img, os.path.join(os.environ.get("GIT_HOME"), u"sikuli-tests", u"img", u"f3.png"))
+		print (u"Сохранил патерн с текущими координатами")
 	except:
-		print ("Не сохранился патерн с текущими координатами")
+		print (u"Не сохранился патерн с текущими координатами")
 		exit(2)
+	try:
+		img = os.path.join(os.environ.get("GIT_HOME"), u"sikuli-tests", u"img", u"f3.png")
+		click(img)
+		waitVanish(Pattern(img).similar(0.80))
+		doubleClick("speeddy-1.png")
+		click("car_in_sea-1.png")
+		wait(Pattern("position_0_0.png").similar(0.90))
+		print (u"Координаты меняются нормально")	
+	except:
+		print (u"Что-то не так с изменением координат!")
+#		type(Key.F4, KeyModifier.ALT)
+		exit(3)
 
-coordinates()
+#coordinates()
 
 
 
