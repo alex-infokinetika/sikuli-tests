@@ -1,1 +1,1 @@
-"%SIKULI_HOME%\\Sikuli-IDE.bat" -r %GIT_HOME%\sikuli-tests\smoketest.sikuli
+"%SIKULI_HOME_2%\runScript.cmd" -r %GIT_HOME%\sikuli-tests\smoketest.sikuli
