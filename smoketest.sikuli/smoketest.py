@@ -16,13 +16,13 @@ class BDTests(unittest.TestCase):
 	
 	def test_1_1(self):
 		print "test 1 1"
-		#s_interface.test1()
+		s_interface.test1()
 	def test_1_2(self):
 		print "test 1 2"
-		#s_interface.test2()
+		s_interface.test2()
 	def test_1_3(self):
 		print "test 1 3"
-		#s_interface.test3()
+		s_interface.test3()
 	def test_1_4(self):
 		print "test 1 4"
 		s_interface.test4()

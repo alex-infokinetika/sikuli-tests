@@ -16,21 +16,7 @@ class BDTests(unittest.TestCase):
 	def test_1(self):
 		print "test 1"
 		#s_interface.test1()
-	def test_2(self):
-		print "test 2"
-		#s_interface.test2()
-	def test_3(self):
-		print "test 3"
-		#s_interface.test3()
-	def test_4(self):
-		print "test 4"
-		s_interface.test4()
-		#s_interface.coordinates()
-	def test_5(self):
-		print "test 5"
-		simpl.zoom()
-		#simpl.coordinates()
-		#s_interface.coordinates()
+
 		
 	def test_0(self):
 		print "test 0"
