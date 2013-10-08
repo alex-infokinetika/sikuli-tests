@@ -22,7 +22,7 @@ def deleteFileOrFolder(directory):
 
 
 def clearData():
-	batPath = os.environ.get("GIT_HOME") + "sikuli-tests\\baseFunction.sikuli\clear.bat"
+	batPath = os.path.join(os.environ.get("GIT_HOME"), u"sikuli-tests", u"baseFunction.sikuli", u"clear.bat")
 	try:
 		os.system(batPath)
 		print (u"Папка NavstatExpress удалена")
