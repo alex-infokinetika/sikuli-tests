@@ -34,7 +34,7 @@ class BDTests(unittest.TestCase):
 		#tmp.timer()
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
-outPath =  os.path.join(os.environ.get("GIT_HOME"),"tmp-report.html") # Вариант с путём без кирилицы и именами без пробелов  
+outPath =  os.path.join(os.environ.get("GIT_HOME"),"tmp-runer.html") # Вариант с путём без кирилицы и именами без пробелов  
 try:
 	outfile = open(outPath, "w")
 	print "open file ", outPath

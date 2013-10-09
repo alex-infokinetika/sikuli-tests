@@ -35,7 +35,7 @@ class BDTests(unittest.TestCase):
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
-outPath =  os.environ.get("GIT_HOME") + "report.html" # Вариант с путём без кирилицы и именами без пробелов  
+outPath =  os.environ.get("GIT_HOME") + "smoketest.html" # Вариант с путём без кирилицы и именами без пробелов  
 #try:
 outfile = open(outPath, "w")
 print "open file ", outPath

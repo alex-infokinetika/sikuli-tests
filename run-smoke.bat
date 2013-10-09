@@ -1,1 +1,0 @@
-"%SIKULI_HOME%\\Sikuli-IDE.bat" -r %GIT_HOME%\sikuli-tests\smoketest.sikuli
