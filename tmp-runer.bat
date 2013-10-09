@@ -1,1 +1,1 @@
-"%SIKULI_HOME_2%\\runScript.cmd"  -r %GIT_HOME%\sikuli-tests\tmp-runer.sikuli
+"%SIKULI_HOME%\\runScript.cmd"  -r %GIT_HOME%\sikuli-tests\tmp-runer.sikuli
