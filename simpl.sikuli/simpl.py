@@ -10,6 +10,21 @@ if not myPath in sys.path:
 # Импорт ------------------------------
 import baseFunction as BF
 
+def findReportOnPanel(pattern):
+	try:
+		find(pattern)
+		return true
+	except:
+		click(Pattern("scrol_down.png").similar(0.80).targetOffset(-2,0))
+		for i in  xrange(1,50):
+			try:
+				click(Pattern("scrol_down_2.png").similar(0.80))
+				find(pattern)
+				return true
+			except:
+				pass
+		return false
+
 
 
 
