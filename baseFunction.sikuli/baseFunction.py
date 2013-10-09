@@ -145,7 +145,7 @@ def waitVanishAll(imgList, timer=3):
 			return 1
 	assert(false)
 # Установка периода для отчётов и истории -----------------------------------------------------------------
-def setInterval(day1,day2):
+def setInterval(day1, day2):
 	# Навстат должен быть запущен и открыта панель с датапикером
 	doubleClick(Pattern("3GlpHOJ1BDBM.png").targetOffset(-39,-4))
 	paste(day1.strftime("%d.%m.%Y "))

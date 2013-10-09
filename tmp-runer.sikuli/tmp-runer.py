@@ -2,21 +2,26 @@
 import os
 import unittest
 import HTMLTestRunner
+import datetime
+import time
 
 myPath = os.environ.get("GIT_HOME") + u"sikuli-tests"
 if not myPath in sys.path:
 	sys.path.append(myPath)
 # Импорт тестов ------------------------------
-import tmp
 import s_interface
 import simpl
 # --------------------------------------------
+# Подготовительная секция, не забыть перенести
+d1 = datetime.datetime(2013, 8, 1)
+d2 = datetime.datetime(2013, 8, 31)
+
 class BDTests(unittest.TestCase):
 
 	def test_1(self):
 		print "test 1"
 		reportName = "ObjectTotals"
-		simpl.reportTest1(reportName)
+		simpl.reportTest1(reportName,d1,d2)
 
 		
 	def test_0(self):
