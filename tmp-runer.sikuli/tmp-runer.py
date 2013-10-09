@@ -19,8 +19,13 @@ d2 = datetime.datetime(2013, 8, 31)
 class BDTests(unittest.TestCase):
 
 	def test_1(self):
-		print "test 1"
+		print (u"test 1 Итоги по автопарку")
 		reportName = "ObjectTotals"
+		simpl.reportTest1(reportName,d1,d2)
+
+	def test_2(self):
+		print (u"test 2 Итоги по автопарку по дням")
+		reportName = "ObjectTotalsByDay"
 		simpl.reportTest1(reportName,d1,d2)
 
 		

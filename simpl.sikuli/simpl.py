@@ -10,13 +10,7 @@ if not myPath in sys.path:
 # Импорт ------------------------------
 import baseFunction as BF
 
-def fff():
-	d1 = datetime.datetime(2013, 8, 1)
-	d2 = datetime.datetime(2013, 8, 31)
-	BF.setInterval(d1,d2)
 
-	
-#fff()
 
 
 def reportTest1(reportName, startDay, endDay):
@@ -26,7 +20,6 @@ def reportTest1(reportName, startDay, endDay):
 	patternList = []
 	for f in fList:
 		patternList.append(os.path.join(baseDir,reportName,f))
-	print patternList
 	BF.clearData()
 #	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
 	BF.firstStartNavstat()
