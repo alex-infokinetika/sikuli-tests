@@ -28,6 +28,10 @@ class BDTests(unittest.TestCase):
 		reportName = "ObjectTotalsByDay"
 		simpl.reportTest1(reportName,d1,d2)
 
+	def test_3(self):
+		print (u"test 3 Уборка мусора ")
+		reportName = "GarbageHistory"
+		simpl.reportTest1(reportName,d1,d2)
 		
 	def test_0(self):
 		print "test 0"

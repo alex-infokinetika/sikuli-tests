@@ -13,18 +13,19 @@ import baseFunction as BF
 def findReportOnPanel(pattern):
 	try:
 		find(pattern)
-		return true
 	except:
-		click(Pattern("scrol_down.png").similar(0.80).targetOffset(-2,0))
-		for i in  xrange(1,50):
-			try:
-				click(Pattern("scrol_down_2.png").similar(0.80))
-				find(pattern)
-				return true
-			except:
-				pass
-		return false
+		click(Pattern("scrol_down.png").similar(0.90).targetOffset(-4,0))
+		mouseDown( Button.LEFT)
+		sleep(10)
+		mouseUp()
+		find(pattern)
 
+
+try:
+	findReportOnPanel("0-1.png")
+	print(1)
+except:
+	print(2)
 
 
 
@@ -43,8 +44,14 @@ def reportTest1(reportName, startDay, endDay):
 	click(Pattern("6917gag.png").similar(0.80).targetOffset(-1,0)) # Заглушка http://idea.navstat.ru/tickets/6917
 	BF.setInterval(startDay, endDay)
 	type(Key.TAB) #затычка чтобы снять фокус с отчёта Итоги по автопарку, т.е. сделать его похожим на остальные
-	click(patternList[0])
-	click("runReport.png")
+	try:
+		findReportOnPanel(patternList[0])
+		click(patternList[0])
+		click("runReport.png")		
+	except:
+		print (u"Не нашли отчёт на панели")
+		type(Key.F4, KeyModifier.ALT)
+		exit(0)	
 	try:
 		find("question.png")
 		click("da.png")
