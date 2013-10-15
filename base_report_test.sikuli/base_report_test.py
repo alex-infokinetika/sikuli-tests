@@ -49,7 +49,11 @@ def reportTest1(reportName, startDay, endDay):
 		exit(0)	
 	try:
 		find("question-1.png")
-		click("da-2.png")
+		try:
+			click("da-2.png")
+		except:
+			print (u"Такой файл уже есть, но не нашёл кнопку 'Да'")
+			exit(0)
 	except:
 		print (u".")
 	try:
