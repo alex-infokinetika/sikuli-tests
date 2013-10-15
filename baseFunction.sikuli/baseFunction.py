@@ -49,7 +49,7 @@ def startNavstat(userName = u"admin", password = u"admin"):
 		print (u"Навтат не запустился, что-то с файлом navstat.appref-ms!")
 		exit()
 	try:
-		wait("1376485054733.png",100)
+		wait("1376485054733.png",200)
 		print (u"Обновлений нет")
 	except:
 		print (u"Похоже есть обновления")
