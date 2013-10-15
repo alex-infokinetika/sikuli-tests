@@ -2,7 +2,8 @@ from sikuli import *
 # -*- coding: utf-8 -*-
 	
 def editKey(newKey):
-	click("1376472023054.png")
+	navstat = os.path.join(os.environ.get("GIT_HOME"),u"sikuli-tests",u"navstat.appref-ms")
+	os.system(navstat)
 	wait(Pattern("YCTGHOBHCHGI.png").similar(0.50),30)
 	type(Pattern("nO1Tb3OBBT1T-1.png").targetOffset(-63,-1), "**")
 	type(Pattern("ap0m-1.png").targetOffset(-60,-3), "**")

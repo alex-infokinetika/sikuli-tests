@@ -6,16 +6,16 @@ myPath = os.environ.get("GIT_HOME") + u"sikuli-tests"
 if not myPath in sys.path:
 	sys.path.append(myPath)
 # Импорт ------------------------------
-import baseFunction
+import baseFunction as BF
 import keyer
 # -------------------------------------
 
 # Проверяет сам факт того что Навстат запустился и работает
 def simple_test1():
-	baseFunction.clearData()
+	BF.clearData()
 	keyer.editKeyAndService("404C2A00-B173-4844-BA59-9A6F296479E7", "http://services.navstat.infokinetika.net")
 	# Ключ тестового клиента "Автотестхолдинг"
-	baseFunction.firstStartNavstat()
+	BF.firstStartNavstat()
 #-----------------------
 	click(Pattern("NAVSTAT.png").similar(0.90))
 	wait(1)
@@ -40,5 +40,5 @@ def simple_test1():
 		print (u"Таб с картой через плюсик открывается")
 	except:
 		print (u"Таб с картой через плюсик НЕ открывается!")
-	type(Key.F4, KeyModifier.ALT)
+	BF.killAllNavstat()
 #simple_test1()

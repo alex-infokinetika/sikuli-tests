@@ -5,6 +5,7 @@ import sys
 import shutil
 import time
 import datetime
+import csv
 
 def deleteFileOrFolder(directory):
 	if os.path.exists(directory):
@@ -31,17 +32,24 @@ def clearData():
 	except:
 		print (u"Папка NavstatExpress не удалена!")
 		return 0
-		
+
+def killAllNavstat():
+	if os.system('taskkill /f /im Infokinetika.Navstat.Express.exe'): # Почему-то возвращает true когда не смогла убить процесс
+		print(u"Не закрылся Навстат!")
+		exit(13)
+	else:
+		print(u"Закрыли Навстат")
 
 def startNavstat(userName = u"admin", password = u"admin"):
 	try:
-		click("1376484163733.png")
-		print (u"Кликнули ярлык Навтат")
+		navstat = os.path.join(os.environ.get("GIT_HOME"),u"sikuli-tests",u"navstat.appref-ms")
+		os.system(navstat)
+		print (u"Запустили Навтат")
 	except:
-		print (u"Не нашёл ярлык Навтат!")
+		print (u"Навтат не запустился, что-то с файлом navstat.appref-ms!")
 		exit()
 	try:
-		wait("1376485054733.png",10)
+		wait("1376485054733.png",100)
 		print (u"Обновлений нет")
 	except:
 		print (u"Похоже есть обновления")
@@ -54,10 +62,11 @@ def startNavstat(userName = u"admin", password = u"admin"):
 			click(Pattern("error_pres_ok.png").targetOffset(95,49))
 			print (u"Обновили Навстат")
 			try:
-				click("1376484163733.png")
-				print (u"Кликнули ярлык Навтат")
+				navstat = os.path.join(os.environ.get("GIT_HOME"),u"sikuli-tests",u"navstat.appref-ms")
+				os.system(navstat)
+				print (u"Запустили Навтат")
 			except:
-				print (u"Не нашёл ярлык Навтат!")
+				print (u"Навтат не запустился, что-то с файлом navstat.appref-ms!")
 				exit()
 			try:
 				wait("1376485054733.png",10)
@@ -166,3 +175,70 @@ def closeCurTab():
 def newMapTab():
 	wait("1379333330757.png")
 	click("1379333330757.png")
+
+# Сохранение отчёта в директорию %GIT_HOME%\
+def saveReportAsCSV(reportName): # Отчёт должен быть уже сгенерирован. Временный файл сохраняет в папке %GITHOME%
+	try:
+		click("save_icon.png")
+		click("data_icon.png")
+		click("csv_icon.png")
+		sleep(3)
+		type(Key.ENTER)
+		click(Pattern("addres_line-1.png").targetOffset(-24,-1))
+		type(os.path.join(os.environ.get("GIT_HOME")))
+		type(Key.ENTER)
+		click(Pattern("name_line.png").similar(0.90).targetOffset(-12,-10))
+		type(reportName + u".csv")
+		type(Key.ENTER)
+		try:
+			find("rewrite.png")
+			click("da-1.png")
+		except:
+			pass
+	except:	
+		print (u"blin")
+
+# Сравнение .csv файла расположенного в %GIT_HOME%\ с эталоном из директории %GIT_HOME%\sikuli-tests\shablony\report_1\
+def mergeFile(reportName):
+	list1 = []
+	list2 = []
+	fName = reportName + ".csv" 
+	shablon = os.path.join(os.environ.get("GIT_HOME"),"sikuli-tests","shablony","report_1",fName)
+	testReport = os.path.join(os.environ.get("GIT_HOME"),fName)
+	try:
+		print (u"Файл шаблона : ",shablon)
+		f1 = open(shablon, 'r')
+		reader = csv.reader(f1)
+		for row in reader:
+			list1.append(row)
+		f1.close()
+	except:
+		# Фактически сюда мы не попадаем, csv.reader не отличает пустой файл от отсутствующего - это надо исправлять
+		(u"Файл шаблона не найден!")
+	try:
+		print (u"Тестовый фаил: ",testReport)
+		f2 = open(testReport, 'r')
+		reader = csv.reader(f2)
+		for row in reader:
+			list2.append(row)
+		f2.close()
+	except:
+		# Фактически сюда мы не попадаем, csv.reader не отличает пустой файл от отсутствующего - это надо исправлять
+		print (u"Тестовый фаил не найден!")
+	try:
+		if list1 == list2:
+			print (u"Тестовый файл совпадает с эталоном")
+		else:
+			print (u"Обнаружены отличия между файлами:")
+			for i in range(len(list1)-1):
+				if list1[i] == list2[i]:
+					print (u"Строка %i совпадает" % i)
+				else:
+					print (u"Строка %i несовпадает: " % i)
+					print str(list1[i]).decode('cp1251')
+					print list2[i]
+			raise()
+	except:
+		print (u"Отчёт не совпал с эталоном!")
+		killAllNavstat()
+		exit(1)

@@ -21,18 +21,18 @@ def eventJornal():
 		print (u"Элементы, журнала событий, в порядке")
 	except:
 		print (u"Элементы, журнала событий, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(1)
 	try:
 		if len( list( findAll("filtr_icon.png") ) ) == 4:
 			print (u"Иконки фильтров, журнала событий, в порядке")
 		else:
 			print (u"Иконки фильтров, журнала событий, не в порядке!")
-			type(Key.F4, KeyModifier.ALT)
+			BF.killAllNavstat()
 			exit(2)	
 	except:
 		print (u"Иконки фильтров, журнала событий, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(3)
 	try:
 		click("jornal_close_icon.png")
@@ -40,19 +40,19 @@ def eventJornal():
 		print (u"Журнал свернулся")
 	except:
 		print (u"Журнал не свернулся!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(4)
 	try:
 		click("jornal_open_icon_blue.png")
 		BF.waitAll(["HaraMunewm.png","Aonem.png","O61cTMoumopm.png","Onncarme.png"])
 		if len( list( findAll("filtr_icon.png") ) ) != 4:
 			print (u"Журнал не развернулся!")
-			type(Key.F4, KeyModifier.ALT)
+			BF.killAllNavstat()
 			exit(5)
 		print (u"Журнал развернулся")
 	except:
 		print (u"Журнал не развернулся!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(6)
 # 4.2 Миникарта
 def miniMap():
@@ -73,7 +73,7 @@ def miniMap():
 		print (u"Миникарта развернулась")
 	except:
 		print (u"Миникарта не развернулась!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(7)
 	try:
 		click("mini_map_close_2.png")
@@ -82,7 +82,7 @@ def miniMap():
 		print (u"Миникарта cвернулась")
 	except:
 		print (u"Миникарта не cвернулась!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(8)
 #	4.3	координаты
 def coordinates():
@@ -105,7 +105,7 @@ def coordinates():
 		print (u"Координаты меняются нормально")	
 	except:
 		print (u"Что-то не так с изменением координат!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(10)
 # 4.4	панелька масштаба
 # не забудь проверку баги http://idea.navstat.ru/tickets/8507
@@ -117,7 +117,7 @@ def zoom():
 		print (u"1")
 	except:
 		print (u"2!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(11)
 	try:
 		for i in xrange(1,12):
@@ -126,7 +126,7 @@ def zoom():
 		print (u"Максимально удалились")
 	except:
 		print (u"Не отработало максимальное удаление!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(12)
 	try:
 		for i in xrange(1,5):
@@ -135,7 +135,7 @@ def zoom():
 		print (u"Масштаб 7 000 000")
 	except:
 		print (u"Не перешли на масштаб 7 000 000!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(13)
 
 # -------------------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ def test1():
 		print (u"Таб История изменений на месте")
 	except:
 		print (u"Нет таба История изменений или соседнего!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(1)
 	click("1379425632955.png")
 	try:
@@ -164,7 +164,7 @@ def test1():
 		print (u"Таб Карта на месте")
 	except:
 		print (u"Нет таба Карта или соседнего!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(2)
 	click("1379425704457.png")
 	try:
@@ -172,7 +172,7 @@ def test1():
 		print (u"Таб Отчёт на месте")
 	except:
 		print (u"Нет таба с Отчёт или соседнего!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(3)
 	click("1379426134745.png")
 	try:
@@ -180,7 +180,7 @@ def test1():
 		print (u"Список табов на месте")
 	except:
 		print (u"Нет списка табов!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(4)
 	click(Pattern("tab_list.png").similar(0.90).targetOffset(-38,13))
 	try:
@@ -188,7 +188,7 @@ def test1():
 		print (u"Перешли на таб Карта через список табов")
 	except:
 		print (u"Не перешли на таб Карта через список табов!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(5)
 	click("1379426134745.png")
 	click(Pattern("tab_list.png").similar(0.90).targetOffset(-36,-8))
@@ -197,7 +197,7 @@ def test1():
 		print (u"Перешли на таб Отчёт через список табов")
 	except:
 		print (u"Не перешли на таб Отчёт через список табов!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(6)
 	click("1379426134745.png")
 	click(Pattern("tab_list.png").targetOffset(-34,34))
@@ -206,7 +206,7 @@ def test1():
 		print (u"Перешли на таб История изменений через список табов")
 	except:
 		print (u"Не перешли на таб История изменений через список табов!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(7)
 	BF.closeCurTab()
 	BF.closeCurTab()
@@ -216,11 +216,11 @@ def test1():
 		print (u"Все табы закрыли")
 	except:
 		print (u"Не все табы закрыли!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(8)
 #	print (u"")
 	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
-	type(Key.F4, KeyModifier.ALT)
+	BF.killAllNavstat()
 #--------------------------------------------------------------------------------------------------------------------
 #	2.	Тест
 #	2.1.	Панель объектов: объекты, зоны, места (сворачивание разворачивание, наличие на нём объектов)
@@ -241,21 +241,21 @@ def test3():
 		print (u"Кнопки переключения между панелями на месте")
 	except:
 		print (u"Нет кнопок переключения между панелями!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(1)
 	try:
 		wait("panel_hist.png")
 		print (u"Панель История на месте")
 	except:
 		print (u"Панель История не развернулась")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(2)
 	try:
 		BF.waitAll(["strelki1.png","strelki2.png","za_den.png","za_period.png","zakladki.png","pokazat_skryt.png","190920131017.png"],5)
 		print (u"Элементы, на панели История, в порядке")
 	except:
 		print (u"Элементы, на панели История, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(3)
 	try:
 		click(Pattern("MapuuprywHou.png").targetOffset(-19,1),15)
@@ -264,14 +264,14 @@ def test3():
 		print (u"Панель Маршрут на месте")
 	except:
 		print (u"Панель Маршрут не открылась")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(4)
 	try:
 		BF.waitAll(["1379567058042.png","1379567072814.png","1379567083379.png","1379567092595.png","0wT.png","IOwncmm.png",Pattern("IOwncmm0wT.png").similar(0.90)])
 		print (u"Элементы, на панели Маршрут, в порядке")
 	except:
 		print (u"Элементы, на панели Маршрут, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(5)
 	try:
 		click(Pattern("VlcropmHoucx.png").targetOffset(28,1),15)
@@ -279,14 +279,14 @@ def test3():
 		print (u"Панель Поиск на месте")
 	except:
 		print (u"Панель Поиск не открылась")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(6)
 	try:
 		BF.waitAll(["CrpanaPacman.png","P.png","Ymua.png","Hou.png","EOrpanmwmtmm.png","1Cnv.png","1379571017771.png","Hoxaaam.png","Cxpum.png",Pattern("HoncxCrpanaP.png").similar(0.90)])
 		print (u"Элементы, на панели Поиск, в порядке")
 	except:
 		print (u"Элементы, на панели Поиск, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(7)
 	try:
 		click(Pattern("1379570862855.png").targetOffset(76,0),15)
@@ -294,14 +294,14 @@ def test3():
 		print (u"Панель Локатор на месте")
 	except:
 		print (u"Панель Локатор не открылась")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(8)
 	try:
 		BF.waitAll(["TmTONKMmncpe.png","Pawycnocxa20.png","Flopuwlrauno.png","Cpm.png",Pattern("TmTONKMmncpe-1.png").similar(0.90)])
 		print (u"Элементы, на панели Локатор, в порядке")
 	except:
 		print (u"Элементы, на панели Локатор, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(9)
 	BF.closeCurTab()
 	print (u"Закрыли таб Карта") 
@@ -310,7 +310,7 @@ def test3():
 		print (u"Переключились на таб Отчёт")
 	except:
 		print (u"Не переключились на таб Отчёт!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(10)
 	click(Pattern("lfEHF.png").similar(0.80).targetOffset(27,0)) # Временная заглушка, убрать её после починки http://idea.navstat.ru/tickets/6917
 	try:
@@ -318,12 +318,12 @@ def test3():
 		print (u"Элементы, на панели Отчёт, в порядке")
 	except:
 		print (u"Элементы, на панели Отчёт, не в порядке!")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(11)
 
 #	print (u"")
 	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
-	type(Key.F4, KeyModifier.ALT)
+	BF.killAllNavstat()
 #--------------------------------------------------------------------------------------------------------------------
 #	4.	Тест
 #	4.1.	Журнал - сворачивание разворачивание, заголовки, фильтрики (наличие данных в журнале и работа фильтров не проверяется)
@@ -348,7 +348,7 @@ def test4():
 
 #	print (u"")
 	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
-	type(Key.F4, KeyModifier.ALT)
+	BF.killAllNavstat()
 #--------------------------------------------------------------------------------------------------------------------
 #	5.	Тест
 #	5.1.	переключение режимов

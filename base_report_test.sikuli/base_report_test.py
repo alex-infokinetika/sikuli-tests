@@ -1,22 +1,24 @@
 from sikuli import *
 # -*- coding: utf-8 -*-
 import os
+import sys
 import datetime
 import time
+
+
 
 myPath = os.path.join(os.environ.get("GIT_HOME"), u"sikuli-tests")
 if not myPath in sys.path:
 	sys.path.append(myPath)
-
 # Импорт ------------------------------
 import baseFunction as BF
 
-
+# Если отчёт в конце списка, т.е. его не видно на панели сразу, прокручиваем список отчётов до конца и смотрим ещё раз
 def findReportOnPanel(pattern):
 	try:
 		find(pattern)
 	except:
-		click(Pattern("scrol_down.png").similar(0.90).targetOffset(-4,0))
+		click(Pattern("scrol_down-1.png").similar(0.90).targetOffset(-4,0))
 		mouseDown( Button.LEFT)
 		sleep(10)
 		mouseUp()
@@ -35,20 +37,19 @@ def reportTest1(reportName, startDay, endDay):
 	BF.firstStartNavstat()
 # Переходим на таб отчётов (просто закрыв таб с картой)
 	BF.closeCurTab()
-	click(Pattern("6917gag.png").similar(0.80).targetOffset(-1,0)) # Заглушка http://idea.navstat.ru/tickets/6917
+	click(Pattern("6917gag-1.png").similar(0.80).targetOffset(-1,0)) # Заглушка http://idea.navstat.ru/tickets/6917
 	BF.setInterval(startDay, endDay)
-	type(Key.TAB) #затычка чтобы снять фокус с отчёта Итоги по автопарку, т.е. сделать его похожим на остальные
 	try:
 		findReportOnPanel(patternList[0])
 		click(patternList[0])
-		click("runReport.png")		
+		click("runReport-1.png")		
 	except:
 		print (u"Не нашли отчёт на панели")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(0)	
 	try:
-		find("question.png")
-		click("da.png")
+		find("question-1.png")
+		click("da-2.png")
 	except:
 		print (u".")
 	try:
@@ -57,7 +58,10 @@ def reportTest1(reportName, startDay, endDay):
 		print (u"Отчёт выполнен за "), datetime.timedelta(seconds=time.time()-reportStart)
 	except:
 		print (u"Отчёт не выполнен или результат не корректен")
-		type(Key.F4, KeyModifier.ALT)
+		BF.killAllNavstat()
 		exit(0)
+	BF.saveReportAsCSV(reportName)
+	BF.mergeFile(reportName)
+	sleep(3)
 	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
-	type(Key.F4, KeyModifier.ALT)
+	BF.killAllNavstat()

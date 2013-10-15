@@ -35,15 +35,14 @@ class BDTests(unittest.TestCase):
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(BDTests)
-outPath =  os.environ.get("GIT_HOME") + "smoketest.html" # Вариант с путём без кирилицы и именами без пробелов  
-#try:
-outfile = open(outPath, "w")
-print "open file ", outPath
-runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Test Report', description='This is demo' )
-runner.run(suite)
-outfile.close()
-#except:
-#	print "Don't open file ", outPath.encode("UTF-8")
-
+outPath =  os.path.join(os.environ.get("GIT_HOME"),"smoketest.html") # Вариант с путём без кирилицы и именами без пробелов  
+try:
+	outfile = open(outPath, "w")
+	print "open file ", outPath
+	runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Tmp Report', description='This is demo' )
+	runner.run(suite)
+	outfile.close()
+except:
+	print "Don't open file ", outPath.encode("UTF-8")
 
 
