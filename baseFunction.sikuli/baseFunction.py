@@ -47,9 +47,9 @@ def startNavstat(userName = u"admin", password = u"admin"):
 		print (u"Запустили Навтат")
 	except:
 		print (u"Навтат не запустился, что-то с файлом navstat.appref-ms!")
-		exit()
+		exit(90)
 	try:
-		wait("1376485054733.png",200)
+		wait("1376485054733.png",100)
 		print (u"Обновлений нет")
 	except:
 		print (u"Похоже есть обновления")
@@ -67,17 +67,17 @@ def startNavstat(userName = u"admin", password = u"admin"):
 				print (u"Запустили Навтат")
 			except:
 				print (u"Навтат не запустился, что-то с файлом navstat.appref-ms!")
-				exit()
+				exit(91)
 			try:
-				wait("1376485054733.png",10)
+				wait("1376485054733.png",100)
 				print (u"Обновлений больше нет")
 			except:
 				print (u"Навстат не запустился после обновления")
-				exit()
+				exit(92)
 		except:
 			print (u"Обновиться не удалось")
-			exit()
-		exit()
+			exit(93)
+		exit(94)
 	try:
 		type(Pattern("VnO1Tb3OBBT1.png").targetOffset(42,2), userName.encode("UTF-8"))
 		type(Key.TAB)
@@ -85,29 +85,29 @@ def startNavstat(userName = u"admin", password = u"admin"):
 		click("OK.png")
 		print (u"Ввели логин и пароль, нажали OK")
 	except:
-		print (u"Вволдили логин и пароль, нажали OK - сто-то пошло не так!")
-		exit()
+		print (u"Вволдили логин и пароль, нажали OK - что-то пошло не так!")
+		exit(95)
 		try:
-			wait(Pattern("NAVSTAT-1.png").similar(0.80), 300)
+			wait(Pattern("NAVSTAT-1.png").similar(0.80), 1300)
 			print (u"Навстат запустился")
 		except:
 			print (u"Навстат не запустился")
-			exit()
-		exit()
+			exit(96)
+		exit(97)
 
 
 def firstStartNavstat(userName = u"admin", password = u"admin"):
 	try:
 		startNavstat(userName, password)
 	except:
-		exit()
-	wait(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1),30)
+		exit(111)
+	wait(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1),300)
 	try:
 		click(Pattern("Vlcropvmvrsm.png").targetOffset(64,-1))
 		print (u"Первичный запуск Навстат")
 	except:
 		print (u"Это не первичный запуск Навстат")
-		exit()
+		exit(112)
 
 # аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
 # если не дождались - вызываем исключение
@@ -195,8 +195,11 @@ def saveReportAsCSV(reportName): # Отчёт должен быть уже сг�
 			click("da-1.png")
 		except:
 			pass
+		sleep(3)
+		waitVanish("report_export.png")
 	except:	
 		print (u"blin")
+		exit(200)
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Сравнение .csv файла расположенного в %GIT_HOME%\ с эталоном из директории %GIT_HOME%\sikuli-tests\shablony\report_1\
