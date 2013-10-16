@@ -1,0 +1,1 @@
+"%SIKULI_HOME%\\runScript.cmd"  -r %GIT_HOME%\sikuli-tests\report-runer.sikuli

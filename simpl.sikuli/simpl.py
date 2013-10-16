@@ -16,8 +16,9 @@ import baseFunction as BF
 
 def starttimer():
 	try:
+		BF.clearData()
 		start = time.time()
-		BF.startNavstat()
+		BF.firstStartNavstat()
 		print ("Стар выполнен за"), datetime.timedelta(seconds=time.time()-start)
 		BF.killAllNavstat()
 	except:
