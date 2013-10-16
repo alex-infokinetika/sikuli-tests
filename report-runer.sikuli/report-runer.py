@@ -14,7 +14,7 @@ import base_report_test as BRT
 # --------------------------------------------
 # Подготовительная секция, не забыть перенести
 d1 = datetime.datetime(2013, 8, 1)
-d2 = datetime.datetime(2013, 8, 31)
+d2 = datetime.datetime(2013, 8, 3)
 
 class BDTests(unittest.TestCase):
 

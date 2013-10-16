@@ -52,7 +52,7 @@ def startReport(patternList):
 		BF.killAllNavstat()
 		exit(0)
 
-# Общая проверка отчётов, подходит для Общих отчётов, 
+# Общая проверка отчётов, подходит для: Общие отчёты, События и сигналы, Отраслевые 
 def reportTest1(reportName, startDay, endDay):
 # ------ Подготовка к тесту --------------------	
 	start = time.time()
