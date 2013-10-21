@@ -10,58 +10,20 @@ if not myPath in sys.path:
 	sys.path.append(myPath)
 # Импорт тестов ------------------------------
 #import s_interface
-#import base_report_test 
-import simpl as BRT
+import base_report_test as BRT
+#import simpl as BRT
 # --------------------------------------------
 # Подготовительная секция, не забыть перенести
-d1 = datetime.datetime(2013, 8, 1)
-d2 = datetime.datetime(2013, 8, 3)
+d1 = datetime.datetime(2013, 8, 16)
+d2 = datetime.datetime(2013, 8, 18)
 
 class BDTests(unittest.TestCase):
 
-	def test_1(self):
-		print (u"test 1 Итоги по автопарку")
-		reportName = "ObjectTotals"
-		BRT.reportTest1(reportName,d1,d2)
+# ------------------------------------------------ Топливные баки
 
-	def test_2(self):
-		print (u"test 2 Топливные баки, Статистика по топливу")
-		reportName = "ReportFuelStatistics"
-		BRT.reportTest1(reportName,d1,d2,'fuel')
-
-	def test_3(self):
-		print (u"test 3 Топливозаправщик, Детализация показаний датчиков")
-		reportName = "ReportFuelRecharge"
-		BRT.reportTest1(reportName,d1,d2, 'bigFuel')
-
-	def test_4(self):
-		print (u"test Топливные карты, Итоги")
-		reportName = "ReportFcTotal"
-		BRT.reportTest1(reportName,d1,d2, 'Fc')
-
-	def test_5(self):
-		print (u"test 5 Путевой лист")
-		reportName = "RouteList"
-		#BRT.reportTest1(reportName,d1,d2)
-		
-	def test_6(self):
-		print (u"test 6 Стоянки")
-		reportName = "Parkings"
-		#BRT.reportTest1(reportName,d1,d2)
-
-	def test_7(self):
-		print (u"test 7 Контроль прохождения зон интереса")
-		reportName = "HistoryGet"
-		#BRT.reportTest1(reportName,d1,d2)
-
-	def test_8(self):
-		print (u"test 8 Отчёт по моточасам")
-		reportName = "MotoHistory"
-		#BRT.reportTest1(reportName,d1,d2)
-
-	def test_20(self):
-		print (u"test 20 Уборка мусора ")
-		reportName = "GarbageHistory"
+	def test_9(self):
+		print (u"test 9 События")
+		reportName = "ReportEventsHistory"
 		BRT.reportTest1(reportName,d1,d2)
 		
 	def test_0(self):

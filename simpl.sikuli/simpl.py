@@ -31,19 +31,17 @@ def startReport(patternList, reportGroupName):
 	if reportGroupName == 'Fuel':
 		print (u"Группа отчётов - Топливные баки")
 		try:
-			find("fuel_group.png").click(patternList[0])
-			click("runReport-2.png")		
+			click(Pattern("bowser.png").similar(0.80).targetOffset(-53,0))
 		except:
-			print (u"Не нашли отчёт на панели")
+			print (u"Не смогли свернуть группу Топливовоз")
 			BF.killAllNavstat()
 			exit(1)		
-	elif reportGroupName == 'BigFuel':
+	elif reportGroupName == 'bigFuel':
 		print (u"Группа отчётов - Топливовоз")
 		try:
-			find("big_fuel_group.png").click(patternList[0])
-			click("runReport-2.png")		
+			click(Pattern("fuel_tank_group.png").similar(0.90).targetOffset(-45,2))
 		except:
-			print (u"Не нашли отчёт на панели")
+			print (u"Не смогли свернуть группу Топливные баки")
 			BF.killAllNavstat()		
 			exit(2)
 	elif reportGroupName == 'Fc':
@@ -51,16 +49,15 @@ def startReport(patternList, reportGroupName):
 		exit(3)
 	else:
 		print (u"Группа отчётов - Общие или отраслевые")
-		try:
-			findReportOnPanel(patternList[0])
-			click(patternList[0])
-			click("runReport-2.png")		
-		except:
-			print (u"Не нашли отчёт на панели")
-			BF.killAllNavstat()
-			exit(0)
-
 #----------------------------------------------------------------------------------
+	try:
+		findReportOnPanel(patternList[0])
+		click(patternList[0])
+		click("runReport-2.png")		
+	except:
+		print (u"Не нашли отчёт на панели")
+		BF.killAllNavstat()
+		exit(0)
 	try:
 		find("question-2.png")
 		try:

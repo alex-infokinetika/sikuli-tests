@@ -13,30 +13,55 @@ if not myPath in sys.path:
 # Импорт ------------------------------
 import baseFunction as BF
 
+
+
+
 # Если отчёт в конце списка, т.е. его не видно на панели сразу, прокручиваем список отчётов до конца и смотрим ещё раз
 def findReportOnPanel(pattern):
 	try:
 		find(pattern)
 	except:
-		click(Pattern("scrol_down-1.png").similar(0.90).targetOffset(-4,0))
+		click(Pattern("scrol_down-2.png").similar(0.90).targetOffset(-4,0))
 		mouseDown( Button.LEFT)
 		sleep(10)
 		mouseUp()
 		find(pattern)
 
-def startReport(patternList):
+def startReport(patternList, reportGroupName):
+	if reportGroupName == 'Fuel':
+		print (u"Группа отчётов - Топливные баки")
+		try:
+			click(Pattern("bowser.png").similar(0.80).targetOffset(-53,0))
+		except:
+			print (u"Не смогли свернуть группу Топливовоз")
+			BF.killAllNavstat()
+			exit(1)		
+	elif reportGroupName == 'bigFuel':
+		print (u"Группа отчётов - Топливовоз")
+		try:
+			click(Pattern("fuel_tank_group.png").similar(0.90).targetOffset(-45,2))
+		except:
+			print (u"Не смогли свернуть группу Топливные баки")
+			BF.killAllNavstat()		
+			exit(2)
+	elif reportGroupName == 'Fc':
+		print (u"Группа отчётов - Топливные карты")
+		exit(3)
+	else:
+		print (u"Группа отчётов - Общие или отраслевые")
+#----------------------------------------------------------------------------------
 	try:
 		findReportOnPanel(patternList[0])
 		click(patternList[0])
-		click("runReport-1.png")		
+		click("runReport-2.png")		
 	except:
 		print (u"Не нашли отчёт на панели")
 		BF.killAllNavstat()
-		exit(0)	
+		exit(0)
 	try:
-		find("question-1.png")
+		find("question-2.png")
 		try:
-			click("da-2.png")
+			click("da-3.png")
 		except:
 			print (u"Такой файл уже есть, но не нашёл кнопку 'Да'")
 			exit(0)
@@ -53,7 +78,7 @@ def startReport(patternList):
 		exit(0)
 
 # Общая проверка отчётов, подходит для: Общие отчёты, События и сигналы, Отраслевые 
-def reportTest1(reportName, startDay, endDay):
+def reportTest1(reportName, startDay, endDay, reportGroupName = 'other'):
 # ------ Подготовка к тесту --------------------	
 	start = time.time()
 	baseDir = os.path.join(os.environ.get("GIT_HOME"), u"sikuli-tests", u"img", u"report_1")
@@ -66,10 +91,10 @@ def reportTest1(reportName, startDay, endDay):
 	BF.firstStartNavstat()
 # Переходим на таб отчётов (просто закрыв таб с картой)
 	BF.closeCurTab()
-	click(Pattern("6917gag-1.png").similar(0.80).targetOffset(-1,0)) # Заглушка http://idea.navstat.ru/tickets/6917
+	click(Pattern("6917gag-2.png").similar(0.80).targetOffset(-1,0)) # Заглушка http://idea.navstat.ru/tickets/6917
 # ------ Тест --------------------	
 	BF.setInterval(startDay, endDay) #Устанавливаем интервал отчёта
-	startReport(patternList) #Выполнили отчёт
+	startReport(patternList, reportGroupName) #Выполнили отчёт
 	BF.saveReportAsCSV(reportName) #Сохранили отчёт в файл
 	BF.mergeFile(reportName) #Сравнили файл с эталоном
 	print (u"Время выполнения теста: "), datetime.timedelta(seconds=time.time()-start)
