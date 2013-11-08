@@ -1,0 +1,6 @@
+***Settings***
+Library  example.NavstatReport  WITH NAME  NavstatReport
+
+***Test Cases***
+Onli start Navstat
+	readCsv
