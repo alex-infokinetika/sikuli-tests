@@ -75,11 +75,14 @@
 </span><span class="kw">import</span> os
 <span class="kw">import</span> sys
 <span class="kw">import</span> csv
+<span class="kw">import</span> logging, logging.handlers
 
 myPath = os.path.join(os.environ.get(<span class="str">"GIT_HOME"</span>), <span class="str">u"sikuli-tests"</span>,<span class="str">u"robotest"</span>,<span class="str">u"example.sikuli"</span>)
 <span class="kw">if</span> <span class="kw">not</span> myPath <span class="kw">in</span> sys.path:
         sys.path.append(myPath)
 <span class="kw">from</span> sikuliwrapper <span class="kw">import</span> *
+
+
 
 
 
@@ -121,14 +124,30 @@ myPath = os.path.join(os.environ.get(<span class="str">"GIT_HOME"</span>), <span
                 self.log.passed(str1)
                 <span class="kw">for</span> row <span class="kw">in</span> list:
                         str = <span class="str">'\t'</span>.join(row)
-                        <span class="kw">print</span> str.decode(<span class="str">"windows-1251"</span>, <span class="str">"ignore"</span>) <span class="cmt">#.decode('windows-1251').encode('utf-8')</span>
+<span class="cmt">#                       print str.decode("windows-1251", "ignore") #.decode('windows-1251').encode('utf-8')
+</span>                        self.log.info(str.decode(<span class="str">"windows-1251"</span>, <span class="str">"ignore"</span>)) <span class="cmt">#.decode('windows-1251').encode('utf-8')</span>
+
+        <span class="kw">def</span> sendEmail(self):
+                accaunt = <span class="str">'ff'</span> <span class="cmt">#['alex@khfam.ru','cbkmvfhbkm']</span>
+                <span class="kw">try</span>:
+                        h2 = logging.handlers.SMTPHandler(mailhost=<span class="str">'smtp.timeweb.ru'</span>,fromaddr=<span class="str">'alex@khfam.ru'</span>,toaddrs=[<span class="str">'alex@infokinetika.ru'</span>],subject=<span class="str">'The log'</span>,credentials=(<span class="str">'alex@khfam.ru'</span>,<span class="str">'cbkmvfhbkm'</span>))
+<span class="cmt">#                       h2 = logging.handlers.SMTPHandler(mailhost='smtp.timeweb.ru',fromaddr='alex@khfam.ru',toaddrs=['alex@infokinetika.ru'],subject='The log',credentials=['alex@khfam.ru','cbkmvfhbkm'])
+</span>                        <span class="cmt">#       ,secure=None)
+</span>
+                        h2.setLevel(logging.DEBUG)
+                        self.log.addHandler(h2)
+                        self.log.debug(<span class="str">"asdsdklfjsak;ld"</span>)
+                <span class="kw">except</span>:
+                        self.log.info(<span class="str">'no mail'</span>) <span class="cmt">#.decode('windows-1251').encode('utf-8')</span>
+                        <span class="kw">print</span> sys.exc_info()
 
 
         <span class="kw">def</span> runTest(self):
-<span class="cmt">#               self.startApp()
-</span><span class="cmt">#               self.readCsv()
-</span>                self.writeLog(self)
-                <span class="cmt">#self.verifyApp()
+                self.startApp()
+<span class="cmt">#               self.readCsv()
+</span><span class="cmt">#               self.writeLog(self)
+</span><span class="cmt">#               self.sendEmail()
+</span><span class="cmt">#self.verifyApp()
 </span>
                 <span class="cmt">#actions = '2+2'
 </span>                <span class="cmt">#self.performAction(*actions)

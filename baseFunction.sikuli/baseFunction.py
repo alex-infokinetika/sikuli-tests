@@ -246,3 +246,4 @@ def mergeFile(reportName):
 		print (u"Отчёт не совпал с эталоном!")
 		killAllNavstat()
 		exit(1)
+

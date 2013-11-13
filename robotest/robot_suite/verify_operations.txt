@@ -2,5 +2,9 @@
 Library  example.NavstatReport  WITH NAME  NavstatReport
 
 ***Test Cases***
-Onli start Navstat
+Read CSV
 	readCsv
+
+***Test Cases***
+Start Navstat	
+	startApp

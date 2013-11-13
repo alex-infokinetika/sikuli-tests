@@ -1,0 +1,323 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>baseFunction.sikuli\baseFunction.sikuli</h2> <a href="baseFunction.sikuli\baseFunction.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="cmt"># -*- coding: utf-8 -*-
+</span><span class="kw">import</span> os
+<span class="kw">import</span> sys
+<span class="kw">import</span> shutil
+<span class="kw">import</span> time
+<span class="kw">import</span> datetime
+<span class="kw">import</span> csv
+
+<span class="kw">def</span> deleteFileOrFolder(directory):
+        <span class="kw">if</span> os.path.exists(directory):
+                <span class="kw">try</span>:
+                        <span class="kw">if</span> os.path.isdir(directory):
+                                <span class="cmt"># delete folder
+</span>                                shutil.rmtree(directory)
+                        <span class="kw">else</span>:
+                                <span class="cmt"># delete file
+</span>                                os.remove(directory)
+                <span class="kw">except</span>:
+                        <span class="kw">print</span> <span class="str">"Ecxeption "</span>,str(sys.exc_info())
+        <span class="kw">else</span>:
+                <span class="kw">print</span> <span class="str">"not found "</span>,directory
+
+
+<span class="kw">def</span> clearData():
+        batPath = os.path.join(os.environ.get(<span class="str">"GIT_HOME"</span>), <span class="str">u"sikuli-tests"</span>, <span class="str">u"baseFunction.sikuli"</span>, <span class="str">u"clear.bat"</span>)
+
+        <span class="kw">try</span>:
+                os.system(batPath)
+                <span class="kw">print</span> (<span class="str">u"Папка NavstatExpress удалена"</span>)
+                <span class="kw">return</span> <span class="dig">1</span>
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Папка NavstatExpress не удалена!"</span>)
+                <span class="kw">return</span> <span class="dig">0</span>
+
+<span class="kw">def</span> killAllNavstat():
+        <span class="kw">if</span> os.system(<span class="str">'taskkill /f /im Infokinetika.Navstat.Express.exe'</span>): <span class="cmt"># Почему-то возвращает true когда не смогла убить процесс</span>
+                <span class="kw">print</span>(<span class="str">u"Не закрылся Навстат!"</span>)
+                exit(<span class="dig">13</span>)
+        <span class="kw">else</span>:
+                <span class="kw">print</span>(<span class="str">u"Закрыли Навстат"</span>)
+
+<span class="kw">def</span> startNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
+        <span class="kw">try</span>:
+                navstat = os.path.join(os.environ.get(<span class="str">"GIT_HOME"</span>),<span class="str">u"sikuli-tests"</span>,<span class="str">u"navstat.appref-ms"</span>)
+                os.system(navstat)
+                <span class="kw">print</span> (<span class="str">u"Запустили Навтат"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Навтат не запустился, что-то с файлом navstat.appref-ms!"</span>)
+                exit(<span class="dig">90</span>)
+        <span class="kw">try</span>:
+                <span class="skw">wait</span>(<img src="1376485054733.png" />,<span class="dig">100</span>)
+                <span class="kw">print</span> (<span class="str">u"Обновлений нет"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Похоже есть обновления"</span>)
+                <span class="kw">try</span>:
+                        <span class="skw">wait</span>(<img src="1379065887261.png" />)
+                        <span class="kw">print</span>(<span class="str">u"Есть обновления"</span>)
+                        <span class="skw">click</span>(<img src="update_butt.png" />)
+                        <span class="skw">click</span>(Pattern(<img src="update_available.png" />).targetOffset(<span class="dig">48</span>,<span class="dig">74</span>))
+                        <span class="skw">wait</span>(<img src="error_pres_ok.png" />,<span class="dig">60</span>)
+                        <span class="skw">click</span>(Pattern(<img src="error_pres_ok.png" />).targetOffset(<span class="dig">95</span>,<span class="dig">49</span>))
+                        <span class="kw">print</span> (<span class="str">u"Обновили Навстат"</span>)
+                        <span class="kw">try</span>:
+                                navstat = os.path.join(os.environ.get(<span class="str">"GIT_HOME"</span>),<span class="str">u"sikuli-tests"</span>,<span class="str">u"navstat.appref-ms"</span>)
+                                os.system(navstat)
+                                <span class="kw">print</span> (<span class="str">u"Запустили Навтат"</span>)
+                        <span class="kw">except</span>:
+                                <span class="kw">print</span> (<span class="str">u"Навтат не запустился, что-то с файлом navstat.appref-ms!"</span>)
+                                exit(<span class="dig">91</span>)
+                        <span class="kw">try</span>:
+                                <span class="skw">wait</span>(<img src="1376485054733.png" />,<span class="dig">100</span>)
+                                <span class="kw">print</span> (<span class="str">u"Обновлений больше нет"</span>)
+                        <span class="kw">except</span>:
+                                <span class="kw">print</span> (<span class="str">u"Навстат не запустился после обновления"</span>)
+                                exit(<span class="dig">92</span>)
+                <span class="kw">except</span>:
+                        <span class="kw">print</span> (<span class="str">u"Обновиться не удалось"</span>)
+                        exit(<span class="dig">93</span>)
+                exit(<span class="dig">94</span>)
+        <span class="kw">try</span>:
+                <span class="skw">type</span>(Pattern(<img src="VnO1Tb3OBBT1.png" />).targetOffset(<span class="dig">42</span>,<span class="dig">2</span>), userName.encode(<span class="str">"UTF-8"</span>))
+                <span class="skw">type</span>(Key.TAB)
+                <span class="skw">type</span>(password.encode(<span class="str">"UTF-8"</span>))
+                <span class="skw">click</span>(<img src="OK.png" />)
+                <span class="kw">print</span> (<span class="str">u"Ввели логин и пароль, нажали OK"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Вволдили логин и пароль, нажали OK - что-то пошло не так!"</span>)
+                exit(<span class="dig">95</span>)
+                <span class="kw">try</span>:
+                        <span class="skw">wait</span>(Pattern(<img src="NAVSTAT-1.png" />).similar(<span class="dig">0.80</span>), <span class="dig">1300</span>)
+                        <span class="kw">print</span> (<span class="str">u"Навстат запустился"</span>)
+                <span class="kw">except</span>:
+                        <span class="kw">print</span> (<span class="str">u"Навстат не запустился"</span>)
+                        exit(<span class="dig">96</span>)
+                exit(<span class="dig">97</span>)
+
+
+<span class="kw">def</span> firstStartNavstat(userName = <span class="str">u"admin"</span>, password = <span class="str">u"admin"</span>):
+        <span class="kw">try</span>:
+                startNavstat(userName, password)
+        <span class="kw">except</span>:
+                exit(<span class="dig">111</span>)
+        <span class="skw">wait</span>(Pattern(<img src="Vlcropvmvrsm.png" />).targetOffset(<span class="dig">64</span>,-<span class="dig">1</span>),<span class="dig">300</span>)
+        <span class="kw">try</span>:
+                <span class="skw">click</span>(Pattern(<img src="Vlcropvmvrsm.png" />).targetOffset(<span class="dig">64</span>,-<span class="dig">1</span>))
+                <span class="kw">print</span> (<span class="str">u"Первичный запуск Навстат"</span>)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Это не первичный запуск Навстат"</span>)
+                exit(<span class="dig">112</span>)
+
+<span class="cmt"># аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает номер найденной картинки
+</span><span class="cmt"># если не дождались - вызываем исключение
+</span><span class="kw">def</span> waitList(imgList, timer=<span class="dig">3</span>):
+        start = time.time() + timer
+        <span class="kw">while</span> start &gt; time.time():
+                <span class="kw">print</span> <span class="str">" --- "</span>, start, <span class="str">" - "</span>, time.time(), <span class="str">" = "</span>, start-time.time()
+                i=<span class="dig">0</span>
+                <span class="kw">while</span> i &lt; len(imgList):
+                        <span class="kw">print</span> <span class="str">"Find "</span>, i
+                        <span class="kw">try</span>:
+                                <span class="skw">find</span>(imgList[i])
+                                <span class="kw">return</span> i
+                        <span class="kw">except</span>:
+                                <span class="kw">print</span>(<span class="str">"Don't find "</span>)
+                        i+=<span class="dig">1</span>
+        <span class="kw">assert</span>(false)
+<span class="cmt"># аналог wait принимает на вход список картинок и время ожидания в секундах, возвращает 1 если нашёл все картинки из списка
+</span><span class="cmt"># если не дождались - вызываем исключение
+</span><span class="kw">def</span> waitAll(imgList, timer=<span class="dig">3</span>):
+        start = time.time() + timer
+        <span class="kw">while</span> start &gt; time.time():
+                res = <span class="dig">1</span>
+                <span class="kw">for</span> img <span class="kw">in</span> imgList:
+                        <span class="kw">try</span>:
+                                <span class="skw">find</span>(img)
+                        <span class="kw">except</span>:
+                                res = -<span class="dig">1</span>
+                <span class="kw">if</span> res == <span class="dig">1</span>:
+                        <span class="kw">return</span> <span class="dig">1</span>
+        <span class="kw">assert</span>(false)
+
+<span class="cmt"># аналог waitVanish принимает на вход список картинок и время ожидания в секундах, возвращает 1 если все картинки из списка исчезли
+</span><span class="cmt"># если за время timer хоть одна картинка не исчезла - вызываем исключение
+</span><span class="kw">def</span> waitVanishAll(imgList, timer=<span class="dig">3</span>):
+        start = time.time() + timer
+        <span class="kw">while</span> start &gt; time.time():
+                res = -<span class="dig">1</span>
+                <span class="kw">for</span> img <span class="kw">in</span> imgList:
+                        <span class="kw">if</span> <span class="kw">not</span> waitVanish(img):
+                                res = <span class="dig">1</span>
+                                <span class="kw">break</span>
+                <span class="kw">if</span> res == -<span class="dig">1</span>:
+                        <span class="kw">return</span> <span class="dig">1</span>
+        <span class="kw">assert</span>(false)
+<span class="cmt"># Установка периода для отчётов и истории -----------------------------------------------------------------
+</span><span class="kw">def</span> setInterval(day1, day2):
+        <span class="cmt"># Навстат должен быть запущен и открыта панель с датапикером
+</span>        <span class="skw">doubleClick</span>(Pattern(<img src="3GlpHOJ1BDBM.png" />).targetOffset(-<span class="dig">39</span>,-<span class="dig">4</span>))
+        paste(day1.strftime(<span class="str">"%d.%m.%Y "</span>))
+        <span class="skw">doubleClick</span>(Pattern(<img src="3GlpHOJ1BDBM.png" />).targetOffset(-<span class="dig">37</span>,<span class="dig">23</span>))
+        paste(day2.strftime(<span class="str">"%d.%m.%Y "</span>))
+<span class="cmt"># ---------------------------------------------------------------------------------------------------------
+</span>
+<span class="cmt"># просто закрывает активный таб
+</span><span class="kw">def</span> closeCurTab():
+        <span class="kw">try</span>:
+                <span class="skw">wait</span>(<img src="1379333077365-1.png" />)
+                <span class="skw">click</span>(<img src="1379333077365-1.png" />)
+                <span class="kw">return</span> <span class="dig">1</span>
+        <span class="kw">except</span>:
+                <span class="kw">return</span> <span class="dig">0</span>
+
+<span class="cmt"># Открывает новый таб с картой
+</span><span class="kw">def</span> newMapTab():
+        <span class="skw">wait</span>(<img src="1379333330757.png" />)
+        <span class="skw">click</span>(<img src="1379333330757.png" />)
+
+<span class="cmt"># Сохранение отчёта в директорию %GIT_HOME%\
+</span><span class="kw">def</span> saveReportAsCSV(reportName): <span class="cmt"># Отчёт должен быть уже сгенерирован. Временный файл сохраняет в папке %GITHOME%</span>
+        <span class="kw">try</span>:
+                <span class="skw">click</span>(<img src="save_icon.png" />)
+                <span class="skw">click</span>(<img src="data_icon.png" />)
+                <span class="skw">click</span>(<img src="csv_icon.png" />)
+                <span class="skw">sleep</span>(<span class="dig">3</span>)
+                <span class="skw">type</span>(Key.ENTER)
+                <span class="skw">click</span>(Pattern(<img src="addres_line-1.png" />).targetOffset(-<span class="dig">24</span>,-<span class="dig">1</span>))
+                <span class="skw">type</span>(os.path.join(os.environ.get(<span class="str">"GIT_HOME"</span>)))
+                <span class="skw">type</span>(Key.ENTER)
+                <span class="skw">click</span>(Pattern(<img src="name_line.png" />).similar(<span class="dig">0.90</span>).targetOffset(-<span class="dig">12</span>,-<span class="dig">10</span>))
+                <span class="skw">type</span>(reportName + <span class="str">u".csv"</span>)
+                <span class="skw">type</span>(Key.ENTER)
+                <span class="kw">try</span>:
+                        <span class="skw">find</span>(<img src="rewrite.png" />)
+                        <span class="skw">click</span>(<img src="da-1.png" />)
+                <span class="kw">except</span>:
+                        <span class="kw">pass</span>
+                <span class="skw">sleep</span>(<span class="dig">3</span>)
+                waitVanish(<img src="report_export.png" />)
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"blin"</span>)
+                exit(<span class="dig">200</span>)
+
+<span class="cmt"># ---------------------------------------------------------------------------------------------------------------------
+</span><span class="cmt"># Сравнение .csv файла расположенного в %GIT_HOME%\ с эталоном из директории %GIT_HOME%\sikuli-tests\shablony\report_1\
+</span><span class="kw">def</span> mergeFile(reportName):
+        list1 = []
+        list2 = []
+        fName = reportName + <span class="str">".csv"</span>
+        shablon = os.path.join(os.environ.get(<span class="str">"GIT_HOME"</span>),<span class="str">"sikuli-tests"</span>,<span class="str">"shablony"</span>,<span class="str">"report_1"</span>,fName)
+        testReport = os.path.join(os.environ.get(<span class="str">"GIT_HOME"</span>),fName)
+        <span class="kw">try</span>:
+                <span class="kw">print</span> (<span class="str">u"Файл шаблона : "</span>,shablon)
+                f1 = open(shablon, <span class="str">'r'</span>)
+                reader = csv.reader(f1)
+                <span class="kw">for</span> row <span class="kw">in</span> reader:
+                        list1.append(row)
+                f1.close()
+        <span class="kw">except</span>:
+                <span class="cmt"># Фактически сюда мы не попадаем, csv.reader не отличает пустой файл от отсутствующего - это надо исправлять
+</span>                (<span class="str">u"Файл шаблона не найден!"</span>)
+        <span class="kw">try</span>:
+                <span class="kw">print</span> (<span class="str">u"Тестовый фаил: "</span>,testReport)
+                f2 = open(testReport, <span class="str">'r'</span>)
+                reader = csv.reader(f2)
+                <span class="kw">for</span> row <span class="kw">in</span> reader:
+                        list2.append(row)
+                f2.close()
+        <span class="kw">except</span>:
+                <span class="cmt"># Фактически сюда мы не попадаем, csv.reader не отличает пустой файл от отсутствующего - это надо исправлять
+</span>                <span class="kw">print</span> (<span class="str">u"Тестовый фаил не найден!"</span>)
+        <span class="kw">try</span>:
+                <span class="kw">if</span> list1 == list2:
+                        <span class="kw">print</span> (<span class="str">u"Тестовый файл совпадает с эталоном"</span>)
+                <span class="kw">else</span>:
+                        <span class="kw">print</span> (<span class="str">u"Обнаружены отличия между файлами:"</span>)
+                        <span class="kw">for</span> i <span class="kw">in</span> range(len(list1)-<span class="dig">1</span>):
+                                <span class="kw">if</span> list1[i] == list2[i]:
+                                        <span class="kw">print</span> (<span class="str">u"Строка %i совпадает"</span> % i)
+                                <span class="kw">else</span>:
+                                        <span class="kw">print</span> (<span class="str">u"Строка %i несовпадает: "</span> % i)
+                                        <span class="kw">print</span> str(list1[i]).decode(<span class="str">'cp1251'</span>)
+                                        <span class="kw">print</span> list2[i]
+                        <span class="kw">raise</span>()
+        <span class="kw">except</span>:
+                <span class="kw">print</span> (<span class="str">u"Отчёт не совпал с эталоном!"</span>)
+                killAllNavstat()
+                exit(<span class="dig">1</span>)
+</pre>
+</body>
+</html>

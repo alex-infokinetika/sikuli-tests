@@ -3,11 +3,14 @@ from __future__ import with_statement
 import os
 import sys
 import csv
+import logging, logging.handlers
 
 myPath = os.path.join(os.environ.get("GIT_HOME"), u"sikuli-tests",u"robotest",u"example.sikuli")
 if not myPath in sys.path:
 	sys.path.append(myPath)
 from sikuliwrapper import *
+
+
 
 
 
@@ -49,14 +52,28 @@ class NavstatReport(BaseLogger):
 		self.log.passed(str1)
 		for row in list:
 			str = '\t'.join(row)
-			print str.decode("windows-1251", "ignore") #.decode('windows-1251').encode('utf-8')
+#			print str.decode("windows-1251", "ignore") #.decode('windows-1251').encode('utf-8')
+			self.log.info(str.decode("windows-1251", "ignore")) #.decode('windows-1251').encode('utf-8')
+
+	def sendEmail(self):
+		try:
+			h2 = logging.handlers.SMTPHandler(mailhost='smtp.timeweb.ru',fromaddr='alex@khfam.ru',toaddrs=['alex@infokinetika.ru'],subject='The log',credentials=('user','pass'))
+			#	,secure=None)
+			
+			h2.setLevel(logging.DEBUG)
+			self.log.addHandler(h2)			
+			self.log.debug("asdsdklfjsak;ld")
+		except:
+			self.log.info('no mail') #.decode('windows-1251').encode('utf-8')
+			print sys.exc_info()
 
 
 	def runTest(self):
-#		self.startApp()
+		self.startApp()
 #		self.readCsv()
-		self.writeLog(self)
-		#self.verifyApp()
+#		self.writeLog(self)
+#		self.sendEmail()
+#self.verifyApp()
 		
 		#actions = '2+2'
 		#self.performAction(*actions)
